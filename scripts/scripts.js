@@ -483,7 +483,7 @@ function showPolityInfo(polity){
                                         prefix = ", "
                                     }
 
-                                    $("#polity-info").append(prefix + "<span class='actionable stat-" + stat + "-data'>" + value + "</span>");                                
+                                    $("#polity-info").append(prefix + "<span class='actionable stat-" + stat + "-data' data='" + statData + "'>" + value + "</span>");                                
                                 });                            
                             }
 
@@ -506,7 +506,7 @@ function showPolityInfo(polity){
                                         name = value
                                     }
 
-                                    $("#polity-info").append(prefix + "<span class='actionable " + value + "'>" + name + "</span>");                                
+                                    $("#polity-info").append(prefix + "<span class='actionable " + value + "' data='" + statData + "'>" + name + "</span>");                                
                                 });                            
                             }
 
@@ -517,19 +517,19 @@ function showPolityInfo(polity){
                                 
 //                                var formattedStatData = formattedStatData
 
-                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data'>" + formattedStatData + "</div>");   
+                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + statData + "'>" + formattedStatData + "</div>");   
 
                             }
 
                             else if(schema[stat].type == "verbose"){
 
-                                $("#polity-info").append("<div class='stat-" + stat + "-data-verbose'>" + statData + "</div>");   
+                                $("#polity-info").append("<div class='stat-" + stat + "-data-verbose' data='" + statData + "'>" + statData + "</div>");   
 
                             }
 
                             else{
 
-                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data'>" + statData + "</div>");
+                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + statData + "'>" + statData + "</div>");
 
                             };                            
                         }
@@ -693,8 +693,9 @@ function makeStatsInteractive(selector){
     each(stats, function(index,stat){
        
        $(scope + ".stat-" + stat + "-data").click(function(){
-           
-            var statValue = $(this).html()
+           log("hello")
+            var statValue = $(this).attr("data")
+            log(statValue)
             setColorsBySubset(stat,statValue);
            
        }) 
