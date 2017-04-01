@@ -601,10 +601,10 @@ function showStatsInfo(stat,limit,direction){
 //        If that polity has info for the stat...
         if(polityInfo[stat]){
             
-            if(limit){
-                
-                var formattedStatData = formatStatData(polityInfo[stat], schema[stat].type);
+            var formattedStatData = formatStatData(polityInfo[stat], schema[stat].type);
             
+            if(limit){
+                            
                 if(direction=="greater" && polityInfo[stat]>=limit){
 
                    $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
@@ -621,7 +621,7 @@ function showStatsInfo(stat,limit,direction){
             }
             else{
 //            Display that info
-            $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + polityInfo[stat] + "</div>");
+            $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
 
         }
         }
