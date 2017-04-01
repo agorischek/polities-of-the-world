@@ -106,7 +106,7 @@ function processNumbers(){
 
                     if(polityInfo[stat]){
 
-                        polityInfo[stat] = numeral(polityInfo[stat]).format("0.0[0000]");
+                        polityInfo[stat] = numeral(polityInfo[stat]).value();
                         
                     }              
                 })          
@@ -526,6 +526,15 @@ function showPolityInfo(polity){
                                 $("#polity-info").append("<div class='stat-" + stat + "-data-verbose' data='" + statData + "'>" + statData + "</div>");   
 
                             }
+                            
+                            else if(schema[stat].type == "number"){
+                                
+                                var formattedStatData = numeral(statData).format('0,0[.]00');
+
+                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + formattedStatData + "'>" + formattedStatData + "</div>");
+
+                            }
+                            
 
                             else{
 
