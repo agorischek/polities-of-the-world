@@ -437,6 +437,27 @@ function setColorsBy(stat, subset){
 
     };
 
+
+function formatStatData(value,type){
+        
+    if(type == "percent"){
+        return numeral(value).format('0[.]00%');
+    }
+    
+    else if(type == "currency"){
+        return numeral(value).format('$0,0[.]00');        
+    }
+    
+    else if(type == "number"){  
+        return numeral(value).format('0,0[.]00') 
+    }
+    
+    else{
+        return value
+    }
+
+}
+
 function showPolityInfo(polity){
     
     $("#polity-list").hide();
