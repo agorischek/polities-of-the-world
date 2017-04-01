@@ -513,7 +513,7 @@ function showPolityInfo(polity){
 
                             else if(schema[stat].type == "percent"){
 
-                                var formattedStatData = numeral(statData).format('0.00%');
+                                var formattedStatData = numeral(statData).format('0[.]00%');
                                 
 //                                var formattedStatData = formattedStatData
 
