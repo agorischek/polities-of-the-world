@@ -100,7 +100,7 @@ function processNumbers(){
         
         if(schema[stat]){
       
-            if(schema[stat].type == "number"){
+            if(schema[stat].type == "number" || schema[stat].type == "currency"){
 
                 each(data,function(polityCode,polityInfo){
 
@@ -118,7 +118,7 @@ function processNumbers(){
 
 function chooseColors(min, max, type){
 
-    if(type == "index" || type == "number" || type == "percent"){
+    if(type == "index" || type == "number" || type == "percent" || type == "currency"){
         colors = d3.scale.linear()
             .domain([min,max])
             .range([lightColor, darkColor]);
@@ -536,6 +536,14 @@ function showPolityInfo(polity){
 
                                 var formattedStatData = formatStatData(statData, schema[stat].type)
 
+                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + statData + "'>" + formattedStatData + "</div>");   
+
+                            }
+                            
+                            else if(schema[stat].type == "currency"){
+
+                                var formattedStatData = formatStatData(statData, schema[stat].type)
+                                                                
                                 $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + statData + "'>" + formattedStatData + "</div>");   
 
                             }
