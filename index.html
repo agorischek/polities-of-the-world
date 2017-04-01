@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        <Title>Polities of the World</Title>
+        
+        <link rel=stylesheet href="libs/normalize.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="styles/styles.css" type="text/css">
+        <link rel="stylesheet" href="styles/fonts.css" type="text/css">
+        
+    </head>
+    
+    <body>
+        
+        <div id="page">
+            
+            <div id="polity-pane">
+                <div id="polity-pane-content">
+                    <div class="pane-header">
+                        <div id="polity-back">
+                            <span id="polity-back-text" class="actionable">&#8592; All Polities</span>
+                        </div>
+                        <h2 id="polity-pane-title">Polities</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div id="polity-list"></div>
+                    <div id="polity-info"></div>
+                </div>
+            </div>
+            
+            <div id="map-pane">
+                <div id="map"></div>
+<!--                <div id="display"></div>-->
+            </div>
+            
+            <div id="stats-pane">
+                <div id="stats-pane-content">
+                    <div class="pane-header">
+                        <div id="stats-back">
+                            <span id="stats-back-text" class="actionable">All Stats &#8594;</span>
+                        </div>                
+                        <h2 id="stats-pane-title">Stats</h2>
+                        <div id="stats-pane-modifier" class="modifier">greater than 30</div>
+                        <div class="divider"></div>
+                    </div>
+                    <ul id="stats-list"></ul>
+                    <div id="stats-info"></div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+        <script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.4/numeral.min.js"></script>
+        <script src="libs/datamaps.world.hires.js"></script>
+        <script src="libs/papaparse.min.js"></script>
+        <script src="scripts/utilities.js"></script>
+        <script src="settings.js"></script>    
+        <script src="libs/underscore.js"></script>
+        <script src="libs/underscore.string.min.js"></script>        
+        <script src="data/schema.js"></script>
+        <script src="scripts/scripts.js"></script>
+        
+    </body>
+    
+</html>
+
+
+
+
+
+
+

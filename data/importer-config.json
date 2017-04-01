@@ -1,0 +1,1282 @@
+{
+    "AFG":{
+        "code":"AFG",
+        "name":"Afghanistan",
+        "synonyms":"AFG|Afghanistan"
+    },
+    "ALB":{
+        "code":"ALB",
+        "name":"Albania",
+        "synonyms":"ALB|Albania"
+    },
+    "DZA":{
+        "code":"DZA",
+        "name":"Algeria",
+        "synonyms":"DZA|Algeria"
+    },
+    "ASM":{
+        "code":"ASM",
+        "name":"American Samoa",
+        "synonyms":"ASM|American Samoa|Samoa"
+    },
+    "AND":{  
+        "code":"AND",
+        "name":"Andorra",
+        "synonyms":"AND|Andorra"
+    },
+    "AGO":{
+        "code":"AGO",
+        "name":"Angola",
+        "synonyms":"AGO|Angola"
+    },
+    "AIA":{
+        "code":"AIA",
+        "name":"Anguilla",
+        "synonyms":"AIA|Anguilla"
+    },
+    "ATA":{
+        "code":"ATA",
+        "name":"Antarctica",
+        "synonyms":"ATA|Antarctica"
+    },
+    "ATG":{
+        "code":"ATG",
+        "name":"Antigua & Barbuda",
+        "synonyms":"ATG|Antigua and Barbuda|Antigua & Barbuda|Antigua"
+    },
+    "ARG":{
+        "code":"ARG",
+        "name":"Argentina",
+        "synonyms":"ARG|Argentina"
+    },
+    "ARM":{
+        "code":"ARM",
+        "name":"Armenia",
+        "synonyms":"ARM|Armenia"
+    },
+    "ABW":{
+        "code":"ABW",
+        "name":"Aruba",
+        "synonyms":"ABW|Aruba"
+    },
+    "AUS":{
+        "code":"AUS",
+        "name":"Australia",
+        "synonyms":"AUS|Australia"
+    },
+    "AUT":{
+        "code":"AUT",
+        "name":"Austria",
+        "synonyms":"AUT|Austria"
+    },
+    "AZE":{
+        "code":"AZE",
+        "name":"Azerbaijan",
+        "synonyms":"AZE|Azerbaijan"
+    },
+    "BHS":{
+        "code":"BHS",
+        "name":"Bahamas",
+        "synonyms":"BHS|Bahamas|The Bahamas|Bahamas, The"
+    },
+    "BHR":{
+        "code":"BHR",
+        "name":"Bahrain",
+        "synonyms":"BHR|Bahrain"
+    },
+    "BGD":{
+        "code":"BGD",
+        "name":"Bangladesh",
+        "synonyms":"BGD|Bangladesh"
+    },
+    "BRB":{
+        "code":"BRB",
+        "name":"Barbados",
+        "synonyms":"BRB|Barbados"
+    },
+    "BLR":{
+        "code":"BLR",
+        "name":"Belarus",
+        "synonyms":"BLR|Belarus|Byelorussia"
+    },
+    "BEL":{
+        "code":"BEL",
+        "name":"Belgium",
+        "synonyms":"BEL|Belgium"
+    },
+    "BLZ":{
+        "code":"BLZ",
+        "name":"Belize",
+        "synonyms":"BLZ|Belize"
+    },
+    "BEN":{
+        "code":"BEN",
+        "name":"Benin",
+        "synonyms":"BEN|Benin"
+    },
+    "BMU":{
+        "code":"BMU",
+        "name":"Bermuda",
+        "synonyms":"BMU|Bermuda"
+    },
+    "BTN":{
+        "code":"BTN",
+        "name":"Bhutan",
+        "synonyms":"BTN|Bhutan"
+    },
+    "BOL":{
+        "code":"BOL",
+        "name":"Bolivia",
+        "synonyms":"BOL|Bolivia"
+    },
+    "BES":{
+        "code":"BES",
+        "name":"Bonaire",
+        "synonyms":"BES|Bonaire|Bonaire, Sint Eustatius and Saba|Bonaire, Sint Eustatius, and Saba"
+    },
+    "BIH":{
+        "code":"BIH",
+        "name":"Bosnia",
+        "synonyms":"BIH|Bosnia and Herzegovina|Bosnia|Bosnia & Herzegovina"
+    },
+    "BWA":{
+        "code":"BWA",
+        "name":"Botswana",
+        "synonyms":"BWA|Botswana"
+    },
+    "BVT":{
+        "code":"BVT",
+        "name":"Bouvet Island",
+        "synonyms":"BVT|Bouvet Island|Bouvet"
+    },
+    "BRA":{
+        "code":"BRA",
+        "name":"Brazil",
+        "synonyms":"BRA|Brazil"
+    },
+    "IOT":{
+        "code":"IOT",
+        "name":"British Indian Ocean Territory",
+        "synonyms":"IOT|British Indian Ocean Territory|British IOT"
+    },
+    "BRN":{
+        "code":"BRN",
+        "name":"Brunei",
+        "synonyms":"BRN|Brunei Darussalam|Brunei"
+    },
+    "BGR":{
+        "code":"BGR",
+        "name":"Bulgaria",
+        "synonyms":"BGR|Bulgaria"
+    },
+    "BFA":{
+        "code":"BFA",
+        "name":"Burkina Faso",
+        "synonyms":"BFA|Burkina Faso"
+    },
+    "BDI":{
+        "code":"BDI",
+        "name":"Burundi",
+        "synonyms":"BDI|Burundi"
+    },
+    "KHM":{
+        "code":"KHM",
+        "name":"Cambodia",
+        "synonyms":"KHM|Cambodia"
+    },
+    "CMR":{
+        "code":"CMR",
+        "name":"Cameroon",
+        "synonyms":"CMR|Cameroon"
+    },
+    "CAN":{
+        "code":"CAN",
+        "name":"Canada",
+        "synonyms":"CAN|Canada"
+    },
+    "CPV":{
+        "code":"CPV",
+        "name":"Cape Verde",
+        "synonyms":"CPV|Cape Verde|Cabo Verde"
+    },
+    "CYM":{
+        "code":"CYM",
+        "name":"Cayman Islands",
+        "synonyms":"CYM|Cayman Islands|Caymans"
+    },
+    "CAF":{
+        "code":"CAF",
+        "name":"Central African Republic",
+        "synonyms":"CAF|Central African Republic|C.A.F."
+    },
+    "TCD":{
+        "code":"TCD",
+        "name":"Chad",
+        "synonyms":"TCD|Chad"
+    },
+    "CHL":{
+        "code":"CHL",
+        "name":"Chile",
+        "synonyms":"Chile"
+    },
+    "CHN":{
+        "code":"CHN",
+        "name":"China",
+        "synonyms":"CHL|China"
+    },
+    "CXR":{
+        "code":"CXR",
+        "name":"Christmas Island",
+        "synonyms":"CXR|Christmas Island|Xmas Island"
+    },
+    "CCK":{
+        "code":"CCK",
+        "name":"Cocos Islands",
+        "synonyms":"CCK|Cocos (Keeling) Islands|Cocos Islands|Keeling Islands"
+    },
+    "COL":{
+        "code":"COL",
+        "name":"Colombia",
+        "synonyms":"COL|Colombia"
+    },
+    "COM":{
+        "code":"COM",
+        "name":"Comoros",
+        "synonyms":"COM|Comoros"
+    },
+    "COG":{
+        "code":"COG",
+        "name":"Congo-Brazzaville",
+        "synonyms":"COG|Congo-Brazzaville|Congo Brazzaville|Congo (Brazzaville)|Congo(Brazzaville)|Congo, Republic of the|Republic of the Congo"
+    },
+    "COD":{
+        "code":"COD",
+        "name":"Congo-Kinshasa",
+        "synonyms":"COD|Congo-Kinshasa|Zaire|Democratic Republic of the Congo|Congo (Kinshasa)|Congo(Kinshasa)|Congo, Democratic Republic of the|Congo (DRC)"
+    },
+    "COK":{
+        "code":"COK",
+        "name":"Cook Islands",
+        "synonyms":"COK|Cook Islands"
+    },
+    "CRI":{
+        "code":"CRI",
+        "name":"Costa Rica",
+        "synonyms":"CRI|Costa Rica"
+    },
+    "CIV":{
+        "code":"CIV",
+        "name":"Ivory Coast",
+        "synonyms":"CIV|Céte d'Ivoire|Ivory Coast|Cote d'Ivoire|Côte d'Ivoire"
+    },
+    "HRV":{
+        "code":"HRV",
+        "name":"Croatia",
+        "synonyms":"HRV|Croatia"
+    },
+    "CUB":{
+        "code":"CUB",
+        "name":"Cuba",
+        "synonyms":"CUB|Cuba"
+    },
+    "CUW":{
+        "code":"CUW",
+        "name":"Curaçao",
+        "synonyms":"CUW|Curacao|Curaçao"
+    },
+    "CYP":{
+        "code":"CYP",
+        "name":"Cyprus",
+        "synonyms":"CYP|Cyprus"
+    },
+    "CZE":{
+        "code":"CZE",
+        "name":"Czechia",
+        "synonyms":"CZE|Czechia|Czech Republic"
+    },
+    "DNK":{
+        "code":"DNK",
+        "name":"Denmark",
+        "synonyms":"DNK|Denmark"
+    },
+    "DJI":{
+        "code":"DJI",
+        "name":"Djibouti",
+        "synonyms":"DJI|Djibouti"
+    },
+    "DMA":{
+        "code":"DMA",
+        "name":"Dominica",
+        "synonyms":"DMA|Dominica|Commonwealth of Dominica"
+    },
+    "DOM":{
+        "code":"DOM",
+        "name":"Dominican Republic",
+        "synonyms":"DOM|Dominican Republic"
+    },
+    "SXM":{
+        "code":"SXM",
+        "name":"Dutch Sint Maarten",
+        "synonyms":"SXM|Dutch Sint Maarten|Dutch Saint Martin|Sint Maarten"
+    },
+    "ECU":{
+        "code":"ECU",
+        "name":"Ecuador",
+        "synonyms":"ECU|Ecuador"
+    },
+    "EGY":{
+        "code":"EGY",
+        "name":"Egypt",
+        "synonyms":"EGY|Egypt"
+    },
+    "SLV":{
+        "code":"SLV",
+        "name":"El Salvador",
+        "synonyms":"SLV|El Salvador"
+    },
+    "GNQ":{
+        "code":"GNQ",
+        "name":"Equatorial Guinea",
+        "synonyms":"GNQ|Equatorial Guinea"
+    },
+    "ERI":{
+        "code":"ERI",
+        "name":"Eritrea",
+        "synonyms":"ERI|Eritrea"
+    },
+    "EST":{
+        "code":"EST",
+        "name":"Estonia",
+        "synonyms":"EST|Estonia|Estonia (Baltic states)"
+    },
+    "ETH":{
+        "code":"ETH",
+        "name":"Ethiopia",
+        "synonyms":"ETH|Ethiopia"
+    },
+    "FLK":{
+        "code":"FLK",
+        "name":"Falkland Islands",
+        "synonyms":"FLK|Falkland Islands (Malvinas)|Falkland Islands|Malvinas|Falkland|Falkland Islands (Islas Malvinas)|Islas Malvinas"
+    },
+    "FRO":{
+        "code":"FRO",
+        "name":"Faroe Islands",
+        "synonyms":"FRO|Faroe Islands|Faroe"
+    },
+    "FJI":{
+        "code":"FJI",
+        "name":"Fiji",
+        "synonyms":"FJI|Fiji"
+    },
+    "FIN":{
+        "code":"FIN",
+        "name":"Finland",
+        "synonyms":"FIN|Finland"
+    },
+    "FRA":{
+        "code":"FRA",
+        "name":"France",
+        "synonyms":"FRA|France"
+    },
+    "GUF":{
+        "code":"GUF",
+        "name":"French Guiana",
+        "synonyms":"GUF|French Guiana"
+    },
+    "PYF":{
+        "code":"PYF",
+        "name":"French Polynesia",
+        "synonyms":"PYF|French Polynesia"
+    },
+    "MAF":{
+        "code":"MAF",
+        "name":"French Saint Martin",
+        "synonyms":"MAF|French Saint Martin|Saint Martin"
+    },
+    "ATF":{
+        "code":"ATF",
+        "name":"French Southern Territories",
+        "synonyms":"ATF|French Southern Territories"
+    },
+    "GAB":{
+        "code":"GAB",
+        "name":"Gabon",
+        "synonyms":"GAB|Gabon"
+    },
+    "GMB":{
+        "code":"GMB",
+        "name":"Gambia|The Gambia|Gambia, The",
+        "synonyms":"GMB|Gambia|The Gambia|Gambia, The"
+    },
+    "GEO":{
+        "code":"GEO",
+        "name":"Georgia",
+        "synonyms":"GEO|Georgia"
+    },
+    "DEU":{
+        "code":"DEU",
+        "name":"Germany",
+        "synonyms":"DEU|Germany"
+    },
+    "GHA":{
+        "code":"GHA",
+        "name":"Ghana",
+        "synonyms":"GHA|Ghana"
+    },
+    "GIB":{
+        "code":"GIB",
+        "name":"Gibraltar",
+        "synonyms":"GIB|Gibraltar"
+    },
+    "GRC":{
+        "code":"GRC",
+        "name":"Greece",
+        "synonyms":"GRC|Greece"
+    },
+    "GRL":{
+        "code":"GRL",
+        "name":"Greenland",
+        "synonyms":"GRL|Greenland"
+    },
+    "GRD":{
+        "code":"GRD",
+        "name":"Grenada",
+        "synonyms":"GRD|Grenada"
+    },
+    "GLP":{
+        "code":"GLP",
+        "name":"Guadeloupe",
+        "synonyms":"GLP|Guadeloupe"
+    },
+    "GUM":{
+        "code":"GUM",
+        "name":"Guam",
+        "synonyms":"Guam"
+    },
+    "GTM":{
+        "code":"GTM",
+        "name":"Guatemala",
+        "synonyms":"GUM|Guatemala"
+    },
+    "GGY":{
+        "code":"GGY",
+        "name":"Guernsey",
+        "synonyms":"GGY|Guernsey"
+    },
+    "GIN":{
+        "code":"GIN",
+        "name":"Guinea",
+        "synonyms":"GIN|Guinea"
+    },
+    "GNB":{
+        "code":"GNB",
+        "name":"Guinea-Bissau",
+        "synonyms":"GNB|Guinea-Bissau|Guinea Bissau"
+    },
+    "GUY":{
+        "code":"GUY",
+        "name":"Guyana",
+        "synonyms":"GUY|Guyana"
+    },
+    "HTI":{
+        "code":"HTI",
+        "name":"Haiti",
+        "synonyms":"HTI|Haiti"
+    },
+    "HMD":{
+        "code":"HMD",
+        "name":"Heard Island and McDonald Islands",
+        "synonyms":"HMD|Heard Island and McDonald Islands|Heard Island & McDonald Islands"
+    },
+    "HND":{
+        "code":"HND",
+        "name":"Honduras",
+        "synonyms":"HND|Honduras"
+    },
+    "HKG":{
+        "code":"HKG",
+        "name":"Hong Kong",
+        "synonyms":"HKG|Hong Kong"
+    },
+    "HUN":{
+        "code":"HUN",
+        "name":"Hungary",
+        "synonyms":"HUN|Hungary"
+    },
+    "ISL":{
+        "code":"ISL",
+        "name":"Iceland",
+        "synonyms":"ISL|Iceland"
+    },
+    "IND":{
+        "code":"IND",
+        "name":"India",
+        "synonyms":"IND|India"
+    },
+    "IDN":{
+        "code":"IDN",
+        "name":"Indonesia",
+        "synonyms":"IDN|Indonesia"
+    },
+    "IRN":{
+        "code":"IRN",
+        "name":"Iran",
+        "synonyms":"IRN|Iran"
+    },
+    "IRQ":{
+        "code":"IRQ",
+        "name":"Iraq",
+        "synonyms":"IRQ|Iraq"
+    },
+    "IRL":{
+        "code":"IRL",
+        "name":"Ireland",
+        "synonyms":"IRL|Ireland"
+    },
+    "IMN":{
+        "code":"IMN",
+        "name":"Isle of Man",
+        "synonyms":"IMN|Isle of Man"
+    },
+    "ISR":{
+        "code":"ISR",
+        "name":"Israel",
+        "synonyms":"ISR|Israel"
+    },
+    "ITA":{
+        "code":"ITA",
+        "name":"Italy",
+        "synonyms":"ITA|Italy"
+    },
+    "JAM":{
+        "code":"JAM",
+        "name":"Jamaica",
+        "synonyms":"JAM|Jamaica"
+    },
+    "JPN":{
+        "code":"JPN",
+        "name":"Japan",
+        "synonyms":"JPN|Japan"
+    },
+    "JEY":{
+        "code":"JEY",
+        "name":"Jersey",
+        "synonyms":"JEY|Jersey"
+    },
+    "JOR":{
+        "code":"JOR",
+        "name":"Jordan",
+        "synonyms":"JOR|Jordan"
+    },
+    "KAZ":{
+        "code":"KAZ",
+        "name":"Kazakhstan",
+        "synonyms":"KAZ|Kazakhstan"
+    },
+    "KEN":{
+        "code":"KEN",
+        "name":"Kenya",
+        "synonyms":"Kenya"
+    },
+    "KIR":{
+        "code":"KIR",
+        "name":"Kiribati",
+        "synonyms":"KEN|Kiribati"
+    },
+    "PRK":{
+        "code":"PRK",
+        "name":"North Korea",
+        "synonyms":"PRK|Korea, People's Democratic Republic of|People's Democratic Republic of Korea|North Korea|PDR Korea|Korea, North"
+    },
+    "KOR":{
+        "code":"KOR",
+        "name":"South Korea",
+        "synonyms":"KOR|Korea, Republic of|South Korea|Republic of Korea|Korea, South"
+    },
+    "KWT":{
+        "code":"KWT",
+        "name":"Kuwait",
+        "synonyms":"KWT|Kuwait"
+    },
+    "KGZ":{
+        "code":"KGZ",
+        "name":"Kyrgyzstan",
+        "synonyms":"KGZ|Kyrgyzstan"
+    },
+    "ALA":{
+        "code":"ALA",
+        "name":"Åland Islands",
+        "synonyms":"ALA|Åland Islands|Aland Islands"
+    },
+    "LAO":{
+        "code":"LAO",
+        "name":"Laos",
+        "synonyms":"LAO|Laos|Lao PDR|Lao Republic"
+    },
+    "LVA":{
+        "code":"LVA",
+        "name":"Latvia",
+        "synonyms":"LVA|Latvia|Latvia (Baltic states)"
+    },
+    "LBN":{
+        "code":"LBN",
+        "name":"Lebanon",
+        "synonyms":"LBN|Lebanon"
+    },
+    "LSO":{
+        "code":"LSO",
+        "name":"Lesotho",
+        "synonyms":"LSO|Lesotho"
+    },
+    "LBR":{
+        "code":"LBR",
+        "name":"Liberia",
+        "synonyms":"LBR|Liberia"
+    },
+    "LBY":{
+        "code":"LBY",
+        "name":"Libya",
+        "synonyms":"LBY|Libya"
+    },
+    "LIE":{
+        "code":"LIE",
+        "name":"Liechtenstein",
+        "synonyms":"LIE|Liechtenstein"
+    },
+    "LTU":{
+        "code":"LTU",
+        "name":"Lithuania",
+        "synonyms":"LTU|Lithuania|Lithuania (Baltic states)"
+    },
+    "LUX":{
+        "code":"LUX",
+        "name":"Luxembourg",
+        "synonyms":"LUX|Luxembourg"
+    },
+    "MAC":{
+        "code":"MAC",
+        "name":"Macau",
+        "synonyms":"MAC|Macau"
+    },
+    "MKD":{
+        "code":"MKD",
+        "name":"Macedonia",
+        "synonyms":"MKD|Macedonia"
+    },
+    "MDG":{
+        "code":"MDG",
+        "name":"Madagascar",
+        "synonyms":"MDG|Madagascar"
+    },
+    "MWI":{
+        "code":"MWI",
+        "name":"Malawi",
+        "synonyms":"MWI|Malawi"
+    },
+    "MYS":{
+        "code":"MYS",
+        "name":"Malaysia",
+        "synonyms":"MYS|Malaysia"
+    },
+    "MDV":{
+        "code":"MDV",
+        "name":"Maldives",
+        "synonyms":"MDV|Maldives|The Maldives"
+    },
+    "MLI":{
+        "code":"MLI",
+        "name":"Mali",
+        "synonyms":"MLI|Mali"
+    },
+    "MLT":{
+        "code":"MLT",
+        "name":"Malta",
+        "synonyms":"MLT|Malta"
+    },
+    "MHL":{
+        "code":"MHL",
+        "name":"Marshall Islands",
+        "synonyms":"MHL|Marshall Islands"
+    },
+    "MTQ":{
+        "code":"MTQ",
+        "name":"Martinique",
+        "synonyms":"MTQ|Martinique"
+    },
+    "MRT":{
+        "code":"MRT",
+        "name":"Mauritania",
+        "synonyms":"MRT|Mauritania"
+    },
+    "MUS":{
+        "code":"MUS",
+        "name":"Mauritius",
+        "synonyms":"MUS|Mauritius"
+    },
+    "MYT":{
+        "code":"MYT",
+        "name":"Mayotte",
+        "synonyms":"MYT|Mayotte"
+    },
+    "MEX":{
+        "code":"MEX",
+        "name":"Mexico",
+        "synonyms":"MEX|Mexico"
+    },
+    "FSM":{
+        "code":"FSM",
+        "name":"Micronesia",
+        "synonyms":"FSM|Micronesia|Micronesia, Federated States of|Federated States of Micronesia"
+    },
+    "MDA":{
+        "code":"MDA",
+        "name":"Moldova",
+        "synonyms":"MDA|Moldova"
+    },
+    "MCO":{
+        "code":"MCO",
+        "name":"Monaco",
+        "synonyms":"MCO|Monaco"
+    },
+    "MNG":{
+        "code":"MNG",
+        "name":"Mongolia",
+        "synonyms":"MNG|Mongolia"
+    },
+    "MNE":{
+        "code":"MNE",
+        "name":"Montenegro",
+        "synonyms":"MNE|Montenegro"
+    },
+    "MSR":{        
+        "code":"MSR",
+        "name":"Montserrat",
+        "synonyms":"MSR|Montserrat"
+    },
+    "MAR":{
+        "code":"MAR",
+        "name":"Morocco",
+        "synonyms":"MAR|Morocco"
+    },
+    "MOZ":{
+        "code":"MOZ",
+        "name":"Mozambique",
+        "synonyms":"MOZ|Mozambique"
+    },
+    "MMR":{
+        "code":"MMR",
+        "name":"Myanmar",
+        "synonyms":"MMR|Myanmar|Burma"
+    },
+    "NAM":{
+        "code":"NAM",
+        "name":"Namibia",
+        "synonyms":"NAM|Namibia"
+    },
+    "NRU":{
+        "code":"NRU",
+        "name":"Nauru",
+        "synonyms":"NRU|Nauru"
+    },
+    "NPL":{
+        "code":"NPL",
+        "name":"Nepal",
+        "synonyms":"NPL|Nepal"
+    },
+    "NLD":{
+        "code":"NLD",
+        "name":"Netherlands",
+        "synonyms":"NLD|Netherlands|The Netherlands"
+    },
+    "NCL":{
+        "code":"NCL",
+        "name":"New Caledonia",
+        "synonyms":"NCL|New Caledonia"
+    },
+    "NZL":{
+        "code":"NZL",
+        "name":"New Zealand",
+        "synonyms":"NZL|New Zealand"
+    },
+    "NIC":{
+        "code":"NIC",
+        "name":"Nicaragua",
+        "synonyms":"NIC|Nicaragua"
+    },
+    "NER":{
+        "code":"NER",
+        "name":"Niger",
+        "synonyms":"NER|Niger"
+    },
+    "NGA":{
+        "code":"NGA",
+        "name":"Nigeria",
+        "synonyms":"NGA|Nigeria"
+    },
+    "NIU":{
+        "code":"NIU",
+        "name":"Niue",
+        "synonyms":"NIU|Niue"
+    },
+    "NFK":{
+        "code":"NFK",
+        "name":"Norfolk Island",
+        "synonyms":"NFK|Norfolk Island|Norfolk"
+    },
+    "MNP":{
+        "code":"MNP",
+        "name":"Northern Mariana Islands",
+        "synonyms":"MNP|Northern Mariana Islands|Northern Mariana"
+    },
+    "NOR":{
+        "code":"NOR",
+        "name":"Norway",
+        "synonyms":"NOR|Norway"
+    },
+    "OMN":{
+        "code":"OMN",
+        "name":"Oman",
+        "synonyms":"OMN|Oman"
+    },
+    "PAK":{
+        "code":"PAK",
+        "name":"Pakistan",
+        "synonyms":"PAK|Pakistan"
+    },
+    "PLW":{
+        "code":"PLW",
+        "name":"Palau",
+        "synonyms":"PLW|Palau"
+    },
+    "PSE":{
+        "code":"PSE",
+        "name":"Palestine",
+        "synonyms":"PSE|Palestine|Palestinian Territories"
+    },
+    "PAN":{
+        "code":"PAN",
+        "name":"Panama",
+        "synonyms":"PAN|Panama"
+    },
+    "PNG":{
+        "code":"PNG",
+        "name":"Papua New Guinea",
+        "synonyms":"PNG|Papua New Guinea"
+    },
+    "PRY":{
+        "code":"PRY",
+        "name":"Paraguay",
+        "synonyms":"PRY|Paraguay"
+    },
+    "PER":{ 
+        "code":"PER",
+        "name":"Peru",
+        "synonyms":"PER|Peru"
+    },
+    "PHL":{
+        "code":"PHL",
+        "name":"Philippines",
+        "synonyms":"PHL|Philippines|The Phillipines"
+    },
+    "PCN":{
+        "code":"PCN",
+        "name":"Pitcairn",
+        "synonyms":"PCN|Pitcairn|Pitcairn Island|Pitcairn Islands"
+    },
+    "POL":{
+        "code":"POL",
+        "name":"Poland",
+        "synonyms":"POL|Poland"
+    },
+    "PRT":{
+        "code":"PRT",
+        "name":"Portugal",
+        "synonyms":"PRT|Portugal"
+    },
+    "PRI":{
+        "code":"PRI",
+        "name":"Puerto Rico",
+        "synonyms":"PRI|Puerto Rico"
+    },
+    "QAT":{
+        "code":"QAT",
+        "name":"Qatar",
+        "synonyms":"QAT|Qatar"
+    },
+    "REU":{
+        "code":"REU",
+        "name":"Réunion Island",
+        "synonyms":"REU|Réunion|Reunion|Reunion Island|Réunion Island"
+    },
+    "ROU":{
+        "code":"ROU",
+        "name":"Romania",
+        "synonyms":"ROU|Romania"
+    },
+    "RUS":{
+        "code":"RUS",
+        "name":"Russia",
+        "synonyms":"RUS|Russia|Russian Federation"
+    },
+    "RWA":{
+        "code":"RWA",
+        "name":"Rwanda",
+        "synonyms":"RWA|Rwanda"
+    },
+    "BLM":{
+        "code":"BLM",
+        "name":"Saint Barthélemy",
+        "synonyms":"BLM|Saint Barthélemy"
+    },
+    "SHN":{
+        "code":"SHN",
+        "name":"Saint Helena",
+        "synonyms":"SHN|Saint Helena, Ascension, and Tristan da Cunha|Saint Helena, Ascension and Tristan da Cunha|Saint Helena, Ascension & Tristan da Cunha|Saint Helena"
+    },
+    "KNA":{
+        "code":"KNA",
+        "name":"Saint Kitts and Nevis",
+        "synonyms":"KNA|Saint Kitts and Nevis"
+    },
+    "LCA":{
+        "code":"LCA",
+        "name":"Saint Lucia",
+        "synonyms":"LCA|Saint Lucia"
+    },
+    "SPM":{
+        "code":"SPM",
+        "name":"Saint Pierre and Miquelon",
+        "synonyms":"SPM|Saint Pierre and Miquelon|Saint Pierre & Miquelon"
+    },
+    "VCT":{
+        "code":"VCT",
+        "name":"Saint Vincent and the Grenadines",
+        "synonyms":"VCT|Saint Vincent and the Grenadines|Saint Vincent & the Grenadines"
+    },
+    "WSM":{
+        "code":"WSM",
+        "name":"Samoa",
+        "synonyms":"WSM|Samoa"
+    },
+    "SMR":{
+        "code":"SMR",
+        "name":"San Marino",
+        "synonyms":"SMR|San Marino"
+    },
+    "STP":{
+        "code":"STP",
+        "name":"Sao Tome and Principe",
+        "synonyms":"STP|Sao Tome and Principe|Sao Tome & Principe"
+    },
+    "SAU":{
+        "code":"SAU",
+        "name":"Saudi Arabia",
+        "synonyms":"SAU|Saudi Arabia"
+    },
+    "SEN":{
+        "code":"SEN",
+        "name":"Senegal",
+        "synonyms":"SEN|Senegal"
+    },
+    "SRB":{
+        "code":"SRB",
+        "name":"Serbia",
+        "synonyms":"SRB|Serbia"
+    },
+    "SYC":{
+        "code":"SYC",
+        "name":"Seychelles",
+        "synonyms":"SYC|Seychelles"
+    },
+    "SLE":{
+        "code":"SLE",
+        "name":"Sierra Leone",
+        "synonyms":"SLE|Sierra Leone"
+    },
+    "SGP":{
+        "code":"SGP",
+        "name":"Singapore",
+        "synonyms":"SGP|Singapore"
+    },
+    "SVK":{
+        "code":"SVK",
+        "name":"Slovakia",
+        "synonyms":"SVK|Slovakia"
+    },
+    "SVN":{
+        "code":"SVN",
+        "name":"Slovenia",
+        "synonyms":"SVN|Slovenia"
+    },
+    "SLB":{
+        "code":"SLB",
+        "name":"Solomon Islands",
+        "synonyms":"SLB|Solomon Islands"
+    },
+    "SOM":{
+        "code":"SOM",
+        "name":"Somalia",
+        "synonyms":"SOM|Somalia"
+    },
+    "ZAF":{
+        "code":"ZAF",
+        "name":"South Africa",
+        "synonyms":"ZAF|South Africa"
+    },
+    "SGS":{
+        "code":"SGS",
+        "name":"South Georgia and the South Sandwich Islands",
+        "synonyms":"SGS|South Georgia and the South Sandwich Islands|South Georgia & the South Sandwich Islands|South Georgia and South Sandwich Islands|South Georgia & South Sandwich Islands"
+    },
+    "SOS":{
+        "code":"SOS",
+        "name":"South Ossetia ",
+        "synonyms":"SOS|South Ossetia "
+    },
+    "SSD":{
+        "code":"SSD",
+        "name":"South Sudan",
+        "synonyms":"SSD|South Sudan"
+    },
+    "ESP":{
+        "code":"ESP",
+        "name":"Spain",
+        "synonyms":"ESP|Spain"
+    },
+    "LKA":{
+        "code":"LKA",
+        "name":"Sri Lanka",
+        "synonyms":"LKA|Sri Lanka"
+    },
+    "SDN":{
+        "code":"SDN",
+        "name":"Sudan",
+        "synonyms":"SDN|Sudan"
+    },
+    "SUR":{
+        "code":"SUR",
+        "name":"Suriname",
+        "synonyms":"SUR|Suriname"
+    },
+    "SJM":{
+        "code":"SJM",
+        "name":"Svalbard and Jan Mayen",
+        "synonyms":"SJM|Svalbard and Jan Mayen|Svalbard & Jan Mayen|Svalbard|Jan Mayen"
+    },
+    "SWZ":{
+        "code":"SWZ",
+        "name":"Swaziland",
+        "synonyms":"SWZ|Swaziland"
+    },
+    "SWE":{
+        "code":"SWE",
+        "name":"Sweden",
+        "synonyms":"SWE|Sweden"
+    },
+    "CHE":{
+        "code":"CHE",
+        "name":"Switzerland",
+        "synonyms":"CHE|Switzerland"
+    },
+    "SYR":{
+        "code":"SYR",
+        "name":"Syria",
+        "synonyms":"SYR|Syria"
+    },
+    "TWN":{
+        "code":"TWN",
+        "name":"Taiwan",
+        "synonyms":"TWN|Taiwan"
+    },
+    "TJK":{
+        "code":"TJK",
+        "name":"Tajikistan",
+        "synonyms":"TJK|Tajikistan"
+    },
+    "TZA":{
+        "code":"TZA",
+        "name":"Tanzania",
+        "synonyms":"TZA|Tanzania"
+    },
+    "THA":{
+        "code":"THA",
+        "name":"Thailand",
+        "synonyms":"THA|Thailand"
+    },
+    "TLS":{
+        "code":"TLS",
+        "name":"East Timor",
+        "synonyms":"TLS|Timor-Leste|East Timor"
+    },
+    "TGO":{
+        "code":"TGO",
+        "name":"Togo",
+        "synonyms":"TGO|Togo"
+    },
+    "TKL":{
+        "code":"TKL",
+        "name":"Tokelau",
+        "synonyms":"TKL|Tokelau"
+    },
+    "TON":{
+        "code":"TON",
+        "name":"Tonga",
+        "synonyms":"TON|Tonga"
+    },
+    "TTO":{
+        "code":"TTO",
+        "name":"Trinidad and Tobago",
+        "synonyms":"TTO|Trinidad and Tobago|Trinidad & Tobago"
+    },
+    "TUN":{
+        "code":"TUN",
+        "name":"Tunisia",
+        "synonyms":"TUN|Tunisia"
+    },
+    "TUR":{
+        "code":"TUR",
+        "name":"Turkey",
+        "synonyms":"TUR|Turkey"
+    },
+    "TKM":{
+        "code":"TKM",
+        "name":"Turkmenistan",
+        "synonyms":"TKM|Turkmenistan"
+    },
+    "TCA":{
+        "code":"TCA",
+        "name":"Turks and Caicos",
+        "synonyms":"TCA|Turks and Caicos Islands|Turks & Caicos Islands|Turks and Caicos|Turks & Caicos"
+    },
+    "TUV":{
+        "code":"TUV",
+        "name":"Tuvalu",
+        "synonyms":"TUV|Tuvalu"
+    },
+    "UGA":{
+        "code":"UGA",
+        "name":"Uganda",
+        "synonyms":"UGA|Uganda"
+    },
+    "UKR":{
+        "code":"UKR",
+        "name":"Ukraine",
+        "synonyms":"UKR|Ukraine|The Ukraine|Ukraine, The"
+    },
+    "ARE":{
+        "code":"ARE",
+        "name":"United Arab Emirates",
+        "synonyms":"ARE|United Arab Emirates|UAE|U.A.E."
+    },
+    "GBR":{
+        "code":"GBR",
+        "name":"United Kingdom",
+        "synonyms":"GBR|United Kingdom|Great Britain|UK|U.K."
+    },
+    "USA":{
+        "code":"USA",
+        "name":"United States",
+        "synonyms":"USA|United States|US|USA|U.S.|U.S.A.|United States of America"
+    },
+    "UMI":{
+        "code":"UMI",
+        "name":"US Minor Outlying Islands",
+        "synonyms":"UMI|United States Minor Outlying Islands|US Minor Outlying Islands"
+    },
+    "URY":{
+        "code":"URY",
+        "name":"Uruguay",
+        "synonyms":"URY|Uruguay"
+    },
+    "UZB":{
+        "code":"UZB",
+        "name":"Uzbekistan",
+        "synonyms":"UZB|Uzbekistan"
+    },
+    "VUT":{
+        "code":"VUT",
+        "name":"Vanuatu",
+        "synonyms":"VUT|Vanuatu"
+    },
+    "VAT":{
+        "code":"VAT",
+        "name":"Vatican City",
+        "synonyms":"VAT|Vatican City|Holy See|Vatican City(Holy See)|Vatican City State|Holy See (Vatican City)"
+    },
+    "VEN":{
+        "code":"VEN",
+        "name":"Venezuela",
+        "synonyms":"VEN|Venezuela"
+    },
+    "VNM":{
+        "code":"VNM",
+        "name":"Vietnam",
+        "synonyms":"VNM|Vietnam|Viet Nam"
+    },
+    "VGB":{
+        "code":"VGB",
+        "name":"British Virgin Islands",
+        "synonyms":"VGB|Virgin Islands, British|British Virgin Islands"
+    },
+    "VIR":{
+        "code":"VIR",
+        "name":"US Virgin Islands",
+        "synonyms":"VIR|Virgin Islands, U.S.|U.S. Virgin Islands|US Virgin Islands|Virgin Islands"
+    },
+    "WLF":{
+        "code":"WLF",
+        "name":"Wallis and Futuna",
+        "synonyms":"WLF|Wallis and Futuna|Wallis & Futuna"
+    },
+    "ESH":{
+        "code":"ESH",
+        "name":"Western Sahara",
+        "synonyms":"ESH|Western Sahara|West Sahara|W. Sahara"
+    },
+    "YEM":{
+        "code":"YEM",
+        "name":"Yemen",
+        "synonyms":"YEM|Yemen"
+    },
+    "ZMB":{
+        "code":"ZMB",
+        "name":"Zambia",
+        "synonyms":"ZMB|Zambia"
+    },
+    "ZWE":{
+        "code":"ZWE",
+        "name":"Zimbabwe",
+        "synonyms":"ZWE|Zimbabwe"
+    },
+    "XKO":{
+        "code":"XKO",
+        "name":"Kosovo",
+        "synonyms":"XKO|Kosovo"
+    },
+    "XWB":{
+        "code":"XWB",
+        "name":"West Bank",
+        "synonyms":"XWB|West Bank"
+    },
+    "XGZ":{
+        "code":"XGZ",
+        "name":"Gaza Strip",
+        "synonyms":"XGZ|Gaza Strip|The Gaza Strip"
+    },
+    "XPM":{
+        "code":"XPM",
+        "name":"Palmyra Atoll",
+        "synonyms":"XPM|Palmyra Atoll"
+    },
+    "XWK":{
+        "code":"XWK",
+        "name":"Wake Island",
+        "synonyms":"XWK|Wake Island"
+    },
+    "XAB":{        
+        "code":"XAB",
+        "name":"Abkhazia",
+        "synonyms":"XAB|Abkhazia"
+    }
+}
