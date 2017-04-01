@@ -18,7 +18,7 @@ var currentStat;
 var currentDirection;
 
 //    The stat sections in their ideal order
-var idealStatSections = ["Indexes","Demographics","Naming","Description","Government","Demographics"]
+var idealStatSections = ["Naming","Demographics","Economy","Infrastructure","Codes"]
 //    The stat sections that actually exist in the data
 var actualStatSections = []
 //    The stat sections that exist in the data but aren't listed in the ideal list
