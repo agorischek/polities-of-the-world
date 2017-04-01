@@ -739,6 +739,8 @@ function setColorsBySubset(stat,limit){
     }
     
     else{
+        
+        limit = numeral(limit).value();
 
     //    This allows us to toggle between the two filters
         if(stat == currentStat && currentDirection == "greater"){
