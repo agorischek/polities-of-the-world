@@ -693,9 +693,7 @@ function makeStatsInteractive(selector){
     each(stats, function(index,stat){
        
        $(scope + ".stat-" + stat + "-data").click(function(){
-           log("hello")
             var statValue = $(this).attr("data")
-            log(statValue)
             setColorsBySubset(stat,statValue);
            
        }) 
