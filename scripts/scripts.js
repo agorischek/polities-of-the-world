@@ -534,9 +534,7 @@ function showPolityInfo(polity){
 
                             else if(schema[stat].type == "percent"){
 
-                                var formattedStatData = numeral(statData).format('0[.]00%');
-                                
-//                                var formattedStatData = formattedStatData
+                                var formattedStatData = formatStatData(statData, schema[stat].type)
 
                                 $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + statData + "'>" + formattedStatData + "</div>");   
 
@@ -550,8 +548,8 @@ function showPolityInfo(polity){
                             
                             else if(schema[stat].type == "number"){
                                 
-                                var formattedStatData = numeral(statData).format('0,0[.]00');
-
+                                var formattedStatData = formatStatData(statData, schema[stat].type)
+                                
                                 $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + formattedStatData + "'>" + formattedStatData + "</div>");
 
                             }
@@ -596,19 +594,21 @@ function showStatsInfo(stat,limit,direction){
         if(polityInfo[stat]){
             
             if(limit){
+                
+                var formattedStatData = formatStatData(polityInfo[stat], schema[stat].type);
             
                 if(direction=="greater" && polityInfo[stat]>=limit){
 
-                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + polityInfo[stat] + "</div>");
+                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
 
                 }
                 else if(direction=="lesser" && polityInfo[stat]<=limit){
 
-                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + polityInfo[stat] + "</div>");
+                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
                 }
                 else if(direction=="same" && containsOrEquals(polityInfo[stat],limit)){
                     
-                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + polityInfo[stat] + "</div>"); 
+                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>"); 
                 }
             }
             else{
@@ -771,6 +771,8 @@ function setColorsBySubset(stat,limit){
     else{
         
         limit = numeral(limit).value();
+        
+        formattedLimit = formatStatData(limit, schema[stat].type)
 
     //    This allows us to toggle between the two filters
         if(stat == currentStat && currentDirection == "greater"){
@@ -783,7 +785,7 @@ function setColorsBySubset(stat,limit){
                 };
 
             currentDirection = "lesser";
-            $("#stats-pane-modifier").html("&le; " + limit);
+            $("#stats-pane-modifier").html("&le; " + formattedLimit);
 
             });       
         }        
@@ -797,7 +799,7 @@ function setColorsBySubset(stat,limit){
                 };
 
                 currentDirection = "greater"; 
-                $("#stats-pane-modifier").html("&ge; " + limit);
+                $("#stats-pane-modifier").html("&ge; " + formattedLimit);
 
             })          
         };
