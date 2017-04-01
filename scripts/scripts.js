@@ -209,9 +209,6 @@ function getSchema(){
             schema[value["stat"]] = value;
             actualStatSections.push(value["section"])
         });
-        
-        log("Schema is")
-        log(schema)
 
         actualStatSections = unique(actualStatSections);
 
