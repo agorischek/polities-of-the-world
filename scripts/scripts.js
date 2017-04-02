@@ -452,10 +452,37 @@ function formatStatData(value,type){
         return numeral(value).format('0,0[.]00') 
     }
     
+    else if(type == "polities"){
+        if(data[value]){
+            return data[value].name
+        }
+        else{
+            return value
+        }
+    }
+    
     else{
         return value
     }
 
+}
+
+function displayStatItem(statInfo){
+    
+    var formattedStatData = formatStatData(statInfo.data, statInfo.type)
+    
+    var classes = ""
+    
+    if(statInfo.actionable){
+        classes = classes.concat("actionable ")
+    }
+    
+    classes = classes.concat("stat-" + statInfo.stat + "-data");
+    
+    log(classes)
+    
+    $(statInfo.target).append(statInfo.prefix + "<span class='" + classes + "' data='" + statInfo.data + "'>" + formattedStatData + "</span>");
+    
 }
 
 function showPolityInfo(polity){
@@ -476,13 +503,15 @@ function showPolityInfo(polity){
             
 //            If a proper title is provided in the schema we use that; else we fall back to the variable name
             var title
-
+            
             if(schema[stat]){
                 title = schema[stat]["title"];
             }
             else{
                 title = "\"" + stat + "\""
             };
+            
+            var target = "#polity-info"
             
             if(schema[stat]){
 
@@ -492,23 +521,9 @@ function showPolityInfo(polity){
 
                         if(statData){
 
-                            $("#polity-info").append("<h3 class='actionable stat-" + stat + "'>" + title + "</h3>");
+                            $(target).append("<h3 class='actionable stat-" + stat + "'>" + title + "</h3>");
 
-                            if(schema[stat].type == "multipleSelect"){
-
-                                each(statData,function(index,value){
-
-                                    var prefix =""
-
-                                    if(index != 0){
-                                        prefix = ", "
-                                    }
-
-                                    $("#polity-info").append(prefix + "<span class='actionable stat-" + stat + "-data' data='" + statData + "'>" + value + "</span>");                                
-                                });                            
-                            }
-
-                            else if(schema[stat].type == "polities"){
+                            if(schema[stat].type == "multipleSelect" || schema[stat].type == "polities"){
 
                                 each(statData,function(index,value){
 
@@ -518,54 +533,28 @@ function showPolityInfo(polity){
                                         prefix = ", "
                                     }
 
-                                    var name
-
-                                    if(data[value]){
-                                        name = data[value].name
-                                    }
-                                    else{
-                                        name = value
-                                    }
-
-                                    $("#polity-info").append(prefix + "<span class='actionable " + value + "' data='" + statData + "'>" + name + "</span>");                                
+                                    displayStatItem({
+                                        target: target,
+                                        prefix: prefix,
+                                        actionable: true,
+                                        stat: stat,
+                                        data: statData,
+                                        type: schema[stat].type
+                                        
+                                    });                               
                                 });                            
                             }
-
-
-                            else if(schema[stat].type == "percent"){
-
-                                var formattedStatData = formatStatData(statData, schema[stat].type)
-
-                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + statData + "'>" + formattedStatData + "</div>");   
-
-                            }
-                            
-                            else if(schema[stat].type == "currency"){
-
-                                var formattedStatData = formatStatData(statData, schema[stat].type)
-                                                                
-                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + statData + "'>" + formattedStatData + "</div>");   
-
-                            }
-
-                            else if(schema[stat].type == "verbose"){
-
-                                $("#polity-info").append("<div class='stat-" + stat + "-data-verbose' data='" + statData + "'>" + statData + "</div>");   
-
-                            }
-                            
-                            else if(schema[stat].type == "number"){
-                                
-                                var formattedStatData = formatStatData(statData, schema[stat].type)
-                                
-                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + formattedStatData + "'>" + formattedStatData + "</div>");
-
-                            }
-                            
 
                             else{
 
-                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data' data='" + statData + "'>" + statData + "</div>");
+                                displayStatItem({
+                                    target: target,
+                                    prefix: "",
+                                    actionable: true,
+                                    stat: stat,
+                                    data: statData,
+                                    type: schema[stat].type
+                                }); 
 
                             };                            
                         }
