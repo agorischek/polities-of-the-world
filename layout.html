@@ -3,62 +3,33 @@
 <html>
 <head>
     <style>
+        
         body{
             margin:0px;
             padding:0px; 
             background-color:black;
-/*            overflow:hidden;*/
-                min-height:100vh;
-
-
-        }
-        #outer{
-            display: flex;
-            background-color:turquoise;
-            flex-direction: column;
-                min-height:100vh;
-        }
-        
-        .current-nav{
-            font-weight: 800;
-        }
-        
-        #nav{
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            background-color:bisque;
-            height:50px;
-            text-align:center;
-            display:none;
-        }
-        
-/*
-        @media (min-width: 750px) {
-            #nav{
-                display:none;
-            }   
-        }
-*/
-        
-
-        
-        .nav-item{
-            background-color:chartreuse;
-            min-width:80px;
-            padding:10px;
+            min-height:100vh;
+            overflow:hidden;
         }
         
         #page{
+            display: flex;
+            background-color:turquoise;
+            flex-direction: column;
+            min-height:100vh;
+            overflow:hidden;
+        }        
+        
+        #content{
             background-color: slategray;
             flex:1;
             display: flex;
             flex-direction: row;
-/*            flex-wrap: wrap;*/
             justify-content:space-between;
             align-items: stretch;
             overflow:hidden;
         }
+        
         .column{
             display: flex;
             flex-direction: column; 
@@ -66,33 +37,16 @@
             align-content:stretch;
             align-items: stretch;
         }
-        
-        #center{
-            flex:1;
-            width:300px;
-            text-align: center;
-        }
-        
-/*
-        body div{
-            padding:10px;
-        }
-*/
-        
+
         #left{
             text-align: left;
         }
         
         #center{
-            
-            justify-content: space-around;
-            
-        }
-        
-        .middle{
             flex:1;
-            overflow:scroll;
-            height:100px;
+            width:300px;
+            text-align: center;
+            justify-content: space-around;
         }
         
         #right{
@@ -106,8 +60,47 @@
         .upper{
             height:80px;
         }
+        
+        .middle{
+            flex:1;
+            overflow:scroll;
+            height:100px;
+        }
+
         .lower{
             height:140px;
+        }
+        
+        #nav{
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background-color:bisque;
+            height:50px;
+            text-align:center;
+            display:none;
+        }   
+        
+        .nav-item{
+            background-color:chartreuse;
+            min-width:80px;
+            padding:10px;
+        }
+        
+        .current-nav{
+            font-weight: 800;
+        }
+        
+        @media (max-width: 750px) { 
+            .narrow-hide{
+                display:none;
+            }
+            #nav{
+                display:flex;
+            }
+            .column{
+                width:100%;
+            }
         }
         
         #left{
@@ -139,35 +132,13 @@
         }
         #lower-right{
             background-color:pink;
-        }
-        
-        @media (max-width: 750px) { 
-            .narrow-hide{
-                display:none;
-            }
-            
-/*
-            #center{
-                display:none;
-            }
-            #right{
-                display:none;
-            }
-*/
-            #nav{
-                display:flex;
-            }
-            .column{
-                width:100%;
-            }
-        }
-        
+        } 
         
     </style>
 </head>
 <body>
-    <div id="outer">
     <div id="page">
+    <div id="content">
         <div id="left" class="column side">
             <div class="upper left" id="upper-left">
             Upper Left
@@ -197,7 +168,7 @@
         </div>
     </div>
         <div id="nav">
-            <div id="polities-nav" class="nav-item">Polities</div>
+            <div id="polities-nav" class="nav-item current-nav">Polities</div>
             <div id="map-nav" class="nav-item">Map</div>
             <div id="stats-nav" class="nav-item">Stats</div>
             
@@ -206,7 +177,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
     $(function(){
-//        $("body").hide();
+
         $("#polities-nav").click(function(){
             $(".nav-item").removeClass("current-nav");
             $(this).addClass("current-nav");
