@@ -18,7 +18,7 @@ var currentStat;
 var currentDirection;
 
 //    The stat sections in their ideal order
-var idealStatSections = ["Indexes","Demographics","Naming","Description","Government","Demographics"]
+var idealStatSections = ["Naming","Demographics","Economy","Infrastructure","Codes"]
 //    The stat sections that actually exist in the data
 var actualStatSections = []
 //    The stat sections that exist in the data but aren't listed in the ideal list
@@ -100,13 +100,13 @@ function processNumbers(){
         
         if(schema[stat]){
       
-            if(schema[stat].type == "number"){
+            if(schema[stat].type == "number" || schema[stat].type == "currency"){
 
                 each(data,function(polityCode,polityInfo){
 
                     if(polityInfo[stat]){
 
-                        polityInfo[stat] = numeral(polityInfo[stat]).format("0.0[0000]");
+                        polityInfo[stat] = numeral(polityInfo[stat]).value();
                         
                     }              
                 })          
@@ -118,7 +118,7 @@ function processNumbers(){
 
 function chooseColors(min, max, type){
 
-    if(type == "index" || type == "number" || type == "percent"){
+    if(type == "index" || type == "number" || type == "percent" || type == "currency"){
         colors = d3.scale.linear()
             .domain([min,max])
             .range([lightColor, darkColor]);
@@ -209,9 +209,6 @@ function getSchema(){
             schema[value["stat"]] = value;
             actualStatSections.push(value["section"])
         });
-        
-        log("Schema is")
-        log(schema)
 
         actualStatSections = unique(actualStatSections);
 
@@ -440,6 +437,54 @@ function setColorsBy(stat, subset){
 
     };
 
+
+function formatStatData(value,type){
+        
+    if(type == "percent"){
+        return numeral(value).format('0[.]00%');
+    }
+    
+    else if(type == "currency"){
+        return numeral(value).format('$0,0[.]00');        
+    }
+    
+    else if(type == "number"){  
+        return numeral(value).format('0,0[.]00') 
+    }
+    
+    else if(type == "polities"){
+        if(data[value]){
+            return data[value].name
+        }
+        else{
+            return value
+        }
+    }
+    
+    else{
+        return value
+    }
+
+}
+
+function displayStatItem(statInfo){
+    
+    var formattedStatData = formatStatData(statInfo.data, statInfo.type)
+    
+    var classes = ""
+    
+    if(statInfo.actionable){
+        classes = classes.concat("actionable ")
+    }
+    
+    classes = classes.concat("stat-" + statInfo.stat + "-data");
+    
+    log(classes)
+    
+    $(statInfo.target).append(statInfo.prefix + "<span class='" + classes + "' data='" + statInfo.data + "'>" + formattedStatData + "</span>");
+    
+}
+
 function showPolityInfo(polity){
     
     $("#polity-list").hide();
@@ -458,13 +503,15 @@ function showPolityInfo(polity){
             
 //            If a proper title is provided in the schema we use that; else we fall back to the variable name
             var title
-
+            
             if(schema[stat]){
                 title = schema[stat]["title"];
             }
             else{
                 title = "\"" + stat + "\""
             };
+            
+            var target = "#polity-info"
             
             if(schema[stat]){
 
@@ -474,23 +521,9 @@ function showPolityInfo(polity){
 
                         if(statData){
 
-                            $("#polity-info").append("<h3 class='actionable stat-" + stat + "'>" + title + "</h3>");
+                            $(target).append("<h3 class='actionable stat-" + stat + "'>" + title + "</h3>");
 
-                            if(schema[stat].type == "multipleSelect"){
-
-                                each(statData,function(index,value){
-
-                                    var prefix =""
-
-                                    if(index != 0){
-                                        prefix = ", "
-                                    }
-
-                                    $("#polity-info").append(prefix + "<span class='actionable stat-" + stat + "-data'>" + value + "</span>");                                
-                                });                            
-                            }
-
-                            else if(schema[stat].type == "polities"){
+                            if(schema[stat].type == "multipleSelect" || schema[stat].type == "polities"){
 
                                 each(statData,function(index,value){
 
@@ -500,39 +533,28 @@ function showPolityInfo(polity){
                                         prefix = ", "
                                     }
 
-                                    var name
-
-                                    if(data[value]){
-                                        name = data[value].name
-                                    }
-                                    else{
-                                        name = value
-                                    }
-
-                                    $("#polity-info").append(prefix + "<span class='actionable " + value + "'>" + name + "</span>");                                
+                                    displayStatItem({
+                                        target: target,
+                                        prefix: prefix,
+                                        actionable: true,
+                                        stat: stat,
+                                        data: statData,
+                                        type: schema[stat].type
+                                        
+                                    });                               
                                 });                            
-                            }
-
-
-                            else if(schema[stat].type == "percent"){
-
-                                var formattedStatData = numeral(statData).format('0.00%');
-                                
-//                                var formattedStatData = formattedStatData
-
-                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data'>" + formattedStatData + "</div>");   
-
-                            }
-
-                            else if(schema[stat].type == "verbose"){
-
-                                $("#polity-info").append("<div class='stat-" + stat + "-data-verbose'>" + statData + "</div>");   
-
                             }
 
                             else{
 
-                                $("#polity-info").append("<div class='actionable stat-" + stat + "-data'>" + statData + "</div>");
+                                displayStatItem({
+                                    target: target,
+                                    prefix: "",
+                                    actionable: true,
+                                    stat: stat,
+                                    data: statData,
+                                    type: schema[stat].type
+                                }); 
 
                             };                            
                         }
@@ -568,25 +590,27 @@ function showStatsInfo(stat,limit,direction){
 //        If that polity has info for the stat...
         if(polityInfo[stat]){
             
-            if(limit){
+            var formattedStatData = formatStatData(polityInfo[stat], schema[stat].type);
             
+            if(limit){
+                            
                 if(direction=="greater" && polityInfo[stat]>=limit){
 
-                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + polityInfo[stat] + "</div>");
+                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
 
                 }
                 else if(direction=="lesser" && polityInfo[stat]<=limit){
 
-                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + polityInfo[stat] + "</div>");
+                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
                 }
                 else if(direction=="same" && containsOrEquals(polityInfo[stat],limit)){
                     
-                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + polityInfo[stat] + "</div>"); 
+                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>"); 
                 }
             }
             else{
 //            Display that info
-            $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + polityInfo[stat] + "</div>");
+            $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
 
         }
         }
@@ -696,8 +720,7 @@ function makeStatsInteractive(selector){
     each(stats, function(index,stat){
        
        $(scope + ".stat-" + stat + "-data").click(function(){
-           
-            var statValue = $(this).html()
+            var statValue = $(this).attr("data")
             setColorsBySubset(stat,statValue);
            
        }) 
@@ -743,6 +766,10 @@ function setColorsBySubset(stat,limit){
     }
     
     else{
+        
+        limit = numeral(limit).value();
+        
+        formattedLimit = formatStatData(limit, schema[stat].type)
 
     //    This allows us to toggle between the two filters
         if(stat == currentStat && currentDirection == "greater"){
@@ -755,7 +782,7 @@ function setColorsBySubset(stat,limit){
                 };
 
             currentDirection = "lesser";
-            $("#stats-pane-modifier").html("&le; " + limit);
+            $("#stats-pane-modifier").html("&le; " + formattedLimit);
 
             });       
         }        
@@ -769,7 +796,7 @@ function setColorsBySubset(stat,limit){
                 };
 
                 currentDirection = "greater"; 
-                $("#stats-pane-modifier").html("&ge; " + limit);
+                $("#stats-pane-modifier").html("&ge; " + formattedLimit);
 
             })          
         };
