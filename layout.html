@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        body{
+            margin:0px;
+            padding:0px; 
+            display: flex;
+            min-height:100vh;
+            background-color:black;
+            overflow:hidden;
+
+        }
+        #page{
+            background-color: slategray;
+            flex:1;
+            display: flex;
+            flex-direction: row;
+/*            flex-wrap: wrap;*/
+            justify-content:space-between;
+            align-items: stretch;
+            overflow:hidden;
+        }
+        .column{
+            display: flex;
+            flex-direction: column; 
+            justify-content:space-between;
+            align-content:stretch;
+            align-items: stretch;
+        }
+        
+        #center{
+            flex:1;
+            width:300px;
+            text-align: center;
+        }
+        
+        div{
+            padding:10px;
+        }
+        
+        #left{
+            text-align: left;
+        }
+        
+        #center{
+            
+            justify-content: space-around;
+            
+        }
+        
+        .middle{
+            flex:1;
+            overflow:scroll;
+            height:100px;
+        }
+        
+        #right{
+            text-align: right;
+        }
+        
+        .side{
+            width:250px;
+        }
+        
+        .upper{
+            height:80px;
+        }
+        .lower{
+            height:140px;
+        }
+        
+        #left{
+            background-color:lightgray;
+        }
+        #right{
+            background-color: darkgray;
+        }
+        #upper-left{
+            background-color:red;
+        }
+        #middle-left{
+            background-color:orange;
+        }
+        #lower-left{
+            background-color:yellow;
+        }
+        #center{
+            background-color:green;
+        }
+        #middle-center{
+            background-color:lightgreen;
+        }
+        #upper-right{
+            background-color:blue;
+        }
+        #middle-right{
+            background-color:purple;
+        }
+        #lower-right{
+            background-color:pink;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div id="page">
+        <div id="left" class="column side">
+            <div class="upper left" id="upper-left">
+            Upper Left
+            </div>
+            <div class="middle left" id="middle-left">
+            Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, Middle Left, 
+            </div>
+            <div class="lower left" id="lower-left">
+            Lower Left
+            </div>
+        </div>
+        <div id="center" class="column">
+            <div class="middle" id="middle-center">
+                Middle Center
+            </div>    
+        </div>
+        <div id="right" class="column side">
+            <div class="upper right" id="upper-right">
+            Upper Right
+            </div>
+            <div class="middle right" id="middle-right">
+            Middle Right
+            </div>
+            <div class="lower right" id="lower-right">
+            Lower Right
+            </div>
+        </div>
+    </div>
+</body>
+</html>
