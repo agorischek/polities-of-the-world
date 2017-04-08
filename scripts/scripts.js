@@ -481,11 +481,15 @@ function displayStatItem(statInfo){
     }
     
     classes = classes.concat("stat-" + statInfo.stat + "-data");
-    
-    log(classes)
-    
+        
     $(statInfo.target).append(statInfo.prefix + "<span class='" + classes + "' data='" + statInfo.data + "'>" + formattedStatData + "</span>");
     
+    $(statInfo.target).append(statInfo.prefix + sculpt({
+        element:"span",
+        content:formattedStatData,
+        class:classes,
+        data: statInfo.data
+    }))
 }
 
 function showPolityInfo(polity){
@@ -842,8 +846,15 @@ function enableNavBar(){
 }
 
 function showStatsSource(stat){
+
     $("#lower-right").show();
     var sourceName = schema[stat].sourceName
     var sourceURL = schema[stat].sourceURL
-    $("#stats-source").html("Source: <a target='_blank' class='actionable' href='" + sourceURL + "'>" + sourceName + "</a>");
+    $("#stats-source").html("Source: " + sculpt({
+        element:"a",
+        content:sourceName,
+        target:"_blank",
+        class:"actionable",
+        href:sourceURL
+    }))
 }
