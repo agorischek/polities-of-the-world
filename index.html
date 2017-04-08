@@ -8,7 +8,7 @@
         <link rel=stylesheet href="libs/normalize.css" type="text/css" media="screen"/>
         <link rel="stylesheet" href="styles/styles.css" type="text/css">
         <link rel="stylesheet" href="styles/fonts.css" type="text/css">
-        <link rel="stylesheet" type="text/css" href="styles/layout.css">
+<!--        <link rel="stylesheet" href="libs/uikit.min.css" type="text/css">-->
 
     </head>
     
@@ -32,7 +32,15 @@
                     <div id="polity-info"></div>
                 </div>
                 <div class="lower left" id="lower-left">
-                Polities of the World
+                    <div id="links-list">
+                        <img id="info" class="icon" src="images/info.png"/>
+                        <a href="#">
+                            <img id="logo" class="icon" src="images/icon.png"/>
+                        </a>
+                        <a href="https://github.com/agorischek/polities-of-the-world" target="_blank">
+                            <img id="source" class="icon" src="images/source.png"/>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div id="center" class="column">
@@ -58,7 +66,7 @@
                     <div id="stats-info"></div>
                 </div>
                 <div class="lower right" id="lower-right">
-                Settings
+                    <div id="stats-source"></div>
                 </div>
             </div>
         </div>
@@ -83,6 +91,8 @@
     <script src="libs/underscore.js"></script>
     <script src="libs/underscore.string.min.js"></script>        
     <script src="scripts/scripts.min.js"></script>
+    <script src="libs/uikit.min.js"></script>
+    <script src="libs/uikit-icons.min.js"></script>
         
     </body>
     

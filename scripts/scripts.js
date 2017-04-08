@@ -432,6 +432,8 @@ function setColorsBy(stat, subset){
         $("#stats-list").show();
 
         $("#stats-back-text").hide();
+        
+        $("#stats-source").html("");
 
         $("#stats-pane-title").html("Stats");
 
@@ -620,6 +622,7 @@ function showStatsInfo(stat,limit,direction){
     makeStatsInteractive("#stats-info");
     makePolitiesInteractive("#stats-info");
     $("#stats-pane").animate({ scrollTop: 0 }, 0);
+    showStatsSource(stat);
 
 }
 
@@ -836,4 +839,11 @@ function enableNavBar(){
         $("#center").addClass("narrow-hide");
         $("#right").removeClass("narrow-hide");
     })
+}
+
+function showStatsSource(stat){
+    $("#lower-right").show();
+    var sourceName = schema[stat].sourceName
+    var sourceURL = schema[stat].sourceURL
+    $("#stats-source").html("Source: <a target='_blank' class='actionable' href='" + sourceURL + "'>" + sourceName + "</a>");
 }
