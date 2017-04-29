@@ -30,7 +30,7 @@
                 <div class="middle left" id="middle-left">
                     <ol id="polity-list">
                         <li :class="'polity actionable ' + polity" v-for="polity in polities">
-                            {{content[polity]["name"]}}
+                            {{content[polity].name}}
                         </li>
                     </ol>
                     <div id="polity-info"></div>
@@ -67,8 +67,16 @@
                 </div>
                 <div class="middle right" id="middle-right">
                     <ul id="stats-list">
-                        <li v-for="stat in orderedStatSections">
-                            Hello    
+                        <li v-for="statSection in orderedStatSections">
+                            <ul>
+                                <h3>
+                                    {{statSection}}    
+                                </h3>
+                                <li v-for="stat in stats" v-if="schema[stat].section==statSection" :class="'actionable stat stat-' + stat">
+                                    {{schema[stat].title}}
+                                </li>
+                                
+                            </ul>
                         </li>                    
                     </ul>
                     <div id="stats-info"></div>

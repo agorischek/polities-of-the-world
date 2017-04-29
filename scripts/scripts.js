@@ -35,7 +35,7 @@ var actualStatSections = []
 //    The stat sections that exist in the data but aren't listed in the ideal list
 var additionalStatSections = []
 //    The full list of stat sections in the order they should be displayed
-var orderedStatSections = ["whattup"]
+//var orderedStatSections = ["whattup"]
 
 //Sequencing
 var gettingData = $.Deferred();
@@ -225,7 +225,7 @@ function getSchema(){
 
         additionalStatSections = _.difference(actualStatSections, idealStatSections);
 
-        orderedStatSections = idealStatSections.concat(additionalStatSections);
+        app.orderedStatSections = idealStatSections.concat(additionalStatSections);
 
         gettingSchema.resolve();
 
@@ -729,7 +729,7 @@ function makePolitiesInteractive(selector){
 function makeStatsInteractive(selector){
     
     var scope = "";
-    
+        
     if(selector){
         scope = selector + " ";
     }
@@ -740,6 +740,9 @@ function makeStatsInteractive(selector){
             setColorsBy(stat);
             showStatsInfo(stat);
         });  
+        
+            log("Stats are being made interactive " + stat)
+
          
     })
     
