@@ -7,25 +7,24 @@ $(function(){
 
 //Variables
 var csv;
-//var data = {};
-var schema = {};
-var stats = [];
+//var stats = [];
 var colors;
 var polities = [];
 var mapDisplay;
 
-var currentPolity;
-var currentStat;
-var currentDirection;
-
 var app = new Vue({
   el: '#page',
   data: {
-    content: {USA: "yeah"},
+    content: {},
+    schema: {},
+    stats: [],
     statsPaneTitle: "Stats",
     polityPaneTitle: "Polities",
     polities: polities,
-    orderedStatSections: orderedStatSections
+    orderedStatSections: [],
+    currentPolity: "",
+    currentStat: "",
+    currentDirection: "",
   }
 })
 
@@ -65,11 +64,11 @@ var showingMap = $.Deferred().done(function(){
 //Functions
 
 function procesMultipleSelects(){
-    each(stats,function(index,stat){
+    each(app.stats,function(index,stat){
         
-        if(schema[stat]){
+        if(app.schema[stat]){
       
-            if(schema[stat].type == "multipleSelect" || schema[stat].type == "polities"){
+            if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "polities"){
 
                 each(app.content,function(polityCode,polityInfo){
 
@@ -86,11 +85,11 @@ function procesMultipleSelects(){
 
 function processPercentages(){
     
-    each(stats,function(index,stat){
+    each(app.stats,function(index,stat){
         
-        if(schema[stat]){
+        if(app.schema[stat]){
       
-            if(schema[stat].type == "percent"){
+            if(app.schema[stat].type == "percent"){
 
                 each(app.content,function(polityCode,polityInfo){
 
@@ -108,11 +107,11 @@ function processPercentages(){
 
 function processNumbers(){
     
-    each(stats,function(index,stat){
+    each(app.stats,function(index,stat){
         
-        if(schema[stat]){
+        if(app.schema[stat]){
       
-            if(schema[stat].type == "number" || schema[stat].type == "currency"){
+            if(app.schema[stat].type == "number" || app.schema[stat].type == "currency"){
 
                 each(app.content,function(polityCode,polityInfo){
 
@@ -166,7 +165,7 @@ function getData(){
 
     .done(function(rawInput){
 
-        stats = Papa.parse(rawInput,{
+        app.stats = Papa.parse(rawInput,{
             delimiter: "",
             newline:"",
             dynamicTyping: true,
@@ -218,7 +217,7 @@ function getSchema(){
         });
 
         each(parsed.data, function( key, value ) {
-            schema[value["stat"]] = value;
+            app.schema[value["stat"]] = value;
             actualStatSections.push(value["section"])
         });
 
@@ -273,7 +272,7 @@ function showMap(){
 
 function setColorsBy(stat, subset){  
     
-        currentStat = stat;
+        app.currentStat = stat;
     
 //        Show or hide the modifier based on whether we're showing a subset
         if(subset){
@@ -289,10 +288,10 @@ function setColorsBy(stat, subset){
         var minValue
         var maxValue
         
-        var statType = schema[stat].type;
+        var statType = app.schema[stat].type;
                
 //      If the data type is verbose, there's no need to calculate anything about the data
-        if(schema[stat]["type"] == "verbose"){
+        if(app.schema[stat]["type"] == "verbose"){
             
             if(subset){
                 
@@ -333,15 +332,15 @@ function setColorsBy(stat, subset){
             });
             
 //            Get a minimum and maximum for the stat
-            if(schema[stat].min){
-                minValue = schema[stat]["min"]
+            if(app.schema[stat].min){
+                minValue = app.schema[stat]["min"]
             }
             else{
                 minValue = Math.min.apply(null, values)
             };
 
-            if(schema[stat].max){
-                maxValue = schema[stat]["max"]
+            if(app.schema[stat].max){
+                maxValue = app.schema[stat]["max"]
             }
             else{
                 maxValue = Math.max.apply(null, values);   
@@ -400,11 +399,11 @@ function setColorsBy(stat, subset){
 //            
 //            var headerAdded = false
 //            
-//            each(stats, function(index,stat) {
+//            each(app.stats, function(index,stat) {
 //                
-//                if(schema[stat]){
+//                if(app.schema[stat]){
 //
-//                    if(schema[stat]["section"] == section){
+//                    if(app.schema[stat]["section"] == section){
 //
 //                        if(headerAdded == false){
 //                            var header = "<h3>" + section + "</h3>"
@@ -414,8 +413,8 @@ function setColorsBy(stat, subset){
 //
 //                        var title            
 //
-//                        if(schema[stat]){
-//                            title = schema[stat]["title"];
+//                        if(app.schema[stat]){
+//                            title = app.schema[stat]["title"];
 //                        }
 //                        else{
 //                            title = "\"" + stat + "\""
@@ -525,8 +524,8 @@ function showPolityInfo(polity){
 //            If a proper title is provided in the schema we use that; else we fall back to the variable name
             var title
             
-            if(schema[stat]){
-                title = schema[stat]["title"];
+            if(app.schema[stat]){
+                title = app.schema[stat]["title"];
             }
             else{
                 title = "\"" + stat + "\""
@@ -534,9 +533,9 @@ function showPolityInfo(polity){
             
             var target = "#polity-info"
             
-            if(schema[stat]){
+            if(app.schema[stat]){
 
-                if(schema[stat].section != "Codes"){
+                if(app.schema[stat].section != "Codes"){
 
                     if(stat != "name"){
 
@@ -544,7 +543,7 @@ function showPolityInfo(polity){
 
                             $(target).append("<h3 class='actionable stat-" + stat + "'>" + title + "</h3>");
 
-                            if(schema[stat].type == "multipleSelect" || schema[stat].type == "polities"){
+                            if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "polities"){
 
                                 each(statData,function(index,value){
 
@@ -560,7 +559,7 @@ function showPolityInfo(polity){
                                         actionable: true,
                                         stat: stat,
                                         data: statData,
-                                        type: schema[stat].type
+                                        type: app.schema[stat].type
                                         
                                     });                               
                                 });                            
@@ -574,7 +573,7 @@ function showPolityInfo(polity){
                                     actionable: true,
                                     stat: stat,
                                     data: statData,
-                                    type: schema[stat].type
+                                    type: app.schema[stat].type
                                 }); 
 
                             };                            
@@ -603,9 +602,9 @@ function showStatsInfo(stat,limit,direction){
     
     $("#stats-back-text").show();
     
-    app.statsPaneTitle = schema[stat].title;    
+    app.statsPaneTitle = app.schema[stat].title;    
     
-//    $("#stats-pane-title").html(schema[stat].title);
+//    $("#stats-pane-title").html(app.schema[stat].title);
     
 //    For each polity...
     each(app.content, function(polityCode, polityInfo){
@@ -613,7 +612,7 @@ function showStatsInfo(stat,limit,direction){
 //        If that polity has info for the stat...
         if(polityInfo[stat]){
             
-            var formattedStatData = formatStatData(polityInfo[stat], schema[stat].type);
+            var formattedStatData = formatStatData(polityInfo[stat], app.schema[stat].type);
             
             if(limit){
                             
@@ -735,7 +734,7 @@ function makeStatsInteractive(selector){
         scope = selector + " ";
     }
     
-    each(stats, function(index, stat){ 
+    each(app.stats, function(index, stat){ 
         
         $(scope + ".stat-" + stat).click(function(){
             setColorsBy(stat);
@@ -744,7 +743,7 @@ function makeStatsInteractive(selector){
          
     })
     
-    each(stats, function(index,stat){
+    each(app.stats, function(index,stat){
        
        $(scope + ".stat-" + stat + "-data").click(function(){
             var statValue = $(this).attr("data")
@@ -771,7 +770,7 @@ function setColorsBySubset(stat,limit){
      
     var subset = [];
         
-    if(schema[stat].type == "multipleSelect" || schema[stat].type == "singleSelect"){
+    if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "singleSelect"){
                     
         each(polities, function(index,polity){
 
@@ -780,7 +779,7 @@ function setColorsBySubset(stat,limit){
                     subset.push([app.content[polity][stat],polity])
                 };
 
-            currentDirection = "same";
+            app.currentDirection = "same";
             
             $("#stats-pane-modifier").html(limit);
 
@@ -788,7 +787,7 @@ function setColorsBySubset(stat,limit){
         
         setColorsBy(stat, subset);
 
-        showStatsInfo(stat,limit,currentDirection);
+        showStatsInfo(stat,limit,app.currentDirection);
         
     }
     
@@ -796,10 +795,10 @@ function setColorsBySubset(stat,limit){
         
         limit = numeral(limit).value();
         
-        formattedLimit = formatStatData(limit, schema[stat].type)
+        formattedLimit = formatStatData(limit, app.schema[stat].type)
 
     //    This allows us to toggle between the two filters
-        if(stat == currentStat && currentDirection == "greater"){
+        if(stat == app.currentStat && app.currentDirection == "greater"){
 
             each(polities, function(index,polity){
 
@@ -808,7 +807,7 @@ function setColorsBySubset(stat,limit){
                     subset.push([app.content[polity][stat],polity])
                 };
 
-            currentDirection = "lesser";
+            app.currentDirection = "lesser";
             $("#stats-pane-modifier").html("&le; " + formattedLimit);
 
             });       
@@ -822,7 +821,7 @@ function setColorsBySubset(stat,limit){
                     subset.push([app.content[polity][stat],polity])                
                 };
 
-                currentDirection = "greater"; 
+                app.currentDirection = "greater"; 
                 $("#stats-pane-modifier").html("&ge; " + formattedLimit);
 
             })          
@@ -836,7 +835,7 @@ function setColorsBySubset(stat,limit){
 
         setColorsBy(stat, subset);
 
-        showStatsInfo(stat,limit,currentDirection);
+        showStatsInfo(stat,limit,app.currentDirection);
     };
 }
 
@@ -867,8 +866,8 @@ function enableNavBar(){
 function showStatsSource(stat){
 
     $("#lower-right").show();
-    var sourceName = schema[stat].sourceName
-    var sourceURL = schema[stat].sourceURL
+    var sourceName = app.schema[stat].sourceName
+    var sourceURL = app.schema[stat].sourceURL
     $("#stats-source").html("Source: " + element({
         tag:"a",
         content:sourceName,
