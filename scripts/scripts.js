@@ -635,11 +635,13 @@ function showStatsInfo(stat,limit,direction){
 
 function populatePolitiesList(){
     
-        each(polities, function(index, polityCode){
-        
-        $("#polity-list").append("<li class='polity actionable " + polityCode + "'>" + data[polityCode]["name"] + "</li>");
-        
-    })
+    app.polities = polities;
+    
+//    each(polities, function(index, polityCode){
+//        
+//        $("#polity-list").append("<li class='polity actionable " + polityCode + "'>" + data[polityCode]["name"] + "</li>");
+//        
+//    })
     
     makePolitiesInteractive("#polity-list");
     

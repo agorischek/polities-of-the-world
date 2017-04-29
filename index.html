@@ -28,7 +28,11 @@
                     </div>
                 </div>
                 <div class="middle left" id="middle-left">
-                    <div id="polity-list"></div>
+                    <ol id="polity-list">
+                        <li :class="'polity actionable ' + polity" v-for="polity in polities">
+                            {{data[polity]["name"]}}
+                        </li>
+                    </ol>
                     <div id="polity-info"></div>
                 </div>
                 <div class="lower left" id="lower-left">
