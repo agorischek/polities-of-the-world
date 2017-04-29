@@ -434,9 +434,8 @@ function setColorsBy(stat, subset){
         $("#stats-back-text").hide();
         
         $("#stats-source").html("");
-
-        $("#stats-pane-title").html("Stats");
-
+        
+        app.statsPaneTitle = "Stats";
 
     };
 
@@ -502,7 +501,9 @@ function showPolityInfo(polity){
     
     $("#polity-back-text").show();
     
-    $("#polity-pane-title").html(data[polity].name);
+    app.polityPaneTitle = data[polity].name;
+    
+//    $("#polity-pane-title").html(data[polity].name);
 
     each(data[polity], function(stat, statData){
         
@@ -589,7 +590,9 @@ function showStatsInfo(stat,limit,direction){
     
     $("#stats-back-text").show();
     
-    $("#stats-pane-title").html(schema[stat].title);
+    app.statsPaneTitle = schema[stat].title;    
+    
+//    $("#stats-pane-title").html(schema[stat].title);
     
 //    For each polity...
     each(data, function(polityCode, polityInfo){
@@ -650,7 +653,9 @@ function showPolitiesList(){
     
     $("#polity-back-text").hide();
     
-    $("#polity-pane-title").html("Polities");
+    app.polityPaneTitle = "Polities";
+    
+//    $("#polity-pane-title").html("Polities");
 
     
 }
