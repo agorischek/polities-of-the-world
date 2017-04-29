@@ -7,7 +7,7 @@ $(function(){
 
 //Variables
 var csv;
-var data = {};
+//var data = {};
 var schema = {};
 var stats = [];
 var colors;
@@ -18,6 +18,17 @@ var currentPolity;
 var currentStat;
 var currentDirection;
 
+var app = new Vue({
+  el: '#page',
+  data: {
+    content: {USA: "yeah"},
+    statsPaneTitle: "Stats",
+    polityPaneTitle: "Polities",
+    polities: polities,
+    orderedStatSections: orderedStatSections
+  }
+})
+
 //    The stat sections in their ideal order
 var idealStatSections = ["Naming","Demographics","Economy","Infrastructure","Codes"]
 //    The stat sections that actually exist in the data
@@ -25,7 +36,7 @@ var actualStatSections = []
 //    The stat sections that exist in the data but aren't listed in the ideal list
 var additionalStatSections = []
 //    The full list of stat sections in the order they should be displayed
-var orderedStatSections
+var orderedStatSections = ["whattup"]
 
 //Sequencing
 var gettingData = $.Deferred();
@@ -60,7 +71,7 @@ function procesMultipleSelects(){
       
             if(schema[stat].type == "multipleSelect" || schema[stat].type == "polities"){
 
-                each(data,function(polityCode,polityInfo){
+                each(app.content,function(polityCode,polityInfo){
 
                     if(polityInfo[stat]){
 
@@ -81,7 +92,7 @@ function processPercentages(){
       
             if(schema[stat].type == "percent"){
 
-                each(data,function(polityCode,polityInfo){
+                each(app.content,function(polityCode,polityInfo){
 
                     if(polityInfo[stat]){
                                                 
@@ -103,7 +114,7 @@ function processNumbers(){
       
             if(schema[stat].type == "number" || schema[stat].type == "currency"){
 
-                each(data,function(polityCode,polityInfo){
+                each(app.content,function(polityCode,polityInfo){
 
                     if(polityInfo[stat]){
 
@@ -173,7 +184,7 @@ function getData(){
         var unsortedPolities = [];
 
         each(parsed.data, function(index, polityInfo) {
-            data[polityInfo[iDColumnHeader]] = polityInfo;
+            app.content[polityInfo[iDColumnHeader]] = polityInfo;
             unsortedPolities.push([polityInfo["name"],polityInfo[iDColumnHeader]]);
         });
         
@@ -234,7 +245,7 @@ function showMap(){
             defaultFill: defaultFillColor
         },
 
-        data: data,
+        data: app.content,
 
         geographyConfig: {
             popupTemplate: function(geo, data) {
@@ -294,7 +305,7 @@ function setColorsBy(stat, subset){
             }
             else{
     //            For each polity...
-                each(data, function(polityCode, polityDetails) {
+                each(app.content, function(polityCode, polityDetails) {
 
     //                If the relevant statistic exists...
                     if(polityDetails[stat]){
@@ -310,7 +321,7 @@ function setColorsBy(stat, subset){
         else{
 
 //            For each polity
-            each(data, function(polityCode, polityDetails) {
+            each(app.content, function(polityCode, polityDetails) {
                 
 //                If the relevant statistic exists
                 if(polityDetails[stat]){
@@ -352,7 +363,7 @@ function setColorsBy(stat, subset){
             else{            
             
     //            For each polity
-                each(data, function(polityCode, polityDetails) {
+                each(app.content, function(polityCode, polityDetails) {
 
     //                If the stat exists for the polity
                     if(polityDetails[stat]){
@@ -373,7 +384,7 @@ function setColorsBy(stat, subset){
     
         var dataForColors = {}
         
-        each(data, function(polityCode, polityInfo) {
+        each(app.content, function(polityCode, polityInfo) {
             dataForColors[polityCode] = defaultFillColor;
         });
         
@@ -382,44 +393,46 @@ function setColorsBy(stat, subset){
     }
 
     function populateStatsList(){
+        
+//        log(orderedStatSections)
                         
-        each(orderedStatSections, function(i,section){
-            
-            var headerAdded = false
-            
-            each(stats, function(index,stat) {
-                
-                if(schema[stat]){
-
-                    if(schema[stat]["section"] == section){
-
-                        if(headerAdded == false){
-                            var header = "<h3>" + section + "</h3>"
-                            $("#stats-list").append(header);
-                            headerAdded=true;                            
-                        }
-
-                        var title            
-
-                        if(schema[stat]){
-                            title = schema[stat]["title"];
-                        }
-                        else{
-                            title = "\"" + stat + "\""
-                        };
-
-
-                        var listItem = "<li class='actionable stat stat-" + stat + "'>" + title + "</li>"
-
-                        $("#stats-list").append(listItem);
-
-                        $(".stat-" + stat).click(function(){
-    //                        showStatsInfo(value);
-                        })
-                    }
-                }
-            });     
-        });
+//        each(orderedStatSections, function(i,section){
+//            
+//            var headerAdded = false
+//            
+//            each(stats, function(index,stat) {
+//                
+//                if(schema[stat]){
+//
+//                    if(schema[stat]["section"] == section){
+//
+//                        if(headerAdded == false){
+//                            var header = "<h3>" + section + "</h3>"
+//                            $("#stats-list").append(header);
+//                            headerAdded=true;                            
+//                        }
+//
+//                        var title            
+//
+//                        if(schema[stat]){
+//                            title = schema[stat]["title"];
+//                        }
+//                        else{
+//                            title = "\"" + stat + "\""
+//                        };
+//
+//
+//                        var listItem = "<li class='actionable stat stat-" + stat + "'>" + title + "</li>"
+//
+//                        $("#stats-list").append(listItem);
+//
+//                        $(".stat-" + stat).click(function(){
+//    //                        showStatsInfo(value);
+//                        })
+//                    }
+//                }
+//            });     
+//        });
         
         makeStatsInteractive("#stats-list");
         
@@ -455,8 +468,8 @@ function formatStatData(value,type){
     }
     
     else if(type == "polities"){
-        if(data[value]){
-            return data[value].name
+        if(app.content[value]){
+            return app.content[value].name
         }
         else{
             return value
@@ -501,13 +514,13 @@ function showPolityInfo(polity){
     
     $("#polity-back-text").show();
     
-    app.polityPaneTitle = data[polity].name;
+    app.polityPaneTitle = app.content[polity].name;
     
 //    $("#polity-pane-title").html(data[polity].name);
 
-    each(data[polity], function(stat, statData){
+    each(app.content[polity], function(stat, statData){
         
-        if(data[polity]){
+        if(app.content[polity]){
             
 //            If a proper title is provided in the schema we use that; else we fall back to the variable name
             var title
@@ -595,7 +608,7 @@ function showStatsInfo(stat,limit,direction){
 //    $("#stats-pane-title").html(schema[stat].title);
     
 //    For each polity...
-    each(data, function(polityCode, polityInfo){
+    each(app.content, function(polityCode, polityInfo){
                 
 //        If that polity has info for the stat...
         if(polityInfo[stat]){
@@ -707,7 +720,7 @@ function makePolitiesInteractive(selector){
         $(scope + "." + polity).hover(function(){
             $("#display").html(element({
                 tag:"h2",
-                content:data[polity].name
+                content:app.content[polity].name
             }))
         })
         
@@ -763,8 +776,8 @@ function setColorsBySubset(stat,limit){
         each(polities, function(index,polity){
 
     //            If the stat isn't blank and is less than the limit
-                if(containsOrEquals(data[polity][stat], limit)){
-                    subset.push([data[polity][stat],polity])
+                if(containsOrEquals(app.content[polity][stat], limit)){
+                    subset.push([app.content[polity][stat],polity])
                 };
 
             currentDirection = "same";
@@ -791,8 +804,8 @@ function setColorsBySubset(stat,limit){
             each(polities, function(index,polity){
 
     //            If the stat isn't blank and is less than the limit
-                if(data[polity][stat] != "" && data[polity][stat] <= limit){
-                    subset.push([data[polity][stat],polity])
+                if(app.content[polity][stat] != "" && app.content[polity][stat] <= limit){
+                    subset.push([app.content[polity][stat],polity])
                 };
 
             currentDirection = "lesser";
@@ -805,8 +818,8 @@ function setColorsBySubset(stat,limit){
             each(polities, function(index,polity){            
 
     //            If the stat isn't blank and is greater than the limit
-                if(data[polity][stat] != "" && data[polity][stat] >= limit){
-                    subset.push([data[polity][stat],polity])                
+                if(app.content[polity][stat] != "" && app.content[polity][stat] >= limit){
+                    subset.push([app.content[polity][stat],polity])                
                 };
 
                 currentDirection = "greater"; 

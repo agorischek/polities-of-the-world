@@ -30,7 +30,7 @@
                 <div class="middle left" id="middle-left">
                     <ol id="polity-list">
                         <li :class="'polity actionable ' + polity" v-for="polity in polities">
-                            {{data[polity]["name"]}}
+                            {{content[polity]["name"]}}
                         </li>
                     </ol>
                     <div id="polity-info"></div>
@@ -66,7 +66,11 @@
                     </div>
                 </div>
                 <div class="middle right" id="middle-right">
-                    <ul id="stats-list"></ul>
+                    <ul id="stats-list">
+                        <li v-for="stat in orderedStatSections">
+                            Hello    
+                        </li>                    
+                    </ul>
                     <div id="stats-info"></div>
                 </div>
                 <div class="lower right" id="lower-right">
@@ -83,7 +87,10 @@
             
     </div>        
         
-    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+            <script src="https://unpkg.com/vue"></script>
+
+        <script src="scripts/vue-scripts.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
@@ -98,8 +105,6 @@
     <script src="scripts/scripts.js"></script>
     <script src="libs/uikit.min.js"></script>
     <script src="libs/uikit-icons.min.js"></script>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="scripts/vue-scripts.js"></script>
         
     </body>
     
