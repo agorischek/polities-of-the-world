@@ -482,10 +482,10 @@ function displayStatItem(statInfo){
     
     classes = classes.concat("stat-" + statInfo.stat + "-data");
         
-    $(statInfo.target).append(statInfo.prefix + "<span class='" + classes + "' data='" + statInfo.data + "'>" + formattedStatData + "</span>");
+//    $(statInfo.target).append(statInfo.prefix + "<span class='" + classes + "' data='" + statInfo.data + "'>" + formattedStatData + "</span>");
     
-    $(statInfo.target).append(statInfo.prefix + sculpt({
-        element:"span",
+    $(statInfo.target).append(statInfo.prefix + element({
+        tag:"span",
         content:formattedStatData,
         class:classes,
         data: statInfo.data
@@ -698,11 +698,10 @@ function makePolitiesInteractive(selector){
         })
         
         $(scope + "." + polity).hover(function(){
-            $("#display").html("<h2>" + data[polity].name + "</h2>")
-                        
-//            if(data[polity][currentStat]){
-//                $("#display").append("<p>" + schema[currentStat].title + ": " + data[polity][currentStat] + "</p>")
-//            }
+            $("#display").html(element({
+                tag:"h2",
+                content:data[polity].name
+            }))
         })
         
     });
@@ -850,8 +849,8 @@ function showStatsSource(stat){
     $("#lower-right").show();
     var sourceName = schema[stat].sourceName
     var sourceURL = schema[stat].sourceURL
-    $("#stats-source").html("Source: " + sculpt({
-        element:"a",
+    $("#stats-source").html("Source: " + element({
+        tag:"a",
         content:sourceName,
         target:"_blank",
         class:"actionable",
