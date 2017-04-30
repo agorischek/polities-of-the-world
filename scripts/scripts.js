@@ -25,7 +25,18 @@ var app = new Vue({
     currentPolity: "",
     currentStat: "",
     currentDirection: "",
-  }
+  },
+    methods:{
+        say: function(message){
+            alert(message)
+        },
+        selectStat: function(stat){
+            showStatsInfo(stat)
+        },
+        selectPolity: function(polity){
+            showPolityInfo(polity)            
+        }
+    }
 })
 
 //    The stat sections in their ideal order
@@ -704,57 +715,54 @@ function showDefaultPolity(){
 
 function makePolitiesInteractive(selector){
     
-    var scope = "";
-    
-    if(selector){
-        scope = selector + " ";
-    };
-
-    each(polities, function(index, polity){
-                
-        $(scope + "." + polity).click(function(){
-            showPolityInfo(polity);
-        })
-        
-        $(scope + "." + polity).hover(function(){
-            $("#display").html(element({
-                tag:"h2",
-                content:app.content[polity].name
-            }))
-        })
-        
-    });
+//    var scope = "";
+//    
+//    if(selector){
+//        scope = selector + " ";
+//    };
+//
+//    each(polities, function(index, polity){
+//                
+//        $(scope + "." + polity).click(function(){
+//            showPolityInfo(polity);
+//        })
+//        
+//        $(scope + "." + polity).hover(function(){
+//            $("#display").html(element({
+//                tag:"h2",
+//                content:app.content[polity].name
+//            }))
+//        })
+//        
+//    });
 };
 
 function makeStatsInteractive(selector){
     
-    var scope = "";
-        
-    if(selector){
-        scope = selector + " ";
-    }
-    
-    each(app.stats, function(index, stat){ 
-        
-        $(scope + ".stat-" + stat).click(function(){
-            setColorsBy(stat);
-            showStatsInfo(stat);
-        });  
-        
-            log("Stats are being made interactive " + stat)
-
-         
-    })
-    
-    each(app.stats, function(index,stat){
-       
-       $(scope + ".stat-" + stat + "-data").click(function(){
-            var statValue = $(this).attr("data")
-            setColorsBySubset(stat,statValue);
-           
-       }) 
-        
-    });
+//    var scope = "";
+//        
+//    if(selector){
+//        scope = selector + " ";
+//    }
+//    
+//    each(app.stats, function(index, stat){ 
+//        
+//        $(scope + ".stat-" + stat).click(function(){
+//            setColorsBy(stat);
+//            showStatsInfo(stat);
+//        });  
+//         
+//    })
+//    
+//    each(app.stats, function(index,stat){
+//       
+//       $(scope + ".stat-" + stat + "-data").click(function(){
+//            var statValue = $(this).attr("data")
+//            setColorsBySubset(stat,statValue);
+//           
+//       }) 
+//        
+//    });
 
 }
 
