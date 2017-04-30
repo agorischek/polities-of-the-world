@@ -47,8 +47,6 @@ var idealStatSections = ["Naming","Demographics","Economy","Infrastructure","Cod
 var actualStatSections = []
 //    The stat sections that exist in the data but aren't listed in the ideal list
 var additionalStatSections = []
-//    The full list of stat sections in the order they should be displayed
-//var orderedStatSections = ["whattup"]
 
 //Sequencing
 var gettingData = $.Deferred();
@@ -609,9 +607,6 @@ function showPolitiesList(){
     $("#polity-back-text").hide();
     
     app.polityPaneTitle = "Polities";
-    
-//    $("#polity-pane-title").html("Polities");
-
     
 }
 
