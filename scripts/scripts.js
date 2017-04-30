@@ -7,9 +7,7 @@ $(function(){
 
 //Variables
 var csv;
-//var stats = [];
 var colors;
-var polities = [];
 var mapDisplay;
 
 var app = new Vue({
@@ -20,7 +18,7 @@ var app = new Vue({
     stats: [],
     statsPaneTitle: "Stats",
     polityPaneTitle: "Polities",
-    polities: polities,
+    polities: [],
     orderedStatSections: [],
     currentPolity: "",
     currentStat: "",
@@ -62,15 +60,10 @@ $.when(gettingData, gettingSchema).done(function(value) {
     processPercentages();
     processNumbers();
     showMap();
-    populateStatsList();
     showStatsList();
-//    makeStatsInteractive("#stats-list");
-    populatePolitiesList();
 });
 
 var showingMap = $.Deferred().done(function(){
-    makePolitiesInteractive("#map-pane");
-//    showDefaultPolity();
     enableZoom();
 });
 
@@ -206,7 +199,7 @@ function getData(){
         });
                 
         each(unsortedPolities, function(index,polityPair){
-            polities.push(polityPair[1]);
+            app.polities.push(polityPair[1]);
         })
                 
         gettingData.resolve();
@@ -405,52 +398,6 @@ function setColorsBy(stat, subset){
 
     }
 
-    function populateStatsList(){
-        
-//        log(orderedStatSections)
-                        
-//        each(orderedStatSections, function(i,section){
-//            
-//            var headerAdded = false
-//            
-//            each(app.stats, function(index,stat) {
-//                
-//                if(app.schema[stat]){
-//
-//                    if(app.schema[stat]["section"] == section){
-//
-//                        if(headerAdded == false){
-//                            var header = "<h3>" + section + "</h3>"
-//                            $("#stats-list").append(header);
-//                            headerAdded=true;                            
-//                        }
-//
-//                        var title            
-//
-//                        if(app.schema[stat]){
-//                            title = app.schema[stat]["title"];
-//                        }
-//                        else{
-//                            title = "\"" + stat + "\""
-//                        };
-//
-//
-//                        var listItem = "<li class='actionable stat stat-" + stat + "'>" + title + "</li>"
-//
-//                        $("#stats-list").append(listItem);
-//
-//                        $(".stat-" + stat).click(function(){
-//    //                        showStatsInfo(value);
-//                        })
-//                    }
-//                }
-//            });     
-//        });
-        
-        makeStatsInteractive("#stats-list");
-        
-    }
-
     function showStatsList(){
         
         $("#stats-info").hide();
@@ -596,11 +543,7 @@ function showPolityInfo(polity){
                 }   
             }
         }        
-    })   
-    
-    makePolitiesInteractive("#polity-info");
-    
-    makeStatsInteractive("#polity-info");
+    })
     
     $("#polity-pane").animate({ scrollTop: 0 }, 0);
 
@@ -652,25 +595,9 @@ function showStatsInfo(stat,limit,direction){
         }
     })   
     
-    makeStatsInteractive("#stats-info");
-    makePolitiesInteractive("#stats-info");
     $("#stats-pane").animate({ scrollTop: 0 }, 0);
     showStatsSource(stat);
 
-}
-
-function populatePolitiesList(){
-    
-    app.polities = polities;
-    
-//    each(polities, function(index, polityCode){
-//        
-//        $("#polity-list").append("<li class='polity actionable " + polityCode + "'>" + data[polityCode]["name"] + "</li>");
-//        
-//    })
-    
-    makePolitiesInteractive("#polity-list");
-    
 }
 
 function showPolitiesList(){
@@ -693,7 +620,7 @@ function showDefaultPolity(){
     if(defaultPolity){
 
         if(defaultPolity == "random"){
-            var polity = pick(polities);
+            var polity = pick(app.polities);
             showPolityInfo(polity);
         }
         else{
@@ -701,59 +628,6 @@ function showDefaultPolity(){
         }
 
     }
-}
-
-function makePolitiesInteractive(selector){
-    
-//    var scope = "";
-//    
-//    if(selector){
-//        scope = selector + " ";
-//    };
-//
-//    each(polities, function(index, polity){
-//                
-//        $(scope + "." + polity).click(function(){
-//            showPolityInfo(polity);
-//        })
-//        
-//        $(scope + "." + polity).hover(function(){
-//            $("#display").html(element({
-//                tag:"h2",
-//                content:app.content[polity].name
-//            }))
-//        })
-//        
-//    });
-};
-
-function makeStatsInteractive(selector){
-    
-//    var scope = "";
-//        
-//    if(selector){
-//        scope = selector + " ";
-//    }
-//    
-//    each(app.stats, function(index, stat){ 
-//        
-//        $(scope + ".stat-" + stat).click(function(){
-//            setColorsBy(stat);
-//            showStatsInfo(stat);
-//        });  
-//         
-//    })
-//    
-//    each(app.stats, function(index,stat){
-//       
-//       $(scope + ".stat-" + stat + "-data").click(function(){
-//            var statValue = $(this).attr("data")
-//            setColorsBySubset(stat,statValue);
-//           
-//       }) 
-//        
-//    });
-
 }
 
 function enableZoom(){
@@ -773,7 +647,7 @@ function setColorsBySubset(stat,limit){
         
     if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "singleSelect"){
                     
-        each(polities, function(index,polity){
+        each(app.polities, function(index,polity){
 
     //            If the stat isn't blank and is less than the limit
                 if(containsOrEquals(app.content[polity][stat], limit)){
@@ -801,7 +675,7 @@ function setColorsBySubset(stat,limit){
     //    This allows us to toggle between the two filters
         if(stat == app.currentStat && app.currentDirection == "greater"){
 
-            each(polities, function(index,polity){
+            each(app.polities, function(index,polity){
 
     //            If the stat isn't blank and is less than the limit
                 if(app.content[polity][stat] != "" && app.content[polity][stat] <= limit){
@@ -815,7 +689,7 @@ function setColorsBySubset(stat,limit){
         }        
         else{
 
-            each(polities, function(index,polity){            
+            each(app.polities, function(index,polity){            
 
     //            If the stat isn't blank and is greater than the limit
                 if(app.content[polity][stat] != "" && app.content[polity][stat] >= limit){
