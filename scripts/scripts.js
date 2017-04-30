@@ -27,14 +27,18 @@ var app = new Vue({
     currentDirection: "",
   },
     methods:{
-        say: function(message){
-            alert(message)
+        politySelect: function(polity){
+            showPolityInfo(polity)            
         },
-        selectStat: function(stat){
+        statSelect: function(stat){
             showStatsInfo(stat)
         },
-        selectPolity: function(polity){
-            showPolityInfo(polity)            
+        polityBack: function(){
+            showPolitiesList(); 
+        },
+        statBack: function(){
+            showStatsList();
+            $("#stats-pane-modifier").hide();
         }
     }
 })
@@ -68,7 +72,6 @@ var showingMap = $.Deferred().done(function(){
     makePolitiesInteractive("#map-pane");
 //    showDefaultPolity();
     enableZoom();
-    enableBackButtons();
 });
 
 
@@ -682,19 +685,6 @@ function showPolitiesList(){
     
 //    $("#polity-pane-title").html("Polities");
 
-    
-}
-
-function enableBackButtons(){
-    
-    $("#polity-back").click(function(){
-        showPolitiesList();
-    });
-    
-    $("#stats-back").click(function(){
-        showStatsList();
-        $("#stats-pane-modifier").hide();
-    })
     
 }
 

@@ -21,7 +21,7 @@
                 <div class="upper left" id="upper-left">
                     <div class="pane-header">
                         <div id="polity-back">
-                            <span id="polity-back-text" class="actionable">&#8592; All Polities</span>
+                            <span id="polity-back-text" class="actionable" v-on:click="polityBack">&#8592; All Polities</span>
                         </div>
                         <h2 id="polity-pane-title">{{polityPaneTitle}}</h2>
                         <div class="divider"></div>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="middle left" id="middle-left">
                     <ol id="polity-list">
-                        <li :class="'polity actionable ' + polity" v-for="polity in polities" v-on:click="selectPolity(polity)">
+                        <li :class="'polity actionable ' + polity" v-for="polity in polities" v-on:click="politySelect(polity)">
                             {{content[polity].name}}
                         </li>
                     </ol>
@@ -58,7 +58,7 @@
                 <div class="upper right" id="upper-right">
                     <div class="pane-header">
                         <div id="stats-back">
-                            <span id="stats-back-text" class="actionable">All Stats &#8594;</span>
+                            <span id="stats-back-text" class="actionable" v-on:click="statBack">All Stats &#8594;</span>
                         </div>                
                         <h2 id="stats-pane-title">{{statsPaneTitle}}</h2>
                         <div id="stats-pane-modifier" class="modifier"></div>
@@ -72,7 +72,7 @@
                                 <h3>
                                     {{statSection}}    
                                 </h3>
-                                <li v-for="stat in stats" v-if="schema[stat].section==statSection" v-on:click="selectStat(stat)" :class="'actionable stat stat-' + stat">
+                                <li v-for="stat in stats" v-if="schema[stat].section==statSection" v-on:click="statSelect(stat)" :class="'actionable stat stat-' + stat">
                                     {{schema[stat].title}}
                                 </li>
                                 
