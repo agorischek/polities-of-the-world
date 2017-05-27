@@ -41,11 +41,11 @@ var app = new Vue({
     }
 })
 
-//    The stat sections in their ideal order
-var idealStatSections = ["Naming","Demographics","Economy","Infrastructure","Codes"]
+//    The stat sections to display first
+var firstStatSections = ["Naming","Demographics","Economy","Infrastructure","Codes"]
 //    The stat sections that actually exist in the data
 var actualStatSections = []
-//    The stat sections that exist in the data but aren't listed in the ideal list
+//    The stat sections that exist in the data but aren't listed in the first list
 var additionalStatSections = []
 
 //Sequencing
@@ -228,9 +228,9 @@ function getSchema(){
 
         actualStatSections = unique(actualStatSections);
 
-        additionalStatSections = _.difference(actualStatSections, idealStatSections);
+        additionalStatSections = _.difference(actualStatSections, firstStatSections);
 
-        app.orderedStatSections = idealStatSections.concat(additionalStatSections);
+        app.orderedStatSections = firstStatSections.concat(additionalStatSections);
 
         gettingSchema.resolve();
 
