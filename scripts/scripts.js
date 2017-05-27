@@ -50,7 +50,21 @@ var app = new Vue({
         },
         currentStatsInfo: function(){
             var info = {}
-            each(this.polities, function(){info[this] = (app.content[this][app.currentStat])})
+            each(this.polities, function(key, value){
+                info[value] = (app.content[value][app.currentStat])
+            })
+            return info;
+        },
+        currentStatsInfoFormatted: function(){
+            var info = {};
+            var type = "";
+            if(this.schema[this.currentStat]){
+                type = this.schema[this.currentStat].type
+                log(type)
+            }
+            each(this.currentStatsInfo, function(key, value){
+                info[key] = formatStatData(value,type)
+            })
             return info;
         }
     }
