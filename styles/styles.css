@@ -120,7 +120,7 @@ h3, .header{
 }
 
 .pane-header{
-/*    margin-bottom:15px;*/
+    padding:0 20px;
 }
 
 #polity-pane{
@@ -134,7 +134,7 @@ h3, .header{
 }
 
 #polity-list{
-    padding:0;
+    padding:0 20px;
 }
 
 #polity-info{
@@ -142,7 +142,7 @@ h3, .header{
 }
 
 #stats-list{
-    padding:0;
+    padding:0 20px;
 }
 
 #stats-info{
@@ -222,7 +222,7 @@ a:hover, .actionable:hover{
 
 .side{
     width:250px;
-    padding:20px 20px 0 20px;
+    padding:20px 0px 0px 0px;
 }
 
 .upper{
