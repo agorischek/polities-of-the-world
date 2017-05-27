@@ -21,13 +21,11 @@
             <div>currentPolity: {{currentPolity}}</div>
             <div>currentStat: {{currentStat}}</div>
 <!--            <div>content: {{content}}</div>-->
-
 <!--            <div>currentPolityInfo: {{currentPolityInfo}}</div>-->
-            <div>currentStatsInfo: {{currentStatsInfo}}</div>
-            <div>currentStatsInfoFormatted: {{currentStatsInfoFormatted}}</div>
-
+            <div>currentStatType: {{currentStatType}}</div>
+<!--            <div>currentStatsInfo: {{currentStatsInfo}}</div>-->
+<!--            <div>currentStatsInfoFormatted: {{currentStatsInfoFormatted}}</div>-->
 <!--            <div>schema: {{schema}}</div>-->
-
 <!--            <div id="stats">Sorted polities: {{sortedPolities}}</div>-->
 <!--            <div>Polity pairs: {{polityPairs}}</div>-->
         </div>
@@ -54,7 +52,7 @@
                             
                             <h3 :class="'actionable'" v-on:click="statSelect(stat)">{{stat}}</h3>
                             <div>
-                                {{currentPolityInfo[stat]}}
+                                {{currentPolityInfoFormatted[stat]}}
                             </div>
                         </li>
                     </ol>

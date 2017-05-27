@@ -24,7 +24,7 @@ var app = new Vue({
         currentStat: "all",
         currentDirection: "",
         polityPairs:[],
-        showDebug: true
+        showDebug: false
     },
     methods:{
         politySelect: function(polity){
@@ -42,6 +42,13 @@ var app = new Vue({
         }
     },
     computed:{
+        currentStatType: function(){
+            var type = "";
+            if(this.schema[this.currentStat]){
+                type = this.schema[this.currentStat].type
+            }
+            return type;
+        },
         currentPolityInfo: function(){
             var info = {}
             if(this.currentPolity !=="all"){
@@ -49,20 +56,32 @@ var app = new Vue({
             }
             return info;
         },
+        currentPolityInfoFormatted: function(){
+            var info = {};
+//            info = this.currentPolityInfo
+
+            log(this.currentPolityInfo)
+            each(this.currentPolityInfo, function(key, value){
+                var type = "";
+                if(app.schema[key]){
+                    type = app.schema[key].type
+                }
+                info[key] = formatStatData(value,type)
+            })
+            return info;
+        },
         currentStatsInfo: function(){
             var info = {}
-            each(this.polities, function(key, value){
-                info[value] = (app.content[value][app.currentStat])
-            })
+            if(this.currentStat !=="all"){
+                each(this.polities, function(key, value){
+                    info[value] = (app.content[value][app.currentStat])
+                })
+            }
             return info;
         },
         currentStatsInfoFormatted: function(){
             var info = {};
-            var type = "";
-            if(this.schema[this.currentStat]){
-                type = this.schema[this.currentStat].type
-                log(type)
-            }
+            var type = this.currentStatType
             each(this.currentStatsInfo, function(key, value){
                 info[key] = formatStatData(value,type)
             })
