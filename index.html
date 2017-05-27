@@ -50,7 +50,7 @@
                     <ol id="polity-info">
                         <li v-for="stat in stats" v-if="currentPolityInfo[stat]">
                             
-                            <h3 :class="'actionable'" v-on:click="statSelect(stat)">{{stat}}</h3>
+                            <h3 :class="'actionable'" v-on:click="statSelect(stat)">{{schema[stat]["title"]}}</h3>
                             <div>
                                 {{currentPolityInfoFormatted[stat]}}
                             </div>
