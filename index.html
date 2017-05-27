@@ -16,7 +16,7 @@
         
         <div id="page">
             
-        <div id="debug">
+        <div id="debug" v-if="showDebug">
             <div class="debugX">X</div> 
             <div>currentPolity: {{currentPolity}}</div>
             <div>currentStat: {{currentStat}}</div>
@@ -104,7 +104,7 @@
                         </li>                    
                     </ul>
                     <ol id="stats-info">
-                        <li :class="'stat'" v-for="polity in polities" v-if="currentStatsInfoFormatted[polity]">
+                        <li :class="'stat'" v-for="polity in polities" v-if="currentStatsInfo[polity]">
                             <h3 :class="'actionable'" v-on:click="politySelect(polity)">{{content[polity].name}}</h3>
                             <div>
                                 {{currentStatsInfoFormatted[polity]}}

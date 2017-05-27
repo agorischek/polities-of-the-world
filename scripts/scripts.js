@@ -23,7 +23,8 @@ var app = new Vue({
         currentPolity: "all",
         currentStat: "all",
         currentDirection: "",
-        polityPairs:[]
+        polityPairs:[],
+        showDebug: true
     },
     methods:{
         politySelect: function(polity){
@@ -784,11 +785,11 @@ function showStatsSource(stat){
 }
 
 function showDebug(){
-    $("#debug").show();
+    app.showDebug = true;
 }
 
 function hideDebug(){
-    $("#debug").hide();
+    app.showDebug = false;
 }
 
 $(".debugX").click(function(){
