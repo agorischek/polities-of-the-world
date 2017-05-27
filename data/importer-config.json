@@ -452,12 +452,12 @@
     "GUM":{
         "code":"GUM",
         "name":"Guam",
-        "synonyms":"Guam"
+        "synonyms":"GUM|Guam"
     },
     "GTM":{
         "code":"GTM",
         "name":"Guatemala",
-        "synonyms":"GUM|Guatemala"
+        "synonyms":"GTM|Guatemala"
     },
     "GGY":{
         "code":"GGY",
@@ -582,7 +582,7 @@
     "KIR":{
         "code":"KIR",
         "name":"Kiribati",
-        "synonyms":"KEN|Kiribati"
+        "synonyms":"KEN|Kiribati|Republic of Kiribati|Gilbert Islands"
     },
     "PRK":{
         "code":"PRK",
@@ -1182,7 +1182,7 @@
     "UMI":{
         "code":"UMI",
         "name":"US Minor Outlying Islands",
-        "synonyms":"UMI|United States Minor Outlying Islands|US Minor Outlying Islands"
+        "synonyms":"UMI|United States Minor Outlying Islands|US Minor Outlying Islands|U.S. Minor Outlying Islands"
     },
     "URY":{
         "code":"URY",
@@ -1222,17 +1222,17 @@
     "VIR":{
         "code":"VIR",
         "name":"US Virgin Islands",
-        "synonyms":"VIR|Virgin Islands, U.S.|U.S. Virgin Islands|US Virgin Islands|Virgin Islands"
+        "synonyms":"VIR|Virgin Islands, U.S.|U.S. Virgin Islands|US Virgin Islands"
     },
     "WLF":{
         "code":"WLF",
         "name":"Wallis and Futuna",
-        "synonyms":"WLF|Wallis and Futuna|Wallis & Futuna"
+        "synonyms":"WLF|Wallis and Futuna|Wallis & Futuna|Wallis Futuna"
     },
     "ESH":{
         "code":"ESH",
         "name":"Western Sahara",
-        "synonyms":"ESH|Western Sahara|West Sahara|W. Sahara"
+        "synonyms":"ESH|Western Sahara|West Sahara|W. Sahara|W Sahara"
     },
     "YEM":{
         "code":"YEM",
@@ -1257,7 +1257,7 @@
     "XWB":{
         "code":"XWB",
         "name":"West Bank",
-        "synonyms":"XWB|West Bank"
+        "synonyms":"XWB|West Bank|The West Bank"
     },
     "XGZ":{
         "code":"XGZ",
