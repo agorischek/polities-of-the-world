@@ -119,7 +119,7 @@ h3, .header{
     display:none;
 }
 
-.pane-header, #polity-list, #polity-info, #stats-list, #stats-info{
+.pane-header, #polity-list, #polity-info, #stats-list, #stats-info, #stats-source{
     padding:0 20px;
 }
 
