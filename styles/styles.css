@@ -119,7 +119,7 @@ h3, .header{
     display:none;
 }
 
-.pane-header{
+.pane-header, #polity-list, #polity-info, #stats-list, #stats-info{
     padding:0 20px;
 }
 
@@ -134,7 +134,7 @@ h3, .header{
 }
 
 #polity-list{
-    padding:0 20px;
+
 }
 
 #polity-info{
@@ -142,11 +142,11 @@ h3, .header{
 }
 
 #stats-list{
-    padding:0 20px;
+
 }
 
 #stats-info{
-    display:none;
+    display:none;    
 }
 
 a{
