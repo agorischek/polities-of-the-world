@@ -18,8 +18,13 @@
             
         <div id="debug">
             <div class="debugX">X</div> 
-            <div id="current-polity">Current polity: {{currentPolity}}</div>
-            <div id="current-stat">Current stat: {{currentStat}}</div>
+            <div>currentPolity: {{currentPolity}}</div>
+            <div>currentStat: {{currentStat}}</div>
+            <div>currentPolityInfo: {{currentPolityInfo}}</div>
+            <div>currentStatsInfo: {{currentStatsInfo}}</div>
+
+<!--            <div id="stats">Sorted polities: {{sortedPolities}}</div>-->
+<!--            <div>Polity pairs: {{polityPairs}}</div>-->
         </div>
             
         <div id="content">
@@ -85,7 +90,14 @@
                             </ul>
                         </li>                    
                     </ul>
-                    <div id="stats-info"></div>
+                    <ol id="stats-info">
+                        <li :class="'polity ' + polity" v-for="polity in polities">
+                            <h3 :class="'actionable'" v-on:click="politySelect(polity)">{{content[polity].name}}</h3>
+                            <div>
+                                {{currentStatsInfo[polity]}}
+                            </div>
+                        </li>
+                    </ol>
                 </div>
                 <div class="lower right" id="lower-right">
                     <div id="stats-source"></div>

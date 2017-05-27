@@ -41,7 +41,14 @@ var app = new Vue({
         }
     },
     computed:{
-
+        currentPolityInfo: function(){
+            return this.content[this.currentPolity];
+        },
+        currentStatsInfo: function(){
+            var info = {}
+            each(this.polities, function(){info[this] = (app.content[this][app.currentStat])})
+            return info;
+        }
     }
 })
 
@@ -560,7 +567,7 @@ function showStatsInfo(stat,limit,direction){
         
     $("#stats-list").hide();
     
-    $("#stats-info").empty();
+//    $("#stats-info").empty();
     
     $("#stats-info").show();
     
@@ -570,37 +577,37 @@ function showStatsInfo(stat,limit,direction){
     
 //    $("#stats-pane-title").html(app.schema[stat].title);
     
-//    For each polity...
-    each(app.content, function(polityCode, polityInfo){
-                
-//        If that polity has info for the stat...
-        if(polityInfo[stat]){
-            
-            var formattedStatData = formatStatData(polityInfo[stat], app.schema[stat].type);
-            
-            if(limit){
-                            
-                if(direction=="greater" && polityInfo[stat]>=limit){
-
-                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
-
-                }
-                else if(direction=="lesser" && polityInfo[stat]<=limit){
-
-                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
-                }
-                else if(direction=="same" && containsOrEquals(polityInfo[stat],limit)){
-                    
-                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>"); 
-                }
-            }
-            else{
-//            Display that info
-            $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
-
-        }
-        }
-    })   
+////    For each polity...
+//    each(app.content, function(polityCode, polityInfo){
+//                
+////        If that polity has info for the stat...
+//        if(polityInfo[stat]){
+//            
+//            var formattedStatData = formatStatData(polityInfo[stat], app.schema[stat].type);
+//            
+//            if(limit){
+//                            
+//                if(direction=="greater" && polityInfo[stat]>=limit){
+//
+//                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
+//
+//                }
+//                else if(direction=="lesser" && polityInfo[stat]<=limit){
+//
+//                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
+//                }
+//                else if(direction=="same" && containsOrEquals(polityInfo[stat],limit)){
+//                    
+//                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>"); 
+//                }
+//            }
+//            else{
+////            Display that info
+//            $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
+//
+//        }
+//        }
+//    })   
     
     $("#stats-pane").animate({ scrollTop: 0 }, 0);
     showStatsSource(stat);
