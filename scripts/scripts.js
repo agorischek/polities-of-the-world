@@ -42,7 +42,11 @@ var app = new Vue({
     },
     computed:{
         currentPolityInfo: function(){
-            return this.content[this.currentPolity];
+            var info = {}
+            if(this.currentPolity !=="all"){
+                info = this.content[this.currentPolity];
+            }
+            return info;
         },
         currentStatsInfo: function(){
             var info = {}
@@ -480,7 +484,7 @@ function showPolityInfo(polity){
     
     $("#polity-list").hide();
     
-    $("#polity-info").empty();
+//    $("#polity-info").empty();
     
     $("#polity-info").show();
     
@@ -490,72 +494,72 @@ function showPolityInfo(polity){
     
 //    $("#polity-pane-title").html(data[polity].name);
 
-    each(app.content[polity], function(stat, statData){
-        
-        if(app.content[polity]){
-            
-//            If a proper title is provided in the schema we use that; else we fall back to the variable name
-            var title
-            
-            if(app.schema[stat]){
-                title = app.schema[stat]["title"];
-            }
-            else{
-                title = "\"" + stat + "\""
-            };
-            
-            var target = "#polity-info"
-            
-            if(app.schema[stat]){
-
-                if(app.schema[stat].section != "Codes"){
-
-                    if(stat != "name"){
-
-                        if(statData){
-
-                            $(target).append("<h3 class='actionable stat-" + stat + "'>" + title + "</h3>");
-
-                            if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "polities"){
-
-                                each(statData,function(index,value){
-
-                                    var prefix =""
-
-                                    if(index != 0){
-                                        prefix = ", "
-                                    }
-
-                                    displayStatItem({
-                                        target: target,
-                                        prefix: prefix,
-                                        actionable: true,
-                                        stat: stat,
-                                        data: statData,
-                                        type: app.schema[stat].type
-                                        
-                                    });                               
-                                });                            
-                            }
-
-                            else{
-
-                                displayStatItem({
-                                    target: target,
-                                    prefix: "",
-                                    actionable: true,
-                                    stat: stat,
-                                    data: statData,
-                                    type: app.schema[stat].type
-                                }); 
-
-                            };                            
-                        }
-                    }
-                }   
-            }
-        }        
-    })
+//    each(app.content[polity], function(stat, statData){
+//        
+//        if(app.content[polity]){
+//            
+////            If a proper title is provided in the schema we use that; else we fall back to the variable name
+//            var title
+//            
+//            if(app.schema[stat]){
+//                title = app.schema[stat]["title"];
+//            }
+//            else{
+//                title = "\"" + stat + "\""
+//            };
+//            
+//            var target = "#polity-info"
+//            
+//            if(app.schema[stat]){
+//
+//                if(app.schema[stat].section != "Codes"){
+//
+//                    if(stat != "name"){
+//
+//                        if(statData){
+//
+//                            $(target).append("<h3 class='actionable stat-" + stat + "'>" + title + "</h3>");
+//
+//                            if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "polities"){
+//
+//                                each(statData,function(index,value){
+//
+//                                    var prefix =""
+//
+//                                    if(index != 0){
+//                                        prefix = ", "
+//                                    }
+//
+//                                    displayStatItem({
+//                                        target: target,
+//                                        prefix: prefix,
+//                                        actionable: true,
+//                                        stat: stat,
+//                                        data: statData,
+//                                        type: app.schema[stat].type
+//                                        
+//                                    });                               
+//                                });                            
+//                            }
+//
+//                            else{
+//
+//                                displayStatItem({
+//                                    target: target,
+//                                    prefix: "",
+//                                    actionable: true,
+//                                    stat: stat,
+//                                    data: statData,
+//                                    type: app.schema[stat].type
+//                                }); 
+//
+//                            };                            
+//                        }
+//                    }
+//                }   
+//            }
+//        }        
+//    })
     
     $("#polity-pane").animate({ scrollTop: 0 }, 0);
 
