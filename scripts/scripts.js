@@ -11,19 +11,20 @@ var colors;
 var mapDisplay;
 
 var app = new Vue({
-  el: '#page',
-  data: {
-    content: {},
-    schema: {},
-    stats: [],
-    statsPaneTitle: strings.statsPaneTitle,
-    polityPaneTitle: strings.polityPaneTitle,
-    polities: [],
-    orderedStatSections: [],
-    currentPolity: "all",
-    currentStat: "all",
-    currentDirection: "",
-  },
+    el: '#page',
+    data: {
+        content: {},
+        schema: {},
+        stats: [],
+        statsPaneTitle: strings.statsPaneTitle,
+        polityPaneTitle: strings.polityPaneTitle,
+        polities: [],
+        orderedStatSections: [],
+        currentPolity: "all",
+        currentStat: "all",
+        currentDirection: "",
+        polityPairs:[]
+    },
     methods:{
         politySelect: function(polity){
             showPolityInfo(polity)            
@@ -38,6 +39,9 @@ var app = new Vue({
             showStatsList();
             $("#stats-pane-modifier").hide();
         }
+    },
+    computed:{
+
     }
 })
 
@@ -64,7 +68,6 @@ $.when(gettingData, gettingSchema).done(function(value) {
 var showingMap = $.Deferred().done(function(){
     enableZoom();
 });
-
 
 //Functions
 
@@ -191,11 +194,11 @@ function getData(){
             app.content[polityInfo[iDColumnHeader]] = polityInfo;
             unsortedPolities.push([polityInfo["name"],polityInfo[iDColumnHeader]]);
         });
-        
-        unsortedPolities.sort(function(a, b){
-            return a[0] - b[0];        
-        });
                 
+        unsortedPolities.sort(function(a, b){
+            return (a[0] === b[0] ? 0 : (a[0] < b[0] ? -1 : 1));
+        });
+                        
         each(unsortedPolities, function(index,polityPair){
             app.polities.push(polityPair[1]);
         })
