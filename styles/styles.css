@@ -28,6 +28,16 @@ li{
     line-height: 24px;
 }
 
+#debug{
+    border-bottom:1px solid #EAEAEA;
+    padding:15px;
+    height:100px;
+}
+
+.debugX{
+    cursor: pointer;
+}
+
 h1,h2,h3,h4,h5,h6{
     font-family: "Cocomat", "Helvetica", sans-serif;
 }

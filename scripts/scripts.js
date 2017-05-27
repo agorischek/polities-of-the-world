@@ -20,8 +20,8 @@ var app = new Vue({
     polityPaneTitle: strings.polityPaneTitle,
     polities: [],
     orderedStatSections: [],
-    currentPolity: "",
-    currentStat: "",
+    currentPolity: "all",
+    currentStat: "all",
     currentDirection: "",
   },
     methods:{
@@ -398,6 +398,8 @@ function setColorsBy(stat, subset){
 
     function showStatsList(){
         
+        app.currentStat = "all";
+        
         $("#stats-info").hide();
 
         $("#stats-list").show();
@@ -463,6 +465,8 @@ function displayStatItem(statInfo){
 }
 
 function showPolityInfo(polity){
+    
+    app.currentPolity = polity;
     
     $("#polity-list").hide();
     
@@ -548,6 +552,8 @@ function showPolityInfo(polity){
 }
 
 function showStatsInfo(stat,limit,direction){
+    
+    app.currentStat = stat;
         
     $("#stats-list").hide();
     
@@ -599,6 +605,8 @@ function showStatsInfo(stat,limit,direction){
 }
 
 function showPolitiesList(){
+     
+    app.currentPolity = "all"
         
     $("#polity-info").hide();
         
@@ -746,3 +754,15 @@ function showStatsSource(stat){
         href:sourceURL
     }))
 }
+
+function showDebug(){
+    $("#debug").show();
+}
+
+function hideDebug(){
+    $("#debug").hide();
+}
+
+$(".debugX").click(function(){
+    hideDebug();
+})
