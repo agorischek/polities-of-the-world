@@ -32,6 +32,7 @@ li{
     border-bottom:1px solid #EAEAEA;
     padding:15px;
     height:100px;
+    overflow-y:scroll;
 }
 
 .debugX{
