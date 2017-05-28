@@ -55,7 +55,11 @@
                         <div v-for="statSection in orderedStatSections">
 <!--                            <h4>{{statSection}}</h4>-->
                             <li v-for="stat in stats" v-if="currentPolityInfo[stat] && schema[stat].section==statSection">
-                                <h3 :class="'actionable'" v-on:click="statSelect(stat)">{{schema[stat]["title"]}}</h3>
+                                <h3>
+                                    <span v-bind:class="['item', 'actionable', {selected: currentStat==stat}]" v-on:click="statSelect(stat)">
+                                        {{schema[stat]["title"]}}
+                                    </span>
+                                </h3>
                                 <div>
                                     {{currentPolityInfoFormatted[stat]}}
                                 </div>
@@ -98,17 +102,25 @@
                         <li v-for="statSection in orderedStatSections">
                             <ul>
                                 <h3>
-                                    {{statSection}}    
+                                    <span class="item">
+                                        {{statSection}}   
+                                    </span>
                                 </h3>
                                 <li v-for="stat in stats" v-if="schema[stat].section==statSection" v-on:click="statSelect(stat)" :class="'actionable stat stat-' + stat">
-                                    {{schema[stat].title}}
+                                    <span class="item">
+                                        {{schema[stat].title}}
+                                    </span>
                                 </li> 
                             </ul>
                         </li>                    
                     </ul>
                     <ol id="stats-info">
                         <li :class="'stat'" v-for="polity in polities" v-if="currentStatsInfo[polity]">
-                            <h3 :class="'actionable'" v-on:click="politySelect(polity)">{{content[polity].name}}</h3>
+                            <h3>
+                                <span v-bind:class="['item', 'actionable', {selected: currentPolity==polity}]" v-on:click="politySelect(polity)">
+                                    {{content[polity].name}}
+                                </span>
+                            </h3>
                             <div>
                                 {{currentStatsInfoFormatted[polity]}}
                             </div>

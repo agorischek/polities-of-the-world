@@ -303,6 +303,17 @@ a:hover, .actionable:hover{
     max-height:50px;
 }
 
+.item{
+    padding:8px;
+    margin:0 -8px;
+    border-radius: 5px;
+}
+
+.selected{
+    background-color:#3C404C;
+    color:#F7F8FC;
+}
+
 @media (max-width: 1000px) { 
     .narrow-hide{
         display:none;
