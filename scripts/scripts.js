@@ -28,16 +28,20 @@ var app = new Vue({
     },
     methods:{
         politySelect: function(polity){
-            showPolityInfo(polity)            
+            showPolityInfo(polity);
+            scrollUp("#middle-left");
         },
         statSelect: function(stat){
             showStatsInfo(stat)
+            scrollUp("#middle-right");
         },
         polityBack: function(){
             showPolitiesList(); 
+            scrollUp("#middle-left");
         },
         statBack: function(){
             showStatsList();
+            scrollUp("#middle-right");
             $("#stats-pane-modifier").hide();
         }
     },
@@ -58,9 +62,6 @@ var app = new Vue({
         },
         currentPolityInfoFormatted: function(){
             var info = {};
-//            info = this.currentPolityInfo
-
-            log(this.currentPolityInfo)
             each(this.currentPolityInfo, function(key, value){
                 var type = "";
                 if(app.schema[key]){
@@ -595,7 +596,13 @@ function showPolityInfo(polity){
 //        }        
 //    })
     
-    $("#polity-pane").animate({ scrollTop: 0 }, 0);
+//    $("#polity-pane").animate({ scrollTop: 0 }, 0);
+
+}
+
+function scrollUp(element){
+//    $(element).scrollTop(0);
+    $(element).animate({ scrollTop: 0 }, 00);
 
 }
 
@@ -647,7 +654,7 @@ function showStatsInfo(stat,limit,direction){
 //        }
 //    })   
     
-    $("#stats-pane").animate({ scrollTop: 0 }, 0);
+//    $("#stats-pane").animate({ scrollTop: 0 }, 0);
     showStatsSource(stat);
 
 }
