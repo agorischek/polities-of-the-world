@@ -23,7 +23,8 @@ var app = new Vue({
         currentPolity: "all",
         currentStat: "all",
         currentDirection: "",
-        showDebug: false
+        showDebug: false,
+        currentView: ""
     },
     methods:{
         politySelect: function(polity){

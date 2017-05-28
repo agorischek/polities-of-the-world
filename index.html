@@ -23,9 +23,10 @@
             <div class="debugX">X</div> 
             <div>currentPolity: {{currentPolity}}</div>
             <div>currentStat: {{currentStat}}</div>
+            <div>currentView: {{currentView}}</div>
 <!--            <div>content: {{content}}</div>-->
 <!--            <div>currentPolityInfo: {{currentPolityInfo}}</div>-->
-            <div>currentStatType: {{currentStatType}}</div>
+<!--            <div>currentStatType: {{currentStatType}}</div>-->
 <!--            <div>currentStatsInfo: {{currentStatsInfo}}</div>-->
 <!--            <div>currentStatsInfoFormatted: {{currentStatsInfoFormatted}}</div>-->
 <!--            <div>schema: {{schema}}</div>-->
@@ -121,9 +122,9 @@
         </div>
             
         <div id="nav">
-            <div id="polities-nav" class="nav-item">Polities</div>
-            <div id="map-nav" class="nav-item current-nav">Map</div>
-            <div id="stats-nav" class="nav-item">Stats</div>    
+            <div v-on:click="currentView = 'polities'" id="polities-nav" class="nav-item">Polities</div>
+            <div v-on:click="currentView = 'map'" id="map-nav" class="nav-item current-nav">Map</div>
+            <div v-on:click="currentView = 'stats'" id="stats-nav" class="nav-item">Stats</div>    
         </div>
             
     </div>        
