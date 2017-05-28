@@ -23,7 +23,6 @@ var app = new Vue({
         currentPolity: "all",
         currentStat: "all",
         currentDirection: "",
-        polityPairs:[],
         showDebug: false
     },
     methods:{
@@ -518,9 +517,7 @@ function showPolityInfo(polity){
     app.currentPolity = polity;
     
     $("#polity-list").hide();
-    
-//    $("#polity-info").empty();
-    
+        
     $("#polity-info").show();
     
     $("#polity-back-text").show();
@@ -611,9 +608,7 @@ function showStatsInfo(stat,limit,direction){
     app.currentStat = stat;
         
     $("#stats-list").hide();
-    
-//    $("#stats-info").empty();
-    
+        
     $("#stats-info").show();
     
     $("#stats-back-text").show();
