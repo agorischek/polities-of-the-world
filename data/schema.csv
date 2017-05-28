@@ -20,7 +20,7 @@
 "publicDebt","Public Debt","currency","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2186rank.html"
 "cellPhoneUsers","Cell Phone Users","number","TRUE","","","Infrastructure","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2151rank.html"
 "officialName","Official Name","verbose","FALSE","","","Naming","","CIA World Factbook","https://www.state.gov/s/inr/rls/4250.htm"
-"capital","Capital","Verbose","FALSE","","","Naming","","CIA World Factbook","https://www.state.gov/s/inr/rls/4250.htm"
+"capital","Capital","verbose","FALSE","","","Naming","","CIA World Factbook","https://www.state.gov/s/inr/rls/4250.htm"
 "region","Region","singleSelect","TRUE","","","Naming","","Pew Research Center via Wikipedia","https://en.wikipedia.org/wiki/Religions_by_country"
 "subregion","Subregion","singleSelect","TRUE","","","Naming","","Pew Research Center via Wikipedia","https://en.wikipedia.org/wiki/Religions_by_country"
 "merchantShips","Merchant Ships","number","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2108rank.html"
