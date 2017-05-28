@@ -10,19 +10,21 @@ function unique(array) {
     var sorted = array;
     sorted.sort();
     return sorted.filter(function(value, index, arr){
-        if(index < 1) 
+        if(index < 1) {
             return true;
-        else
+        }
+        else{
             return value != arr[index-1];
+        }
     });
 }
 
 function containsOrEquals(set,item){
     if(_.contains(set,item) || set==item){
-        return true
+        return true;
     }
     else{
-        return false
+        return false;
     }
 }
 
