@@ -28,20 +28,16 @@ var app = new Vue({
     methods:{
         politySelect: function(polity){
             showPolityInfo(polity);
-            scrollUp("#middle-left");
         },
         statSelect: function(stat){
-            showStatsInfo(stat)
-            scrollUp("#middle-right");
+            showStatsInfo(stat);
+//            log("You selected the stat " + stat);
         },
         polityBack: function(){
             showPolitiesList(); 
-            scrollUp("#middle-left");
         },
         statBack: function(){
             showStatsList();
-            scrollUp("#middle-right");
-            $("#stats-pane-modifier").hide();
         }
     },
     computed:{
@@ -313,6 +309,15 @@ function showMap(){
         },
         projectionConfig: {
             rotation: [0, 0]
+        },
+        done: function(datamap) {
+            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+//                politySelect(geography);
+//                log(geography);
+//                log(geography.id);
+                showPolityInfo(geography.id)
+//                alert(geography.properties.name);
+            });
         }
 });
 
@@ -448,6 +453,10 @@ function setColorsBy(stat, subset){
         
         app.currentStat = "all";
         
+        scrollUp("#middle-right");
+        
+        $("#stats-pane-modifier").hide();
+        
         $("#stats-info").hide();
 
         $("#stats-list").show();
@@ -513,6 +522,8 @@ function displayStatItem(statInfo){
 }
 
 function showPolityInfo(polity){
+    
+    scrollUp("#middle-left");
     
     app.currentPolity = polity;
     
@@ -606,6 +617,10 @@ function scrollUp(element){
 function showStatsInfo(stat,limit,direction){
     
     app.currentStat = stat;
+    
+    scrollUp("#middle-right");
+    
+    setColorsBy(stat);
         
     $("#stats-list").hide();
         
@@ -657,6 +672,8 @@ function showStatsInfo(stat,limit,direction){
 function showPolitiesList(){
      
     app.currentPolity = "all"
+    
+    scrollUp("#middle-left");
         
     $("#polity-info").hide();
         
