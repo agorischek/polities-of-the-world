@@ -28,6 +28,10 @@ li{
     line-height: 24px;
 }
 
+ul{
+    padding:0;
+}
+
 #debug{
     border-bottom:1px solid #EAEAEA;
     padding:15px;
