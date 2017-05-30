@@ -342,4 +342,7 @@ a:hover, .actionable:hover{
     .side{
         padding-bottom:0;
     }
+    .wordmark{
+        max-height:50px;
+    }
 }
