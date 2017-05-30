@@ -2,7 +2,6 @@
 $(function(){
     getData();
     getSchema();
-    enableNavBar();
 });
 
 //Variables
@@ -24,7 +23,7 @@ var app = new Vue({
         currentStat: "all",
         currentDirection: "",
         showDebug: false,
-        currentView: ""
+        currentView: "map"
     },
     methods:{
         politySelect: function(polity){
@@ -778,30 +777,6 @@ function setColorsBySubset(stat,limit){
 
         showStatsInfo(stat,limit,app.currentDirection);
     };
-}
-
-function enableNavBar(){
-    $("#polities-nav").click(function(){
-        $(".nav-item").removeClass("current-nav");
-        $(this).addClass("current-nav");
-        $("#left").removeClass("narrow-hide");
-        $("#center").addClass("narrow-hide");
-        $("#right").addClass("narrow-hide");
-    })
-    $("#map-nav").click(function(){
-        $(".nav-item").removeClass("current-nav");
-        $(this).addClass("current-nav");
-        $("#left").addClass("narrow-hide");
-        $("#center").removeClass("narrow-hide");
-        $("#right").addClass("narrow-hide");
-    })
-    $("#stats-nav").click(function(){
-        $(".nav-item").removeClass("current-nav");
-        $(this).addClass("current-nav");
-        $("#left").addClass("narrow-hide");
-        $("#center").addClass("narrow-hide");
-        $("#right").removeClass("narrow-hide");
-    })
 }
 
 function showStatsSource(stat){
