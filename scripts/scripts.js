@@ -2,7 +2,6 @@
 $(function(){
     getData();
     getSchema();
-    enableNavBar();
 });
 
 //Variables
@@ -24,7 +23,7 @@ var app = new Vue({
         currentStat: "all",
         currentDirection: "",
         showDebug: false,
-        currentView: ""
+        currentView: "map"
     },
     methods:{
         politySelect: function(polity){
@@ -32,7 +31,6 @@ var app = new Vue({
         },
         statSelect: function(stat){
             showStatsInfo(stat);
-//            log("You selected the stat " + stat);
         },
         polityBack: function(){
             showPolitiesList(); 
@@ -313,11 +311,7 @@ function showMap(){
         },
         done: function(datamap) {
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-//                politySelect(geography);
-//                log(geography);
-//                log(geography.id);
                 showPolityInfo(geography.id)
-//                alert(geography.properties.name);
             });
         }
 });
@@ -785,33 +779,9 @@ function setColorsBySubset(stat,limit){
     };
 }
 
-function enableNavBar(){
-    $("#polities-nav").click(function(){
-        $(".nav-item").removeClass("current-nav");
-        $(this).addClass("current-nav");
-        $("#left").removeClass("narrow-hide");
-        $("#center").addClass("narrow-hide");
-        $("#right").addClass("narrow-hide");
-    })
-    $("#map-nav").click(function(){
-        $(".nav-item").removeClass("current-nav");
-        $(this).addClass("current-nav");
-        $("#left").addClass("narrow-hide");
-        $("#center").removeClass("narrow-hide");
-        $("#right").addClass("narrow-hide");
-    })
-    $("#stats-nav").click(function(){
-        $(".nav-item").removeClass("current-nav");
-        $(this).addClass("current-nav");
-        $("#left").addClass("narrow-hide");
-        $("#center").addClass("narrow-hide");
-        $("#right").removeClass("narrow-hide");
-    })
-}
-
 function showStatsSource(stat){
 
-    $("#lower-right").show();
+//    $("#lower-right").show();
     var sourceName = app.schema[stat].sourceName
     var sourceURL = app.schema[stat].sourceURL
     $("#stats-source").html("Source: " + element({
