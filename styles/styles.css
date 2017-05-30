@@ -321,6 +321,10 @@ a:hover, .actionable:hover{
     border-radius: 5px;
 }
 
+#nav{
+    cursor:default;
+}
+
 .selected{
     background-color:#3C404C;
     color:#F7F8FC;
