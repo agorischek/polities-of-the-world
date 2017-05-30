@@ -811,7 +811,7 @@ function enableNavBar(){
 
 function showStatsSource(stat){
 
-    $("#lower-right").show();
+//    $("#lower-right").show();
     var sourceName = app.schema[stat].sourceName
     var sourceURL = app.schema[stat].sourceURL
     $("#stats-source").html("Source: " + element({

@@ -130,7 +130,7 @@
                         </li>
                     </ol>
                 </div>
-                <div class="lower right" id="lower-right">
+                <div v-bind:class="{hidden: currentStat == 'all'}" class="lower right" id="lower-right">
                     <div id="stats-source"></div>
                 </div>
             </div>
