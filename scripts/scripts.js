@@ -32,7 +32,6 @@ var app = new Vue({
         },
         statSelect: function(stat){
             showStatsInfo(stat);
-//            log("You selected the stat " + stat);
         },
         polityBack: function(){
             showPolitiesList(); 
@@ -313,11 +312,7 @@ function showMap(){
         },
         done: function(datamap) {
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-//                politySelect(geography);
-//                log(geography);
-//                log(geography.id);
                 showPolityInfo(geography.id)
-//                alert(geography.properties.name);
             });
         }
 });
