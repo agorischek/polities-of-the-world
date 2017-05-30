@@ -271,6 +271,7 @@ a:hover, .actionable:hover{
 }
 
 #nav{
+    display:flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -326,27 +327,12 @@ a:hover, .actionable:hover{
 }
 
 @media (max-width: 1000px) { 
-    page{
-        overflow:hide;
-        position:absolute;
-        bottom:0;
-    }
     .narrow-hide{
         display:none;
     }
     #nav{
         display:flex;
-/*
-        position:absolute;
-        bottom:0;
-        width:100%;
-*/
     }
-/*
-    #content{
-        margin-bottom:70px;
-    }
-*/
     .column{
         width:100%;
     }
