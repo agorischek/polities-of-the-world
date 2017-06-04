@@ -43,9 +43,9 @@
                 <div class="upper left" id="upper-left">
                     <div class="pane-header">
                         <div id="polity-back">
-                            <span id="polity-back-text" class="actionable" v-on:click="polityBack">&#8592; All Polities</span>
+                            <span id="polity-back-text" class="actionable" v-on:click="polityBack">&#8592; {{strings.allPolities}}</span>
                         </div>
-                        <h2 id="polity-pane-title">{{polityPaneTitle}}</h2>
+                        <h2 id="polity-pane-title">{{strings.polityPaneTitle}}</h2>
                         <div class="divider"></div>
                     </div>
                 </div>
@@ -101,9 +101,9 @@
                 <div class="upper right" id="upper-right">
                     <div class="pane-header">
                         <div id="stats-back">
-                            <span id="stats-back-text" class="actionable" v-on:click="statBack">All Stats &#8594;</span>
+                            <span id="stats-back-text" class="actionable" v-on:click="statBack">{{strings.allStats}} &#8594;</span>
                         </div>                
-                        <h2 id="stats-pane-title">{{statsPaneTitle}}</h2>
+                        <h2 id="stats-pane-title">{{strings.statsPaneTitle}}</h2>
                         <div id="stats-pane-modifier" class="modifier"></div>
                         <div class="divider"></div>
                     </div>
