@@ -330,6 +330,15 @@ a:hover, .actionable:hover{
     color:#F7F8FC;
 }
 
+#app{
+    width:100%;
+    height:100%;
+}
+
+[v-cloak] {
+  display: none;
+}
+
 @media (max-width: 1000px) { 
     .narrow-hide{
         display:none;

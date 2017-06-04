@@ -10,7 +10,7 @@ var colors;
 var mapDisplay;
 
 var app = new Vue({
-    el: '#page',
+    el: "#app",
     data: {
         content: {},
         schema: {},
