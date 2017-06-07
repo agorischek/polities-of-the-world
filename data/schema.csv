@@ -1,6 +1,6 @@
 "stat","title","type","colorable","min","max","section","parent","sourceName","sourceURL","show"
 "name","Name","verbose","FALSE","","","Naming","","U.S. Department of State","https://www.state.gov/s/inr/rls/4250.htm","false"
-"id","ID","code","FALSE","","","Codes","","U.S. Department of State","https://www.state.gov/s/inr/rls/4250.htm","false"
+"id","ID","code","FALSE","","","Naming","","U.S. Department of State","https://www.state.gov/s/inr/rls/4250.htm","false"
 "medianAge","Median Age","number","TRUE","","","Demographics","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2177rank.html","true"
 "internetUsers","Internet Users","number","TRUE","","","Infrastructure","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2153rank.html","true"
 "airports","Airports","number","TRUE","","","Infrastructure","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2053rank.html","true"

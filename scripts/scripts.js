@@ -109,7 +109,7 @@ var app = new Vue({
 })
 
 //    The stat sections to display first
-var firstStatSections = ["Naming","Demographics","Economy","Infrastructure","Codes"]
+var firstStatSections = ["Naming","Demographics","Economy","Infrastructure"]
 //    The stat sections that actually exist in the data
 var actualStatSections = []
 //    The stat sections that exist in the data but aren't listed in the first list
