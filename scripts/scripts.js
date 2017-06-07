@@ -80,6 +80,30 @@ var app = new Vue({
                 info[key] = formatStatData(value,type)
             })
             return info;
+        },
+        currentPolityName: function(){
+            return this.currentPolityInfo.name;
+        },
+        currentStatName: function(){
+            if(this.schema[this.currentStat]){
+                return this.schema[this.currentStat]["title"];
+            }
+        },
+        polityPaneTitle: function(){
+            if (this.currentPolity == "all"){
+                return this.strings.polityPaneTitle;
+            }
+            else{
+                return this.currentPolityName;
+            }
+        },
+        statsPaneTitle: function(){
+            if (this.currentStat == "all"){
+                return this.strings.statsPaneTitle;
+            }
+            else{
+                return this.currentStatName;
+            }
         }
     }
 })
