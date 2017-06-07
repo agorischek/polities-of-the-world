@@ -60,7 +60,7 @@
                     <ol id="polity-info">
                         <div v-for="statSection in orderedStatSections">
 <!--                            <h4>{{statSection}}</h4>-->
-                            <li v-for="stat in stats" v-if="currentPolityInfo[stat] && schema[stat].section==statSection">
+                            <li v-for="stat in stats" v-if="currentPolityInfo[stat] && schema[stat].section==statSection && schema[stat].show==true">
                                 <h3>
                                     <span v-bind:class="['item', 'actionable', {selected: currentStat==stat}]" v-on:click="statSelect(stat)">
                                         {{schema[stat]["title"]}}
@@ -106,7 +106,7 @@
                                         {{statSection}}   
                                     </span>
                                 </h3>
-                                <li v-for="stat in stats" v-if="schema[stat].section==statSection" v-on:click="statSelect(stat)" :class="'actionable stat stat-' + stat">
+                                <li v-for="stat in stats" v-if="schema[stat].section==statSection && schema[stat].show==true" v-on:click="statSelect(stat)" :class="'actionable stat stat-' + stat">
                                     <span class="item">
                                         {{schema[stat].title}}
                                     </span>
