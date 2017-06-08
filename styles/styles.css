@@ -130,8 +130,12 @@ h3, .header{
 /*    margin-right:-9px;*/
 }
 
-#polity-back-text,#stats-back-text{
-    display:none;
+#polity-back-text{
+/*    display:none;*/
+}
+
+#stats-back-text{
+/*    display:none;*/
 }
 
 .pane-header, #polity-list, #polity-info, #stats-list, #stats-info, #stats-source{
@@ -146,22 +150,6 @@ h3, .header{
 #stats-pane{
     text-align: right;
     border-left:1px solid #EAEAEA;
-}
-
-#polity-list{
-
-}
-
-#polity-info{
-    display:none;
-}
-
-#stats-list{
-
-}
-
-#stats-info{
-    display:none;    
 }
 
 a{

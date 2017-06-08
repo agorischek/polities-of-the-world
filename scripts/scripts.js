@@ -20,6 +20,7 @@ var app = new Vue({
         orderedStatSections: [],
         currentPolity: null,
         currentStat: null,
+        currentLimit: null,
         currentDirection: null,
         showDebug: false,
         currentView: "map"
@@ -352,14 +353,6 @@ function setColorsBy(stat, subset){
     
         app.currentStat = stat;
     
-//        Show or hide the modifier based on whether we're showing a subset
-        if(subset){
-            $("#stats-pane-modifier").show();
-        }
-        else{
-            $("#stats-pane-modifier").hide();
-        }
-    
         var dataForColors = {}
         
         var values = []
@@ -477,15 +470,7 @@ function setColorsBy(stat, subset){
         
         $("#stats-pane-modifier").hide();
         
-        $("#stats-info").hide();
-
-        $("#stats-list").show();
-
-        $("#stats-back-text").hide();
-        
         $("#stats-source").html("");
-        
-        app.statsPaneTitle = "Stats";
 
     };
 
@@ -546,17 +531,7 @@ function showPolityInfo(polity){
     scrollUp("#middle-left");
     
     app.currentPolity = polity;
-    
-    $("#polity-list").hide();
         
-    $("#polity-info").show();
-    
-    $("#polity-back-text").show();
-    
-    app.polityPaneTitle = app.content[polity].name;
-    
-//    $("#polity-pane-title").html(data[polity].name);
-
 //    each(app.content[polity], function(stat, statData){
 //        
 //        if(app.content[polity]){
@@ -641,16 +616,6 @@ function showStatsInfo(stat,limit,direction){
     scrollUp("#middle-right");
     
     setColorsBy(stat);
-        
-    $("#stats-list").hide();
-        
-    $("#stats-info").show();
-    
-    $("#stats-back-text").show();
-    
-    app.statsPaneTitle = app.schema[stat].title;    
-    
-//    $("#stats-pane-title").html(app.schema[stat].title);
     
 ////    For each polity...
 //    each(app.content, function(polityCode, polityInfo){
@@ -694,15 +659,7 @@ function showPolitiesList(){
     app.currentPolity = null;
     
     scrollUp("#middle-left");
-        
-    $("#polity-info").hide();
-        
-    $("#polity-list").show();
-    
-    $("#polity-back-text").hide();
-    
-    app.polityPaneTitle = "Polities";
-    
+            
 }
 
 function showDefaultPolity(){
@@ -806,7 +763,6 @@ function setColorsBySubset(stat,limit){
 
 function showStatsSource(stat){
 
-//    $("#lower-right").show();
     var sourceName = app.schema[stat].sourceName
     var sourceURL = app.schema[stat].sourceURL
     $("#stats-source").html("Source: " + element({
