@@ -476,12 +476,8 @@ function setColorsBy(stat, subset){
         scrollUp("#middle-right");
         
         $("#stats-pane-modifier").hide();
-
-//        $("#stats-back-text").hide();
         
         $("#stats-source").html("");
-        
-//        app.statsPaneTitle = "Stats";
 
     };
 
@@ -542,13 +538,7 @@ function showPolityInfo(polity){
     scrollUp("#middle-left");
     
     app.currentPolity = polity;
-    
-//    $("#polity-back-text").show();
-    
-//    app.polityPaneTitle = app.content[polity].name;
-    
-//    $("#polity-pane-title").html(data[polity].name);
-
+        
 //    each(app.content[polity], function(stat, statData){
 //        
 //        if(app.content[polity]){
@@ -634,12 +624,6 @@ function showStatsInfo(stat,limit,direction){
     
     setColorsBy(stat);
     
-//    $("#stats-back-text").show();
-    
-    app.statsPaneTitle = app.schema[stat].title;    
-    
-//    $("#stats-pane-title").html(app.schema[stat].title);
-    
 ////    For each polity...
 //    each(app.content, function(polityCode, polityInfo){
 //                
@@ -679,12 +663,10 @@ function showStatsInfo(stat,limit,direction){
 
 function showPolitiesList(){
      
-    app.currentPolity = "yo";
+    app.currentPolity = null;
     
     scrollUp("#middle-left");
-    
-//    $("#polity-back-text").hide();
-        
+            
 }
 
 function showDefaultPolity(){
@@ -788,7 +770,6 @@ function setColorsBySubset(stat,limit){
 
 function showStatsSource(stat){
 
-//    $("#lower-right").show();
     var sourceName = app.schema[stat].sourceName
     var sourceURL = app.schema[stat].sourceURL
     $("#stats-source").html("Source: " + element({
