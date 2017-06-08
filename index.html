@@ -57,7 +57,7 @@
                             {{content[polity].name}}
                         </li>
                     </ol>
-                    <ol id="polity-info">
+                    <ol v-if="currentPolity" id="polity-info">
                         <div v-for="statSection in orderedStatSections">
 <!--                            <h4>{{statSection}}</h4>-->
                             <li v-for="stat in stats" v-if="currentPolityInfo[stat] && schema[stat].section==statSection && schema[stat].show==true">
