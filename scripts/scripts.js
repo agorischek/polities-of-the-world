@@ -20,6 +20,7 @@ var app = new Vue({
         orderedStatSections: [],
         currentPolity: null,
         currentStat: null,
+        currentLimit: null,
         currentDirection: null,
         showDebug: true,
         currentView: "map"
@@ -351,14 +352,6 @@ function showMap(){
 function setColorsBy(stat, subset){  
     
         app.currentStat = stat;
-    
-//        Show or hide the modifier based on whether we're showing a subset
-        if(subset){
-            $("#stats-pane-modifier").show();
-        }
-        else{
-            $("#stats-pane-modifier").hide();
-        }
     
         var dataForColors = {}
         
