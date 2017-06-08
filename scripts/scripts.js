@@ -18,9 +18,9 @@ var app = new Vue({
         strings: strings,
         polities: [],
         orderedStatSections: [],
-        currentPolity: "all",
-        currentStat: "all",
-        currentDirection: "",
+        currentPolity: null,
+        currentStat: null,
+        currentDirection: null,
         showDebug: false,
         currentView: "map"
     },
@@ -48,7 +48,7 @@ var app = new Vue({
         },
         currentPolityInfo: function(){
             var info = {}
-            if(this.currentPolity !=="all"){
+            if(this.currentPolity){
                 info = this.content[this.currentPolity];
             }
             return info;
@@ -66,7 +66,7 @@ var app = new Vue({
         },
         currentStatsInfo: function(){
             var info = {}
-            if(this.currentStat !=="all"){
+            if(this.currentStat){
                 each(this.polities, function(key, value){
                     info[value] = (app.content[value][app.currentStat])
                 })
@@ -82,7 +82,9 @@ var app = new Vue({
             return info;
         },
         currentPolityName: function(){
-            return this.currentPolityInfo.name;
+            if(this.currentPolity){
+                return this.currentPolityInfo.name;
+            }
         },
         currentStatName: function(){
             if(this.schema[this.currentStat]){
@@ -90,7 +92,7 @@ var app = new Vue({
             }
         },
         polityPaneTitle: function(){
-            if (this.currentPolity == "all"){
+            if (!this.currentPolity){
                 return this.strings.polityPaneTitle;
             }
             else{
@@ -98,7 +100,7 @@ var app = new Vue({
             }
         },
         statsPaneTitle: function(){
-            if (this.currentStat == "all"){
+            if (!this.currentStat){
                 return this.strings.statsPaneTitle;
             }
             else{
@@ -469,7 +471,7 @@ function setColorsBy(stat, subset){
 
     function showStatsList(){
         
-        app.currentStat = "all";
+        app.currentStat = null;
         
         scrollUp("#middle-right");
         
@@ -689,7 +691,7 @@ function showStatsInfo(stat,limit,direction){
 
 function showPolitiesList(){
      
-    app.currentPolity = "all"
+    app.currentPolity = null;
     
     scrollUp("#middle-left");
         
