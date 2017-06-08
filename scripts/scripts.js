@@ -22,7 +22,7 @@ var app = new Vue({
         currentStat: null,
         currentLimit: null,
         currentDirection: null,
-        showDebug: true,
+        showDebug: false,
         currentView: "map"
     },
     methods:{
