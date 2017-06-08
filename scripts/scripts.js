@@ -21,7 +21,7 @@ var app = new Vue({
         currentPolity: null,
         currentStat: null,
         currentDirection: null,
-        showDebug: false,
+        showDebug: true,
         currentView: "map"
     },
     methods:{
@@ -476,16 +476,12 @@ function setColorsBy(stat, subset){
         scrollUp("#middle-right");
         
         $("#stats-pane-modifier").hide();
-        
-        $("#stats-info").hide();
 
-        $("#stats-list").show();
-
-        $("#stats-back-text").hide();
+//        $("#stats-back-text").hide();
         
         $("#stats-source").html("");
         
-        app.statsPaneTitle = "Stats";
+//        app.statsPaneTitle = "Stats";
 
     };
 
@@ -547,13 +543,9 @@ function showPolityInfo(polity){
     
     app.currentPolity = polity;
     
-    $("#polity-list").hide();
-        
-    $("#polity-info").show();
+//    $("#polity-back-text").show();
     
-    $("#polity-back-text").show();
-    
-    app.polityPaneTitle = app.content[polity].name;
+//    app.polityPaneTitle = app.content[polity].name;
     
 //    $("#polity-pane-title").html(data[polity].name);
 
@@ -641,12 +633,8 @@ function showStatsInfo(stat,limit,direction){
     scrollUp("#middle-right");
     
     setColorsBy(stat);
-        
-    $("#stats-list").hide();
-        
-    $("#stats-info").show();
     
-    $("#stats-back-text").show();
+//    $("#stats-back-text").show();
     
     app.statsPaneTitle = app.schema[stat].title;    
     
@@ -691,18 +679,12 @@ function showStatsInfo(stat,limit,direction){
 
 function showPolitiesList(){
      
-    app.currentPolity = null;
+    app.currentPolity = "yo";
     
     scrollUp("#middle-left");
+    
+//    $("#polity-back-text").hide();
         
-    $("#polity-info").hide();
-        
-    $("#polity-list").show();
-    
-    $("#polity-back-text").hide();
-    
-    app.polityPaneTitle = "Polities";
-    
 }
 
 function showDefaultPolity(){

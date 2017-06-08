@@ -45,14 +45,14 @@
                 <div class="upper left" id="upper-left">
                     <div class="pane-header">
                         <div id="polity-back">
-                            <span id="polity-back-text" class="actionable" v-on:click="polityBack">&#8592; {{strings.allPolities}}</span>
+                            <span v-if="currentPolity" id="polity-back-text" class="actionable" v-on:click="polityBack">&#8592; {{strings.allPolities}}</span>
                         </div>
                         <h2 id="polity-pane-title">{{polityPaneTitle}}</h2>
                         <div class="divider"></div>
                     </div>
                 </div>
                 <div class="middle left" id="middle-left">
-                    <ol id="polity-list">
+                    <ol v-if="!currentPolity" id="polity-list">
                         <li :class="'polity actionable ' + polity" v-for="polity in polities" v-on:click="politySelect(polity)">
                             {{content[polity].name}}
                         </li>
@@ -90,7 +90,7 @@
                 <div class="upper right" id="upper-right">
                     <div class="pane-header">
                         <div id="stats-back">
-                            <span id="stats-back-text" class="actionable" v-on:click="statBack">{{strings.allStats}} &#8594;</span>
+                            <span v-if="currentStat" id="stats-back-text" class="actionable" v-on:click="statBack">{{strings.allStats}} &#8594;</span>
                         </div>                
                         <h2 id="stats-pane-title">{{statsPaneTitle}}</h2>
                         <div id="stats-pane-modifier" class="modifier"></div>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="middle right" id="middle-right">
-                    <ul id="stats-list">
+                    <ul v-if="!currentStat" id="stats-list">
                         <li v-for="statSection in orderedStatSections">
                             <ul>
                                 <h3>
@@ -114,7 +114,7 @@
                             </ul>
                         </li>                    
                     </ul>
-                    <ol id="stats-info">
+                    <ol v-if="currentStat" id="stats-info">
                         <li :class="'stat'" v-for="polity in polities" v-if="currentStatsInfo[polity]">
                             <h3>
                                 <span v-bind:class="['item', 'actionable', {selected: currentPolity==polity}]" v-on:click="politySelect(polity)">
@@ -127,7 +127,7 @@
                         </li>
                     </ol>
                 </div>
-                <div v-bind:class="{hidden: currentStat == 'all'}" class="lower right" id="lower-right">
+                <div v-bind:class="{hidden: !currentStat}" class="lower right" id="lower-right">
                     <div id="stats-source"></div>
                 </div>
             </div>
