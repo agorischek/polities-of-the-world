@@ -31,12 +31,46 @@ var app = new Vue({
         },
         statSelect: function(stat){
             showStatsInfo(stat);
+            this.currentLimit = null;
+            this.currentDirection = null;
         },
         polityBack: function(){
             showPolitiesList(); 
         },
         statBack: function(){
             showStatsList();
+        },
+        statSelectWithLimit: function(stat, limit){
+            showStatsInfo(stat);
+            this.currentLimit = limit;
+            changeDirection();
+        },
+        filterStatItem: function(polity){
+            if(this.currentLimit == null){
+                return true;
+            }
+            else if(this.currentStatIsNumeric){
+                if(!this.currentLimit && this.currentStatsInfo[polity]){
+                    return true;
+                }
+                else if(this.currentStatsInfo[polity]*this.currentDirection > this.currentLimit*this.currentDirection && this.currentLimit){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                if(this.currentDirection == 1 && this.currentLimit == this.currentStatsInfo[polity]){
+                    return true;
+                }
+                else if (this.currentDirection == -1 && this.currentLimit != this.currentStatsInfo[polity]){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
         }
     },
     computed:{
@@ -107,9 +141,41 @@ var app = new Vue({
             else{
                 return this.currentStatName;
             }
+        },
+        currentLimitFormatted: function(){
+            if (this.currentLimit == null){
+                return null;
+            }
+            else{
+                return formatStatData(this.currentLimit, this.currentStatType)
+            }
+        },
+        currentStatIsNumeric: function(){
+            if(this.currentStatType == null){
+                return null;
+            }
+            else if(this.currentStatType == "index" || this.currentStatType == "number" || this.currentStatType == "percent" || this.currentStatType == "currency" || this.currentStatType == "rank"){
+                return true;
+            }
+            else if (this.currentStatType == "singleSelect" || this.currentStatType == "verbose" || this.currentStatType == "code" || this.currentStatType == "multipleSelect"){
+                return false;
+            }
+            else{
+                return false;
+            }
+                
         }
     }
 })
+
+function changeDirection(){
+        if (app.currentDirection == null || app.currentDirection == -1){
+            app.currentDirection = 1
+        }
+        else{
+            app.currentDirection = -1
+        }
+}
 
 //    The stat sections to display first
 var firstStatSections = ["Naming","Demographics","Economy","Infrastructure"]
@@ -468,7 +534,7 @@ function setColorsBy(stat, subset){
         
         scrollUp("#middle-right");
         
-        $("#stats-pane-modifier").hide();
+//        $("#stats-pane-modifier").hide();
         
         $("#stats-source").html("");
 
@@ -703,7 +769,7 @@ function setColorsBySubset(stat,limit){
 
             app.currentDirection = "same";
             
-            $("#stats-pane-modifier").html(limit);
+//            $("#stats-pane-modifier").html(limit);
 
             });   
         
@@ -730,7 +796,7 @@ function setColorsBySubset(stat,limit){
                 };
 
             app.currentDirection = "lesser";
-            $("#stats-pane-modifier").html("&le; " + formattedLimit);
+//            $("#stats-pane-modifier").html("&le; " + formattedLimit);
 
             });       
         }        
@@ -744,7 +810,7 @@ function setColorsBySubset(stat,limit){
                 };
 
                 app.currentDirection = "greater"; 
-                $("#stats-pane-modifier").html("&ge; " + formattedLimit);
+//                $("#stats-pane-modifier").html("&ge; " + formattedLimit);
 
             })          
         };
