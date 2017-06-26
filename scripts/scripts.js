@@ -566,11 +566,7 @@ function setColorsBy(stat, subset){
         app.currentStat = null;
         
         scrollUp("#middle-right");
-        
-//        $("#stats-pane-modifier").hide();
-        
-        $("#stats-source").html("");
-
+                
     };
 
 
@@ -625,39 +621,6 @@ function showStatsInfo(stat,limit,filter){
     
     setColorsBy(stat);
     
-////    For each polity...
-//    each(app.content, function(polityCode, polityInfo){
-//                
-////        If that polity has info for the stat...
-//        if(polityInfo[stat]){
-//            
-//            var formattedStatData = formatStatData(polityInfo[stat], app.schema[stat].type);
-//            
-//            if(limit){
-//                            
-//                if(filter=="greater" && polityInfo[stat]>=limit){
-//
-//                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
-//
-//                }
-//                else if(filter=="lesser" && polityInfo[stat]<=limit){
-//
-//                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
-//                }
-//                else if(filter=="same" && containsOrEquals(polityInfo[stat],limit)){
-//                    
-//                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>"); 
-//                }
-//            }
-//            else{
-////            Display that info
-//            $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
-//
-//        }
-//        }
-//    })   
-    
-//    $("#stats-pane").animate({ scrollTop: 0 }, 0);
     showStatsSource(stat);
 
 }
@@ -711,9 +674,7 @@ function setColorsBySubset(stat,limit){
 
             app.currentFilter = "equal";
             
-//            $("#stats-pane-modifier").html(limit);
-
-            });   
+        });   
         
         setColorsBy(stat, subset);
 
@@ -737,8 +698,7 @@ function setColorsBySubset(stat,limit){
                     subset.push([app.content[polity][stat],polity])
                 };
 
-            app.currentFilter = "lesser";
-//            $("#stats-pane-modifier").html("&le; " + formattedLimit);
+                app.currentFilter = "lesser";
 
             });       
         }        
@@ -752,7 +712,6 @@ function setColorsBySubset(stat,limit){
                 };
 
                 app.currentFilter = "greater"; 
-//                $("#stats-pane-modifier").html("&ge; " + formattedLimit);
 
             })          
         };
