@@ -59,10 +59,10 @@ var app = new Vue({
                 }
 //                Else, and if the stat is numeric...
                 else if(this.currentStatIsNumeric){
-                    if(this.currentFilter=="greaterThanOrEqual" && this.currentStatsInfo[polity] > this.currentLimit && this.currentLimit){
+                    if(this.currentFilter=="greaterThanOrEqual" && this.currentStatsInfo[polity] >= this.currentLimit && this.currentLimit){
                         return true;
                     }
-                    else if(this.currentFilter=="lessThanOrEqual" && this.currentStatsInfo[polity] < this.currentLimit && this.currentLimit){
+                    else if(this.currentFilter=="lessThanOrEqual" && this.currentStatsInfo[polity] <= this.currentLimit && this.currentLimit){
                         return true;
                     }
                     else{
