@@ -6,7 +6,7 @@ $(function(){
 
 //Variables
 var csv;
-var colors;
+var colors = d3.scale.category20b();
 var mapDisplay;
 
 var app = new Vue({
@@ -44,6 +44,7 @@ var app = new Vue({
             showStatsInfo(stat);
             this.currentLimit = limit;
             changeFilter();
+            setColorsBySubset();
         },
         filterStatItem: function(polity){
 //            If there's no info for the polity, filter it out
@@ -327,7 +328,7 @@ function chooseColors(min, max, type){
     }
     else{
         colors = d3.scale.category20b();
-        } 
+    } 
 }
 
 function getData(){
@@ -659,73 +660,23 @@ function zoomed() {
   d3.select(".datamaps-subunits").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
-function setColorsBySubset(stat,limit){
+function setColorsBySubset(){
      
+    var stat = app.currentStat;
+    var limit = app.currentLimit;
+    
     var subset = [];
-        
-    if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "singleSelect"){
                     
         each(app.polities, function(index,polity){
-
-    //            If the stat isn't blank and is less than the limit
-                if(containsOrEquals(app.content[polity][stat], limit)){
-                    subset.push([app.content[polity][stat],polity])
-                };
-
-            app.currentFilter = "equal";
+            
+            if(app.filterStatItem(polity)){
+                subset.push([app.content[polity][stat],polity])
+            };
             
         });   
         
         setColorsBy(stat, subset);
-
-        showStatsInfo(stat,limit,app.currentFilter);
         
-    }
-    
-    else{
-        
-        limit = numeral(limit).value();
-        
-        formattedLimit = formatStatData(limit, app.schema[stat].type)
-
-    //    This allows us to toggle between the two filters
-        if(stat == app.currentStat && app.currentFilter == "greater"){
-
-            each(app.polities, function(index,polity){
-
-    //            If the stat isn't blank and is less than the limit
-                if(app.content[polity][stat] != "" && app.content[polity][stat] <= limit){
-                    subset.push([app.content[polity][stat],polity])
-                };
-
-                app.currentFilter = "lesser";
-
-            });       
-        }        
-        else{
-
-            each(app.polities, function(index,polity){            
-
-    //            If the stat isn't blank and is greater than the limit
-                if(app.content[polity][stat] != "" && app.content[polity][stat] >= limit){
-                    subset.push([app.content[polity][stat],polity])                
-                };
-
-                app.currentFilter = "greater"; 
-
-            })          
-        };
-
-        subset.sort(function(a, b)
-            {
-                return a[0] - b[0];
-
-            });
-
-        setColorsBy(stat, subset);
-
-        showStatsInfo(stat,limit,app.currentFilter);
-    };
 }
 
 function showStatsSource(stat){
