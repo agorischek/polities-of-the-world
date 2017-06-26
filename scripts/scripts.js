@@ -6,7 +6,7 @@ $(function(){
 
 //Variables
 var csv;
-var colors;
+var colors = d3.scale.category20b();
 var mapDisplay;
 
 var app = new Vue({
@@ -21,7 +21,7 @@ var app = new Vue({
         currentPolity: null,
         currentStat: null,
         currentLimit: null,
-        currentDirection: null,
+        currentFilter: null,
         showDebug: false,
         currentView: "map"
     },
@@ -31,21 +31,67 @@ var app = new Vue({
         },
         statSelect: function(stat){
             showStatsInfo(stat);
+            this.currentLimit = null;
+            this.currentFilter = null;
         },
         polityBack: function(){
             showPolitiesList(); 
         },
         statBack: function(){
             showStatsList();
+        },
+        statSelectWithLimit: function(stat, limit){
+            showStatsInfo(stat);
+            this.currentLimit = limit;
+            changeFilter();
+            setColorsBySubset();
+        },
+        filterStatItem: function(polity){
+//            If there's no info for the polity, filter it out
+            if(!this.currentStatsInfo[polity]){
+                return false
+            }
+//            Otherwise, perform other logic to determine whether it should be shown
+            else{
+//                If there's no limit, show everything with info
+                if(this.currentLimit == null){
+                    return true;
+                }
+//                Else, and if the stat is numeric...
+                else if(this.currentStatIsNumeric){
+                    if(this.currentFilter=="greaterThanOrEqual" && this.currentStatsInfo[polity] >= this.currentLimit && this.currentLimit){
+                        return true;
+                    }
+                    else if(this.currentFilter=="lessThanOrEqual" && this.currentStatsInfo[polity] <= this.currentLimit && this.currentLimit){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+//                Else, and if the stat is not numeric...
+                else{
+                    if(this.currentFilter == "equal" && this.currentLimit == this.currentStatsInfo[polity]){
+                        return true;
+                    }
+                    else if (this.currentFilter == "notEqual" && this.currentLimit != this.currentStatsInfo[polity]){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+            }
         }
     },
     computed:{
         currentStatType: function(){
-            var type = "";
             if(this.schema[this.currentStat]){
-                type = this.schema[this.currentStat].type
+                return this.schema[this.currentStat].type
             }
-            return type;
+            else{
+                return null;
+            }
         },
         currentPolityInfo: function(){
             var info = {}
@@ -107,9 +153,63 @@ var app = new Vue({
             else{
                 return this.currentStatName;
             }
+        },
+        currentLimitFormatted: function(){
+            if (this.currentLimit == null){
+                return null;
+            }
+            else{
+                return formatStatData(this.currentLimit, this.currentStatType)
+            }
+        },
+        currentStatIsNumeric: function(){
+            if(this.currentStatType == null){
+                return null;
+            }
+            else if(this.currentStatType == "index" || this.currentStatType == "number" || this.currentStatType == "percent" || this.currentStatType == "currency" || this.currentStatType == "rank"){
+                return true;
+            }
+            else if (this.currentStatType == "singleSelect" || this.currentStatType == "verbose" || this.currentStatType == "code" || this.currentStatType == "multipleSelect"){
+                return false;
+            }
+            else{
+                return false;
+            }
+                
+        },
+        currentPossibleFilters: function(){
+            if(!this.currentStat){
+                return null
+            }
+            else if(this.currentStatIsNumeric){
+                return ["greaterThanOrEqual","lessThanOrEqual"]
+            }
+            else if(!this.currentStatIsNumeric){
+                return ["equal","notEqual"]
+            }
+            else{
+                return null;
+            }
+        },
+        currentFilterIndex: function(){
+            if(!this.currentStat){
+                return null;
+            }
+            else{
+                return this.currentPossibleFilters.indexOf(this.currentFilter);
+            }
         }
     }
 })
+
+function changeFilter(){
+    if((app.currentFilterIndex + 1) >= app.currentPossibleFilters.length){
+            app.currentFilter = app.currentPossibleFilters[0];
+        }
+    else{
+        app.currentFilter = app.currentPossibleFilters[(app.currentFilterIndex + 1)]
+    }
+}
 
 //    The stat sections to display first
 var firstStatSections = ["Naming","Demographics","Economy","Infrastructure"]
@@ -228,7 +328,7 @@ function chooseColors(min, max, type){
     }
     else{
         colors = d3.scale.category20b();
-        } 
+    } 
 }
 
 function getData(){
@@ -467,11 +567,7 @@ function setColorsBy(stat, subset){
         app.currentStat = null;
         
         scrollUp("#middle-right");
-        
-        $("#stats-pane-modifier").hide();
-        
-        $("#stats-source").html("");
-
+                
     };
 
 
@@ -504,102 +600,11 @@ function formatStatData(value,type){
 
 }
 
-function displayStatItem(statInfo){
-    
-    var formattedStatData = formatStatData(statInfo.data, statInfo.type)
-    
-    var classes = ""
-    
-    if(statInfo.actionable){
-        classes = classes.concat("actionable ")
-    }
-    
-    classes = classes.concat("stat-" + statInfo.stat + "-data");
-        
-//    $(statInfo.target).append(statInfo.prefix + "<span class='" + classes + "' data='" + statInfo.data + "'>" + formattedStatData + "</span>");
-    
-    $(statInfo.target).append(statInfo.prefix + element({
-        tag:"span",
-        content:formattedStatData,
-        class:classes,
-        data: statInfo.data
-    }))
-}
-
 function showPolityInfo(polity){
     
     scrollUp("#middle-left");
     
     app.currentPolity = polity;
-        
-//    each(app.content[polity], function(stat, statData){
-//        
-//        if(app.content[polity]){
-//            
-////            If a proper title is provided in the schema we use that; else we fall back to the variable name
-//            var title
-//            
-//            if(app.schema[stat]){
-//                title = app.schema[stat]["title"];
-//            }
-//            else{
-//                title = "\"" + stat + "\""
-//            };
-//            
-//            var target = "#polity-info"
-//            
-//            if(app.schema[stat]){
-//
-//                if(app.schema[stat].section != "Codes"){
-//
-//                    if(stat != "name"){
-//
-//                        if(statData){
-//
-//                            $(target).append("<h3 class='actionable stat-" + stat + "'>" + title + "</h3>");
-//
-//                            if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "polities"){
-//
-//                                each(statData,function(index,value){
-//
-//                                    var prefix =""
-//
-//                                    if(index != 0){
-//                                        prefix = ", "
-//                                    }
-//
-//                                    displayStatItem({
-//                                        target: target,
-//                                        prefix: prefix,
-//                                        actionable: true,
-//                                        stat: stat,
-//                                        data: statData,
-//                                        type: app.schema[stat].type
-//                                        
-//                                    });                               
-//                                });                            
-//                            }
-//
-//                            else{
-//
-//                                displayStatItem({
-//                                    target: target,
-//                                    prefix: "",
-//                                    actionable: true,
-//                                    stat: stat,
-//                                    data: statData,
-//                                    type: app.schema[stat].type
-//                                }); 
-//
-//                            };                            
-//                        }
-//                    }
-//                }   
-//            }
-//        }        
-//    })
-    
-//    $("#polity-pane").animate({ scrollTop: 0 }, 0);
 
 }
 
@@ -609,7 +614,7 @@ function scrollUp(element){
 
 }
 
-function showStatsInfo(stat,limit,direction){
+function showStatsInfo(stat,limit,filter){
     
     app.currentStat = stat;
     
@@ -617,39 +622,6 @@ function showStatsInfo(stat,limit,direction){
     
     setColorsBy(stat);
     
-////    For each polity...
-//    each(app.content, function(polityCode, polityInfo){
-//                
-////        If that polity has info for the stat...
-//        if(polityInfo[stat]){
-//            
-//            var formattedStatData = formatStatData(polityInfo[stat], app.schema[stat].type);
-//            
-//            if(limit){
-//                            
-//                if(direction=="greater" && polityInfo[stat]>=limit){
-//
-//                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
-//
-//                }
-//                else if(direction=="lesser" && polityInfo[stat]<=limit){
-//
-//                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
-//                }
-//                else if(direction=="same" && containsOrEquals(polityInfo[stat],limit)){
-//                    
-//                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>"); 
-//                }
-//            }
-//            else{
-////            Display that info
-//            $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
-//
-//        }
-//        }
-//    })   
-    
-//    $("#stats-pane").animate({ scrollTop: 0 }, 0);
     showStatsSource(stat);
 
 }
@@ -688,77 +660,23 @@ function zoomed() {
   d3.select(".datamaps-subunits").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
-function setColorsBySubset(stat,limit){
+function setColorsBySubset(){
      
+    var stat = app.currentStat;
+    var limit = app.currentLimit;
+    
     var subset = [];
-        
-    if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "singleSelect"){
                     
         each(app.polities, function(index,polity){
-
-    //            If the stat isn't blank and is less than the limit
-                if(containsOrEquals(app.content[polity][stat], limit)){
-                    subset.push([app.content[polity][stat],polity])
-                };
-
-            app.currentDirection = "same";
             
-            $("#stats-pane-modifier").html(limit);
-
-            });   
+            if(app.filterStatItem(polity)){
+                subset.push([app.content[polity][stat],polity])
+            };
+            
+        });   
         
         setColorsBy(stat, subset);
-
-        showStatsInfo(stat,limit,app.currentDirection);
         
-    }
-    
-    else{
-        
-        limit = numeral(limit).value();
-        
-        formattedLimit = formatStatData(limit, app.schema[stat].type)
-
-    //    This allows us to toggle between the two filters
-        if(stat == app.currentStat && app.currentDirection == "greater"){
-
-            each(app.polities, function(index,polity){
-
-    //            If the stat isn't blank and is less than the limit
-                if(app.content[polity][stat] != "" && app.content[polity][stat] <= limit){
-                    subset.push([app.content[polity][stat],polity])
-                };
-
-            app.currentDirection = "lesser";
-            $("#stats-pane-modifier").html("&le; " + formattedLimit);
-
-            });       
-        }        
-        else{
-
-            each(app.polities, function(index,polity){            
-
-    //            If the stat isn't blank and is greater than the limit
-                if(app.content[polity][stat] != "" && app.content[polity][stat] >= limit){
-                    subset.push([app.content[polity][stat],polity])                
-                };
-
-                app.currentDirection = "greater"; 
-                $("#stats-pane-modifier").html("&ge; " + formattedLimit);
-
-            })          
-        };
-
-        subset.sort(function(a, b)
-            {
-                return a[0] - b[0];
-
-            });
-
-        setColorsBy(stat, subset);
-
-        showStatsInfo(stat,limit,app.currentDirection);
-    };
 }
 
 function showStatsSource(stat){
