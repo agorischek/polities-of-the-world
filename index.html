@@ -25,8 +25,10 @@
             
         <div id="debug" v-if="showDebug">
             <div class="debugX">X</div> 
+            <div>currentPossibleFilters: {{currentPossibleFilters}}</div>
+            <div>currentFilterIndex: {{currentFilterIndex}}</div>
             <div>currentLimit: {{currentLimit}}</div>
-            <div>currentDirection: {{currentDirection}}</div>
+            <div>currentFilter: {{currentFilter}}</div>
             <div>currentLimitFormatted: {{currentLimitFormatted}}</div>
             <div>currentStatIsNumeric: {{currentStatIsNumeric}}</div>
 <!--            <div>currentPolity: {{currentPolity}}</div>-->
@@ -98,10 +100,10 @@
                         </div>                
                         <h2 id="stats-pane-title">{{statsPaneTitle}}</h2>
                         <div v-if="currentStat" id="stats-pane-modifier" class="modifier">
-                            <span v-if="currentStatIsNumeric && currentDirection==1">&ge;</span>
-                            <span v-if="currentStatIsNumeric && currentDirection==-1">&le;</span>
-                            <span v-if="!currentStatIsNumeric && currentDirection==1">=</span>
-                            <span v-if="!currentStatIsNumeric && currentDirection==-1">&ne;</span>
+                            <span v-if="currentStatIsNumeric && currentFilter=='greaterThanOrEqual'">&ge;</span>
+                            <span v-if="currentStatIsNumeric && currentFilter=='lessThanOrEqual'">&le;</span>
+                            <span v-if="!currentStatIsNumeric && currentFilter=='equal'">=</span>
+                            <span v-if="!currentStatIsNumeric && currentFilter=='notEqual'">&ne;</span>
                             <span> </span>
                             <span>{{currentLimitFormatted}}</span>
                         </div>

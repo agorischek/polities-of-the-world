@@ -21,7 +21,7 @@ var app = new Vue({
         currentPolity: null,
         currentStat: null,
         currentLimit: null,
-        currentDirection: null,
+        currentFilter: null,
         showDebug: false,
         currentView: "map"
     },
@@ -32,7 +32,7 @@ var app = new Vue({
         statSelect: function(stat){
             showStatsInfo(stat);
             this.currentLimit = null;
-            this.currentDirection = null;
+            this.currentFilter = null;
         },
         polityBack: function(){
             showPolitiesList(); 
@@ -43,43 +43,54 @@ var app = new Vue({
         statSelectWithLimit: function(stat, limit){
             showStatsInfo(stat);
             this.currentLimit = limit;
-            changeDirection();
+            changeFilter();
         },
         filterStatItem: function(polity){
-            if(this.currentLimit == null){
-                return true;
+//            If there's no info for the polity, filter it out
+            if(!this.currentStatsInfo[polity]){
+                return false
             }
-            else if(this.currentStatIsNumeric){
-                if(!this.currentLimit && this.currentStatsInfo[polity]){
-                    return true;
-                }
-                else if(this.currentStatsInfo[polity]*this.currentDirection > this.currentLimit*this.currentDirection && this.currentLimit){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
+//            Otherwise, perform other logic to determine whether it should be shown
             else{
-                if(this.currentDirection == 1 && this.currentLimit == this.currentStatsInfo[polity]){
+//                If there's no limit, show everything with info
+                if(this.currentLimit == null){
                     return true;
                 }
-                else if (this.currentDirection == -1 && this.currentLimit != this.currentStatsInfo[polity]){
-                    return true;
+//                Else, and if the stat is numeric...
+                else if(this.currentStatIsNumeric){
+                    if(this.currentFilter=="greaterThanOrEqual" && this.currentStatsInfo[polity] > this.currentLimit && this.currentLimit){
+                        return true;
+                    }
+                    else if(this.currentFilter=="lessThanOrEqual" && this.currentStatsInfo[polity] < this.currentLimit && this.currentLimit){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
                 }
+//                Else, and if the stat is not numeric...
                 else{
-                    return false;
+                    if(this.currentFilter == "equal" && this.currentLimit == this.currentStatsInfo[polity]){
+                        return true;
+                    }
+                    else if (this.currentFilter == "notEqual" && this.currentLimit != this.currentStatsInfo[polity]){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
                 }
             }
         }
     },
     computed:{
         currentStatType: function(){
-            var type = "";
             if(this.schema[this.currentStat]){
-                type = this.schema[this.currentStat].type
+                return this.schema[this.currentStat].type
             }
-            return type;
+            else{
+                return null;
+            }
         },
         currentPolityInfo: function(){
             var info = {}
@@ -164,17 +175,39 @@ var app = new Vue({
                 return false;
             }
                 
+        },
+        currentPossibleFilters: function(){
+            if(!this.currentStat){
+                return null
+            }
+            else if(this.currentStatIsNumeric){
+                return ["greaterThanOrEqual","lessThanOrEqual"]
+            }
+            else if(!this.currentStatIsNumeric){
+                return ["equal","notEqual"]
+            }
+            else{
+                return null;
+            }
+        },
+        currentFilterIndex: function(){
+            if(!this.currentStat){
+                return null;
+            }
+            else{
+                return this.currentPossibleFilters.indexOf(this.currentFilter);
+            }
         }
     }
 })
 
-function changeDirection(){
-        if (app.currentDirection == null || app.currentDirection == -1){
-            app.currentDirection = 1
+function changeFilter(){
+    if((app.currentFilterIndex + 1) >= app.currentPossibleFilters.length){
+            app.currentFilter = app.currentPossibleFilters[0];
         }
-        else{
-            app.currentDirection = -1
-        }
+    else{
+        app.currentFilter = app.currentPossibleFilters[(app.currentFilterIndex + 1)]
+    }
 }
 
 //    The stat sections to display first
@@ -584,7 +617,7 @@ function scrollUp(element){
 
 }
 
-function showStatsInfo(stat,limit,direction){
+function showStatsInfo(stat,limit,filter){
     
     app.currentStat = stat;
     
@@ -602,16 +635,16 @@ function showStatsInfo(stat,limit,direction){
 //            
 //            if(limit){
 //                            
-//                if(direction=="greater" && polityInfo[stat]>=limit){
+//                if(filter=="greater" && polityInfo[stat]>=limit){
 //
 //                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
 //
 //                }
-//                else if(direction=="lesser" && polityInfo[stat]<=limit){
+//                else if(filter=="lesser" && polityInfo[stat]<=limit){
 //
 //                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>");
 //                }
-//                else if(direction=="same" && containsOrEquals(polityInfo[stat],limit)){
+//                else if(filter=="same" && containsOrEquals(polityInfo[stat],limit)){
 //                    
 //                   $("#stats-info").append("<h3 class='header actionable " + polityCode + "'>" + polityInfo["name"] + "</h3><div>" + formattedStatData + "</div>"); 
 //                }
@@ -676,7 +709,7 @@ function setColorsBySubset(stat,limit){
                     subset.push([app.content[polity][stat],polity])
                 };
 
-            app.currentDirection = "same";
+            app.currentFilter = "equal";
             
 //            $("#stats-pane-modifier").html(limit);
 
@@ -684,7 +717,7 @@ function setColorsBySubset(stat,limit){
         
         setColorsBy(stat, subset);
 
-        showStatsInfo(stat,limit,app.currentDirection);
+        showStatsInfo(stat,limit,app.currentFilter);
         
     }
     
@@ -695,7 +728,7 @@ function setColorsBySubset(stat,limit){
         formattedLimit = formatStatData(limit, app.schema[stat].type)
 
     //    This allows us to toggle between the two filters
-        if(stat == app.currentStat && app.currentDirection == "greater"){
+        if(stat == app.currentStat && app.currentFilter == "greater"){
 
             each(app.polities, function(index,polity){
 
@@ -704,7 +737,7 @@ function setColorsBySubset(stat,limit){
                     subset.push([app.content[polity][stat],polity])
                 };
 
-            app.currentDirection = "lesser";
+            app.currentFilter = "lesser";
 //            $("#stats-pane-modifier").html("&le; " + formattedLimit);
 
             });       
@@ -718,7 +751,7 @@ function setColorsBySubset(stat,limit){
                     subset.push([app.content[polity][stat],polity])                
                 };
 
-                app.currentDirection = "greater"; 
+                app.currentFilter = "greater"; 
 //                $("#stats-pane-modifier").html("&ge; " + formattedLimit);
 
             })          
@@ -732,7 +765,7 @@ function setColorsBySubset(stat,limit){
 
         setColorsBy(stat, subset);
 
-        showStatsInfo(stat,limit,app.currentDirection);
+        showStatsInfo(stat,limit,app.currentFilter);
     };
 }
 
