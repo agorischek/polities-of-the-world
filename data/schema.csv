@@ -8,7 +8,7 @@
 "electricityConsumption","Electricity Consumption","number","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2233rank.html","true"
 "population","Population","number","TRUE","","","Demographics","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2119rank.html","true"
 "populationGrowthRate","Population Growth Rate","percent","TRUE","","","Demographics","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2002rank.html","true"
-"unemploymentRate","Unemployment Rate","percent","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2129rank.html","true"
+"unemploymentRate","Unemployment Rate","percent","TRUE","0","1","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2129rank.html","true"
 "GDPPPPPerCapita","GDP PPP per Capita","currency","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2004rank.html","true"
 "inflationRate","Inflation Rate","percent","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2092rank.html","true"
 "GDPPPP","GDP PPP","currency","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2001rank.html","true"

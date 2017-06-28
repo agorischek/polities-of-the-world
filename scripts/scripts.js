@@ -198,6 +198,47 @@ var app = new Vue({
             else{
                 return this.currentPossibleFilters.indexOf(this.currentFilter);
             }
+        },
+        currentStatArray: function(){
+            var array = [] 
+            each(this.currentStatsInfo,function(key,value){
+                if(value && value != ""){
+                    array.push(value)
+                }
+            });
+            return array;
+        },
+        currentStatMin: function(){
+            if(!this.currentStat){
+                return null;
+            }
+            else{
+                log(this.schema)
+                log(this.currentStat)
+                log(this.schema[this.currentStat])
+                log(this.schema[this.currentStat].min)
+                if(this.schema[this.currentStat].min != null && this.schema[this.currentStat].min != ""){
+                    log("Returned the schema min")
+                    return this.schema[this.currentStat].min
+                }
+                else{
+                    log("Returned the array min")
+                    return Math.min.apply(null, this.currentStatArray)
+                };
+            }
+        },
+        currentStatMax: function(){
+            if(!this.currentStat){
+                return null;
+            }
+            else{
+                if(this.schema[this.currentStat].max != null && this.schema[this.currentStat].max != ""){
+                    return this.schema[this.currentStat].max
+                }
+                else{
+                    return Math.max.apply(null, this.currentStatArray)
+                };
+            }
         }
     }
 })
