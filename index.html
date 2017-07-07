@@ -30,8 +30,8 @@
 <!--            <div>currentColors: {{currentColors}}</div>-->
 <!--            <div>currentPossibleFilters: {{currentPossibleFilters}}</div>-->
 <!--            <div>currentFilterIndex: {{currentFilterIndex}}</div>-->
-<!--            <div>currentLimit: {{currentLimit}}</div>-->
-<!--            <div>currentFilter: {{currentFilter}}</div>-->
+            <div>currentLimit: {{currentLimit}}</div>
+            <div>currentFilter: {{currentFilter}}</div>
 <!--            <div>currentLimitFormatted: {{currentLimitFormatted}}</div>-->
 <!--            <div>currentStatIsNumeric: {{currentStatIsNumeric}}</div>-->
 <!--            <div>currentPolity: {{currentPolity}}</div>-->
@@ -67,7 +67,7 @@
                 </div>
                 <div class="middle left" id="middle-left">
                     <ol v-if="!currentPolity" id="polity-list">
-                        <li :class="'polity actionable ' + polity" v-for="polity in polities" @click="politySelect(polity)">
+                        <li :class="'polity actionable ' + polity" v-for="polity in polities" @click="function(){politySelect(polity);removeFilter();}">
                             {{content[polity].name}}
                         </li>
                     </ol>
