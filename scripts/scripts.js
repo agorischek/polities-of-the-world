@@ -1,4 +1,4 @@
-//                Begin
+//Begin
 $(function(){
     getData();
     getSchema();
@@ -6,9 +6,9 @@ $(function(){
 
 //Variables
 var csv;
-var colors = d3.scale.category20b();
 var mapDisplay;
 
+//App
 var app = new Vue({
     el: "#app",
     data: {
@@ -23,28 +23,94 @@ var app = new Vue({
         currentLimit: null,
         currentFilter: null,
         showDebug: false,
-        currentView: "map"
+        currentView: "map",
+        firstStatSections: ["Naming","Demographics","Economy","Infrastructure"],
+        actualStatSections: [],
+        additionalStatSections: []
     },
     methods:{
+        formatStatData: function(value,type){
+        
+            if(type == "percent"){
+                return numeral(value).format('0[.]00%');
+            }
+
+            else if(type == "currency"){
+                return numeral(value).format('$0,0[.]00');        
+            }
+
+            else if(type == "number"){  
+                return numeral(value).format('0,0[.]00') 
+            }
+
+            else if(type == "polities"){
+                if(this.content[value]){
+                    return this.content[value].name
+                }
+                else{
+                    return value
+                }
+            }
+
+            else{
+                return value
+            }
+
+        },
         politySelect: function(polity){
-            showPolityInfo(polity);
+            this.showPolityInfo(polity);
         },
         statSelect: function(stat){
-            showStatsInfo(stat);
+            this.showStatsInfo(stat);
+            this.removeFilter();
+        },
+        removeFilter: function(){
             this.currentLimit = null;
             this.currentFilter = null;
         },
         polityBack: function(){
-            showPolitiesList(); 
+            this.showPolitiesList(); 
         },
         statBack: function(){
-            showStatsList();
+            this.showStatsList();
         },
         statSelectWithLimit: function(stat, limit){
-            showStatsInfo(stat);
+            this.showStatsInfo(stat);
+            this.applyFilter(limit);
+        },
+        applyFilter:function(limit){
             this.currentLimit = limit;
-            changeFilter();
-            setColorsBySubset();
+            this.changeFilter();
+        },
+        showPolitiesList: function(){
+            this.currentPolity = null;
+            scrollUp("#middle-left");            
+        },
+        showStatsList: function(){        
+            this.currentStat = null;
+            scrollUp("#middle-right");    
+        },
+        showPolityInfo: function(polity){
+            this.currentPolity = polity;
+            scrollUp("#middle-left");
+        },
+        showStatsInfo: function(stat){
+            this.currentStat = stat;
+            scrollUp("#middle-right");
+        },
+        hideDebug: function(){
+            this.showDebug = false;
+        },
+        showDebug: function(){
+            this.showDebug = true;
+        },
+        changeFilter: function(){
+            if((app.currentFilterIndex + 1) >= app.currentPossibleFilters.length){
+                    app.currentFilter = app.currentPossibleFilters[0];
+                }
+            else{
+                app.currentFilter = app.currentPossibleFilters[(app.currentFilterIndex + 1)]
+            }
         },
         filterStatItem: function(polity){
 //            If there's no info for the polity, filter it out
@@ -84,6 +150,12 @@ var app = new Vue({
             }
         }
     },
+    watch:{
+      currentColors: function(){
+          mapDisplay.updateChoropleth(this.currentColors, {reset: true});  
+
+      }  
+    },
     computed:{
         currentStatType: function(){
             if(this.schema[this.currentStat]){
@@ -107,7 +179,7 @@ var app = new Vue({
                 if(app.schema[key]){
                     type = app.schema[key].type
                 }
-                info[key] = formatStatData(value,type)
+                info[key] = app.formatStatData(value,type)
             })
             return info;
         },
@@ -120,11 +192,20 @@ var app = new Vue({
             }
             return info;
         },
+        currentStatsInfoFiltered: function(){
+            var info = {}
+            each(this.currentStatsInfo, function(polity, value){
+                if(app.filterStatItem(polity)){
+                    info[polity] = value;
+                }
+            })
+            return info;
+        },
         currentStatsInfoFormatted: function(){
             var info = {};
             var type = this.currentStatType
             each(this.currentStatsInfo, function(key, value){
-                info[key] = formatStatData(value,type)
+                info[key] = app.formatStatData(value,type)
             })
             return info;
         },
@@ -159,7 +240,7 @@ var app = new Vue({
                 return null;
             }
             else{
-                return formatStatData(this.currentLimit, this.currentStatType)
+                return app.formatStatData(this.currentLimit, this.currentStatType)
             }
         },
         currentStatIsNumeric: function(){
@@ -239,25 +320,80 @@ var app = new Vue({
                     return Math.max.apply(null, this.currentStatArray)
                 };
             }
+        },
+        currentSourceName: function(){
+            if(!this.currentStat){
+                return null;
+            }
+            else{
+                return this.schema[this.currentStat].sourceName
+            }
+        },
+        currentSourceURL: function(){
+            if(!this.currentStat){
+                return null;
+            }
+            else{
+                return this.schema[this.currentStat].sourceURL
+            }
+        },
+        filterApplied: function(){
+            if(!this.currentStat){
+                return null
+            }
+            else if(this.currentLimit){
+                return true
+            }
+            else{
+                return false;
+            };
+        },
+        currentColorScale: function(){
+            
+            var type = this.currentStatType;
+            var min = this.currentStatMin;
+            var max = this.currentStatMax;
+            
+            if(!this.currentStat){
+                return null;
+            }
+            else if(type == "index" || type == "number" || type == "percent" || type == "currency"){
+                return d3.scale.linear().domain([min,max]).range([lightColor, darkColor]);
+            }
+            else if(type == "rank"){
+                return d3.scale.linear().domain([min,max]).range([darkColor, lightColor]);
+            }
+            else if(TypeError == "singleSelect"){
+                return d3.scale.category20b()
+            }
+            else if(type == "verbose" || type == "code"){
+                return function(){
+                    return mediumColor;
+                };
+            }
+            else if(type == "multipleSelect"){
+                return function(){
+                    return mediumDarkColor;
+                };
+            }
+            else{
+                return d3.scale.category20b();
+            }
+        },
+        currentColors: function(){
+            if(!this.currentStat){
+                return null
+            }
+            else{
+                info = {}
+                each(this.currentStatsInfoFiltered, function(polity, value){
+                    info[polity] = app.currentColorScale(value)
+                })
+                return info;            
+            }
         }
     }
 })
-
-function changeFilter(){
-    if((app.currentFilterIndex + 1) >= app.currentPossibleFilters.length){
-            app.currentFilter = app.currentPossibleFilters[0];
-        }
-    else{
-        app.currentFilter = app.currentPossibleFilters[(app.currentFilterIndex + 1)]
-    }
-}
-
-//    The stat sections to display first
-var firstStatSections = ["Naming","Demographics","Economy","Infrastructure"]
-//    The stat sections that actually exist in the data
-var actualStatSections = []
-//    The stat sections that exist in the data but aren't listed in the first list
-var additionalStatSections = []
 
 //Sequencing
 var gettingData = $.Deferred();
@@ -265,11 +401,8 @@ var gettingData = $.Deferred();
 var gettingSchema = $.Deferred();
 
 $.when(gettingData, gettingSchema).done(function(value) {
-    procesMultipleSelects();
-    processPercentages();
-    processNumbers();
+    processData();
     showMap();
-    showStatsList();
 });
 
 var showingMap = $.Deferred().done(function(){
@@ -277,100 +410,6 @@ var showingMap = $.Deferred().done(function(){
 });
 
 //Functions
-
-function procesMultipleSelects(){
-    each(app.stats,function(index,stat){
-        
-        if(app.schema[stat]){
-      
-            if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "polities"){
-
-                each(app.content,function(polityCode,polityInfo){
-
-                    if(polityInfo[stat]){
-
-                        polityInfo[stat] = polityInfo[stat].split(",");
-
-                    }              
-                })          
-            }
-        }
-    })   
-};
-
-function processPercentages(){
-    
-    each(app.stats,function(index,stat){
-        
-        if(app.schema[stat]){
-      
-            if(app.schema[stat].type == "percent"){
-
-                each(app.content,function(polityCode,polityInfo){
-
-                    if(polityInfo[stat]){
-                                                
-                        Math.round(polityInfo[stat] = polityInfo[stat] / 100).toFixed(2)
-
-                    }              
-                })          
-            }
-        }
-    })  
-    
-};
-
-function processNumbers(){
-    
-    each(app.stats,function(index,stat){
-        
-        if(app.schema[stat]){
-      
-            if(app.schema[stat].type == "number" || app.schema[stat].type == "currency"){
-
-                each(app.content,function(polityCode,polityInfo){
-
-                    if(polityInfo[stat]){
-
-                        polityInfo[stat] = numeral(polityInfo[stat]).value();
-                        
-                    }              
-                })          
-            }
-        }
-    })  
-    
-};
-
-function chooseColors(min, max, type){
-
-    if(type == "index" || type == "number" || type == "percent" || type == "currency"){
-        colors = d3.scale.linear()
-            .domain([min,max])
-            .range([lightColor, darkColor]);
-    }
-    else if(type == "rank"){
-        colors = d3.scale.linear()
-            .domain([min,max])
-            .range([darkColor, lightColor]);
-    }
-    else if(TypeError == "singleSelect"){
-        colors = d3.scale.category20b()
-    }
-    else if(type == "verbose" || type == "code"){
-        colors = function(){
-            return mediumColor;
-        };
-    }
-    else if(type == "multipleSelect"){
-        colors = function(){
-            return mediumDarkColor;
-        };
-    }
-    else{
-        colors = d3.scale.category20b();
-    } 
-}
 
 function getData(){
 
@@ -415,6 +454,35 @@ function getData(){
     });  
 };
 
+function processData(){
+    each(app.stats,function(index,stat){
+        if(app.schema[stat]){
+            
+            each(app.content,function(polityCode,polityInfo){
+                
+                if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "polities"){
+                    if(polityInfo[stat]){
+                        polityInfo[stat] = polityInfo[stat].split(",");
+                    }  
+                }
+                
+                else if(app.schema[stat].type == "percent"){
+                    if(polityInfo[stat]){
+                        Math.round(polityInfo[stat] = polityInfo[stat] / 100).toFixed(2)
+                    }
+                }
+                
+                else if(app.schema[stat].type == "number" || app.schema[stat].type == "currency"){
+                    if(polityInfo[stat]){
+                        polityInfo[stat] = numeral(polityInfo[stat]).value();
+                    }   
+                }
+                  
+            })
+        }
+    })  
+}
+
 function getSchema(){
 
     $.ajax({
@@ -433,14 +501,14 @@ function getSchema(){
 
         each(parsed.data, function( key, value ) {
             app.schema[value["stat"]] = value;
-            actualStatSections.push(value["section"])
+            app.actualStatSections.push(value["section"])
         });
 
-        actualStatSections = unique(actualStatSections);
+        app.actualStatSections = unique(app.actualStatSections);
 
-        additionalStatSections = _.difference(actualStatSections, firstStatSections);
+        app.additionalStatSections = _.difference(app.actualStatSections, app.firstStatSections);
 
-        app.orderedStatSections = firstStatSections.concat(additionalStatSections);
+        app.orderedStatSections = app.firstStatSections.concat(app.additionalStatSections);
 
         gettingSchema.resolve();
 
@@ -462,12 +530,7 @@ function showMap(){
         data: app.content,
 
         geographyConfig: {
-            popupTemplate: function(geo, data) {
-                return ['<div class="hoverinfo"><strong>',
-                        data.name,
-                        ': ' + data[setColorsByStat],
-                        '</strong></div>'].join('');
-            },
+            popupOnHover: false,
             highlightFillColor: highlightColor,
             highlightBorderColor: highlightBorderColor,
             highlightBorderWidth: 1,
@@ -478,7 +541,7 @@ function showMap(){
         },
         done: function(datamap) {
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-                showPolityInfo(geography.id)
+                app.showPolityInfo(geography.id)
             });
         }
 });
@@ -490,204 +553,11 @@ function showMap(){
 
 };
 
-function setColorsBy(stat, subset){  
-    
-        app.currentStat = stat;
-    
-        var dataForColors = {}
-        
-        var values = []
-        var minValue
-        var maxValue
-        
-        var statType = app.schema[stat].type;
-               
-//      If the data type is verbose, there's no need to calculate anything about the data
-        if(app.schema[stat]["type"] == "verbose"){
-            
-            if(subset){
-                
-                each(subset, function(index,pair){
-                    
-                    dataForColors[pair[1]] = colors(pair[0])
-                    
-                })
-                
-            }
-            else{
-    //            For each polity...
-                each(app.content, function(polityCode, polityDetails) {
-
-    //                If the relevant statistic exists...
-                    if(polityDetails[stat]){
-
-    //                    Push that polity into the dataForColors object
-                        dataForColors[polityCode] = mediumColor;
-                    };
-                });
-            }
-        }
-    
-//    Otherwise, we need to know more about the data    
-        else{
-
-//            For each polity
-            each(app.content, function(polityCode, polityDetails) {
-                
-//                If the relevant statistic exists
-                if(polityDetails[stat]){
-                    
-//                    Push into the values array for further analysis
-                    values.push(polityDetails[stat]);
-                };
-                
-            });
-            
-//            Get a minimum and maximum for the stat
-            if(app.schema[stat].min){
-                minValue = app.schema[stat]["min"]
-            }
-            else{
-                minValue = Math.min.apply(null, values)
-            };
-
-            if(app.schema[stat].max){
-                maxValue = app.schema[stat]["max"]
-            }
-            else{
-                maxValue = Math.max.apply(null, values);   
-            };
-
-//            Choose colors based on the min, max, and stat type
-            chooseColors(minValue, maxValue, statType)   
-
-            
-            if(subset){
-                
-                each(subset, function(index,pair){
-                    
-                    dataForColors[pair[1]] = colors(pair[0])
-                    
-                })
-                
-            }
-            else{            
-            
-    //            For each polity
-                each(app.content, function(polityCode, polityDetails) {
-
-    //                If the stat exists for the polity
-                    if(polityDetails[stat]){
-
-    //                    Add that color to the dataForColors object
-                        dataForColors[polityCode] = colors(polityDetails[stat]);
-                    };
-                });
-            }
-            
-        }
-    
-        mapDisplay.updateChoropleth(dataForColors, {reset: true});  
-
-    };
-
-    function clearMapColors(){
-    
-        var dataForColors = {}
-        
-        each(app.content, function(polityCode, polityInfo) {
-            dataForColors[polityCode] = defaultFillColor;
-        });
-        
-        mapDisplay.updateChoropleth(dataForColors, {reset: true});  
-
-    }
-
-    function showStatsList(){
-        
-        app.currentStat = null;
-        
-        scrollUp("#middle-right");
-                
-    };
-
-
-function formatStatData(value,type){
-        
-    if(type == "percent"){
-        return numeral(value).format('0[.]00%');
-    }
-    
-    else if(type == "currency"){
-        return numeral(value).format('$0,0[.]00');        
-    }
-    
-    else if(type == "number"){  
-        return numeral(value).format('0,0[.]00') 
-    }
-    
-    else if(type == "polities"){
-        if(app.content[value]){
-            return app.content[value].name
-        }
-        else{
-            return value
-        }
-    }
-    
-    else{
-        return value
-    }
-
-}
-
-function showPolityInfo(polity){
-    
-    scrollUp("#middle-left");
-    
-    app.currentPolity = polity;
-
-}
 
 function scrollUp(element){
 //    $(element).scrollTop(0);
     $(element).animate({ scrollTop: 0 }, 00);
 
-}
-
-function showStatsInfo(stat,limit,filter){
-    
-    app.currentStat = stat;
-    
-    scrollUp("#middle-right");
-    
-    setColorsBy(stat);
-    
-    showStatsSource(stat);
-
-}
-
-function showPolitiesList(){
-     
-    app.currentPolity = null;
-    
-    scrollUp("#middle-left");
-            
-}
-
-function showDefaultPolity(){
-
-    if(defaultPolity){
-
-        if(defaultPolity == "random"){
-            var polity = pick(app.polities);
-            showPolityInfo(polity);
-        }
-        else{
-            showPolityInfo(defaultPolity);
-        }
-
-    }
 }
 
 function enableZoom(){
@@ -700,47 +570,3 @@ function enableZoom(){
 function zoomed() {
   d3.select(".datamaps-subunits").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
-
-function setColorsBySubset(){
-     
-    var stat = app.currentStat;
-    var limit = app.currentLimit;
-    
-    var subset = [];
-                    
-        each(app.polities, function(index,polity){
-            
-            if(app.filterStatItem(polity)){
-                subset.push([app.content[polity][stat],polity])
-            };
-            
-        });   
-        
-        setColorsBy(stat, subset);
-        
-}
-
-function showStatsSource(stat){
-
-    var sourceName = app.schema[stat].sourceName
-    var sourceURL = app.schema[stat].sourceURL
-    $("#stats-source").html("Source: " + element({
-        tag:"a",
-        content:sourceName,
-        target:"_blank",
-        class:"actionable",
-        href:sourceURL
-    }))
-}
-
-function showDebug(){
-    app.showDebug = true;
-}
-
-function hideDebug(){
-    app.showDebug = false;
-}
-
-$(".debugX").click(function(){
-    hideDebug();
-})
