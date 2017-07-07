@@ -530,6 +530,7 @@ function showMap(){
         data: app.content,
 
         geographyConfig: {
+            popupOnHover: false,
             highlightFillColor: highlightColor,
             highlightBorderColor: highlightBorderColor,
             highlightBorderWidth: 1,
