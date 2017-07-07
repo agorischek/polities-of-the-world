@@ -144,7 +144,9 @@
                     </ol>
                 </div>
                 <div v-bind:class="{hidden: !currentStat}" class="lower right" id="lower-right">
-                    <div id="stats-source"></div>
+                    <div id="stats-source">
+                        Source: <a target="_blank" class="actionable" v-bind:href="currentSourceURL">{{currentSourceName}}</a>
+                    </div>
                 </div>
             </div>
         </div>

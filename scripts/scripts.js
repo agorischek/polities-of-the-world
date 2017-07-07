@@ -53,7 +53,7 @@ var app = new Vue({
         showStatsList: function(){        
             this.currentStat = null;
             scrollUp("#middle-right");    
-        };
+        },
         hideDebug: function(){
             this.showDebug = false;
         },
@@ -253,6 +253,22 @@ var app = new Vue({
                     return Math.max.apply(null, this.currentStatArray)
                 };
             }
+        },
+        currentSourceName: function(){
+            if(!this.currentStat){
+                return null;
+            }
+            else{
+                return this.schema[this.currentStat].sourceName
+            }
+        },
+        currentSourceURL: function(){
+            if(!this.currentStat){
+                return null;
+            }
+            else{
+                return this.schema[this.currentStat].sourceURL
+            }
         }
     }
 })
@@ -283,7 +299,6 @@ $.when(gettingData, gettingSchema).done(function(value) {
     processPercentages();
     processNumbers();
     showMap();
-//    showStatsList();
 });
 
 var showingMap = $.Deferred().done(function(){
@@ -670,8 +685,6 @@ function showStatsInfo(stat,limit,filter){
     scrollUp("#middle-right");
     
     setColorsBy(stat);
-    
-    showStatsSource(stat);
 
 }
 
@@ -718,17 +731,4 @@ function setColorsBySubset(){
         
         setColorsBy(stat, subset);
         
-}
-
-function showStatsSource(stat){
-
-    var sourceName = app.schema[stat].sourceName
-    var sourceURL = app.schema[stat].sourceURL
-    $("#stats-source").html("Source: " + element({
-        tag:"a",
-        content:sourceName,
-        target:"_blank",
-        class:"actionable",
-        href:sourceURL
-    }))
 }
