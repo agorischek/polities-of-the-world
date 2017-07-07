@@ -1,4 +1,4 @@
-//                Begin
+//Begin
 $(function(){
     getData();
     getSchema();
@@ -6,9 +6,9 @@ $(function(){
 
 //Variables
 var csv;
-var colors = d3.scale.category20b();
 var mapDisplay;
 
+//App
 var app = new Vue({
     el: "#app",
     data: {
@@ -371,7 +371,7 @@ var gettingData = $.Deferred();
 var gettingSchema = $.Deferred();
 
 $.when(gettingData, gettingSchema).done(function(value) {
-    procesMultipleSelects();
+    processMultipleSelects();
     processPercentages();
     processNumbers();
     showMap();
@@ -383,19 +383,13 @@ var showingMap = $.Deferred().done(function(){
 
 //Functions
 
-function procesMultipleSelects(){
+function processMultipleSelects(){
     each(app.stats,function(index,stat){
-        
         if(app.schema[stat]){
-      
             if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "polities"){
-
                 each(app.content,function(polityCode,polityInfo){
-
                     if(polityInfo[stat]){
-
                         polityInfo[stat] = polityInfo[stat].split(",");
-
                     }              
                 })          
             }
@@ -404,41 +398,26 @@ function procesMultipleSelects(){
 };
 
 function processPercentages(){
-    
     each(app.stats,function(index,stat){
-        
         if(app.schema[stat]){
-      
             if(app.schema[stat].type == "percent"){
-
                 each(app.content,function(polityCode,polityInfo){
-
                     if(polityInfo[stat]){
-                                                
                         Math.round(polityInfo[stat] = polityInfo[stat] / 100).toFixed(2)
-
                     }              
                 })          
             }
         }
     })  
-    
 };
 
 function processNumbers(){
-    
     each(app.stats,function(index,stat){
-        
         if(app.schema[stat]){
-      
             if(app.schema[stat].type == "number" || app.schema[stat].type == "currency"){
-
                 each(app.content,function(polityCode,polityInfo){
-
                     if(polityInfo[stat]){
-
                         polityInfo[stat] = numeral(polityInfo[stat]).value();
-                        
                     }              
                 })          
             }
