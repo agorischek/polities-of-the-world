@@ -1,0 +1,13 @@
+{
+    "mapProjection": "mercator",
+    "iDColumnHeader": "id",
+    "colors": {
+        "defaultFill":"rgb(234,234,234)",
+        "light":"rgb(239,239,255)",
+        "medium": "rgb(177,178,196)",
+        "mediumDark": "rgb(82,106,158)",
+        "dark": "rgb(2,56,111)",
+        "highlight": "rgb(208,53,216)",
+        "highlightBorder": "rgb(219,128,225)"    
+    }
+}
