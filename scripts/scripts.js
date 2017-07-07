@@ -371,9 +371,7 @@ var gettingData = $.Deferred();
 var gettingSchema = $.Deferred();
 
 $.when(gettingData, gettingSchema).done(function(value) {
-    processMultipleSelects();
-    processPercentages();
-    processNumbers();
+    processData();
     showMap();
 });
 
@@ -382,49 +380,6 @@ var showingMap = $.Deferred().done(function(){
 });
 
 //Functions
-
-function processMultipleSelects(){
-    each(app.stats,function(index,stat){
-        if(app.schema[stat]){
-            if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "polities"){
-                each(app.content,function(polityCode,polityInfo){
-                    if(polityInfo[stat]){
-                        polityInfo[stat] = polityInfo[stat].split(",");
-                    }              
-                })          
-            }
-        }
-    })   
-};
-
-function processPercentages(){
-    each(app.stats,function(index,stat){
-        if(app.schema[stat]){
-            if(app.schema[stat].type == "percent"){
-                each(app.content,function(polityCode,polityInfo){
-                    if(polityInfo[stat]){
-                        Math.round(polityInfo[stat] = polityInfo[stat] / 100).toFixed(2)
-                    }              
-                })          
-            }
-        }
-    })  
-};
-
-function processNumbers(){
-    each(app.stats,function(index,stat){
-        if(app.schema[stat]){
-            if(app.schema[stat].type == "number" || app.schema[stat].type == "currency"){
-                each(app.content,function(polityCode,polityInfo){
-                    if(polityInfo[stat]){
-                        polityInfo[stat] = numeral(polityInfo[stat]).value();
-                    }              
-                })          
-            }
-        }
-    })  
-    
-};
 
 function getData(){
 
@@ -468,6 +423,35 @@ function getData(){
 
     });  
 };
+
+function processData(){
+    each(app.stats,function(index,stat){
+        if(app.schema[stat]){
+            
+            each(app.content,function(polityCode,polityInfo){
+                
+                if(app.schema[stat].type == "multipleSelect" || app.schema[stat].type == "polities"){
+                    if(polityInfo[stat]){
+                        polityInfo[stat] = polityInfo[stat].split(",");
+                    }  
+                }
+                
+                else if(app.schema[stat].type == "percent"){
+                    if(polityInfo[stat]){
+                        Math.round(polityInfo[stat] = polityInfo[stat] / 100).toFixed(2)
+                    }
+                }
+                
+                else if(app.schema[stat].type == "number" || app.schema[stat].type == "currency"){
+                    if(polityInfo[stat]){
+                        polityInfo[stat] = numeral(polityInfo[stat]).value();
+                    }   
+                }
+                  
+            })
+        }
+    })  
+}
 
 function getSchema(){
 
