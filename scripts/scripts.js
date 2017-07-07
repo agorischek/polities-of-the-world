@@ -27,10 +27,10 @@ var app = new Vue({
     },
     methods:{
         politySelect: function(polity){
-            showPolityInfo(polity);
+            this.showPolityInfo(polity);
         },
         statSelect: function(stat){
-            showStatsInfo(stat);
+            this.showStatsInfo(stat);
             this.currentLimit = null;
             this.currentFilter = null;
         },
@@ -41,9 +41,9 @@ var app = new Vue({
             this.showStatsList();
         },
         statSelectWithLimit: function(stat, limit){
-            showStatsInfo(stat);
+            this.showStatsInfo(stat);
             this.currentLimit = limit;
-            changeFilter();
+            this.changeFilter();
         },
         showPolitiesList: function(){
             this.currentPolity = null;
@@ -53,11 +53,27 @@ var app = new Vue({
             this.currentStat = null;
             scrollUp("#middle-right");    
         },
+        showPolityInfo: function(polity){
+            this.currentPolity = polity;
+            scrollUp("#middle-left");
+        },
+        showStatsInfo: function(stat){
+            this.currentStat = stat;
+            scrollUp("#middle-right");
+        },
         hideDebug: function(){
             this.showDebug = false;
         },
         showDebug: function(){
             this.showDebug = true;
+        },
+        changeFilter: function(){
+            if((app.currentFilterIndex + 1) >= app.currentPossibleFilters.length){
+                    app.currentFilter = app.currentPossibleFilters[0];
+                }
+            else{
+                app.currentFilter = app.currentPossibleFilters[(app.currentFilterIndex + 1)]
+            }
         },
         filterStatItem: function(polity){
 //            If there's no info for the polity, filter it out
@@ -342,15 +358,6 @@ var app = new Vue({
     }
 })
 
-function changeFilter(){
-    if((app.currentFilterIndex + 1) >= app.currentPossibleFilters.length){
-            app.currentFilter = app.currentPossibleFilters[0];
-        }
-    else{
-        app.currentFilter = app.currentPossibleFilters[(app.currentFilterIndex + 1)]
-    }
-}
-
 //    The stat sections to display first
 var firstStatSections = ["Naming","Demographics","Economy","Infrastructure"]
 //    The stat sections that actually exist in the data
@@ -566,7 +573,7 @@ function showMap(){
         },
         done: function(datamap) {
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-                showPolityInfo(geography.id)
+                app.showPolityInfo(geography.id)
             });
         }
 });
@@ -607,41 +614,10 @@ function formatStatData(value,type){
 
 }
 
-function showPolityInfo(polity){
-    
-    scrollUp("#middle-left");
-    
-    app.currentPolity = polity;
-
-}
-
 function scrollUp(element){
 //    $(element).scrollTop(0);
     $(element).animate({ scrollTop: 0 }, 00);
 
-}
-
-function showStatsInfo(stat,limit,filter){
-    
-    app.currentStat = stat;
-    
-    scrollUp("#middle-right");
-
-}
-
-function showDefaultPolity(){
-
-    if(defaultPolity){
-
-        if(defaultPolity == "random"){
-            var polity = pick(app.polities);
-            showPolityInfo(polity);
-        }
-        else{
-            showPolityInfo(defaultPolity);
-        }
-
-    }
 }
 
 function enableZoom(){
