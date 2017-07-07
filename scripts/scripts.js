@@ -46,6 +46,12 @@ var app = new Vue({
             changeFilter();
             setColorsBySubset();
         },
+        hideDebug: function(){
+            this.showDebug = false;
+        },
+        showDebug: function(){
+            this.showDebug = true;
+        },
         filterStatItem: function(polity){
 //            If there's no info for the polity, filter it out
             if(!this.currentStatsInfo[polity]){
@@ -732,15 +738,3 @@ function showStatsSource(stat){
         href:sourceURL
     }))
 }
-
-function showDebug(){
-    app.showDebug = true;
-}
-
-function hideDebug(){
-    app.showDebug = false;
-}
-
-$(".debugX").click(function(){
-    hideDebug();
-})
