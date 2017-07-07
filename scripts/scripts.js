@@ -44,7 +44,6 @@ var app = new Vue({
             showStatsInfo(stat);
             this.currentLimit = limit;
             changeFilter();
-            setColorsBySubset();
         },
         showPolitiesList: function(){
             this.currentPolity = null;
@@ -98,6 +97,12 @@ var app = new Vue({
             }
         }
     },
+    watch:{
+      currentColors: function(){
+          mapDisplay.updateChoropleth(this.currentColors, {reset: true});  
+
+      }  
+    },
     computed:{
         currentStatType: function(){
             if(this.schema[this.currentStat]){
@@ -132,6 +137,15 @@ var app = new Vue({
                     info[value] = (app.content[value][app.currentStat])
                 })
             }
+            return info;
+        },
+        currentStatsInfoFiltered: function(){
+            var info = {}
+            each(this.currentStatsInfo, function(polity, value){
+                if(app.filterStatItem(polity)){
+                    info[polity] = value;
+                }
+            })
             return info;
         },
         currentStatsInfoFormatted: function(){
@@ -269,6 +283,61 @@ var app = new Vue({
             else{
                 return this.schema[this.currentStat].sourceURL
             }
+        },
+        filterApplied: function(){
+            if(!this.currentStat){
+                return null
+            }
+            else if(this.currentLimit){
+                return true
+            }
+            else{
+                return false;
+            };
+        },
+        currentColorScale: function(){
+            
+            var type = this.currentStatType;
+            var min = this.currentStatMin;
+            var max = this.currentStatMax;
+            
+            if(!this.currentStat){
+                return null;
+            }
+            else if(type == "index" || type == "number" || type == "percent" || type == "currency"){
+                return d3.scale.linear().domain([min,max]).range([lightColor, darkColor]);
+            }
+            else if(type == "rank"){
+                return d3.scale.linear().domain([min,max]).range([darkColor, lightColor]);
+            }
+            else if(TypeError == "singleSelect"){
+                return d3.scale.category20b()
+            }
+            else if(type == "verbose" || type == "code"){
+                return function(){
+                    return mediumColor;
+                };
+            }
+            else if(type == "multipleSelect"){
+                return function(){
+                    return mediumDarkColor;
+                };
+            }
+            else{
+                return d3.scale.category20b();
+            }
+        },
+        currentColors: function(){
+            if(!this.currentStat){
+                return null
+            }
+            else{
+                info = {}
+                each(this.currentStatsInfoFiltered, function(polity, value){
+                    info[polity] = app.currentColorScale(value)
+                })
+                return info;            
+            }
         }
     }
 })
@@ -374,14 +443,10 @@ function processNumbers(){
 function chooseColors(min, max, type){
 
     if(type == "index" || type == "number" || type == "percent" || type == "currency"){
-        colors = d3.scale.linear()
-            .domain([min,max])
-            .range([lightColor, darkColor]);
+        colors = d3.scale.linear().domain([min,max]).range([lightColor, darkColor]);
     }
     else if(type == "rank"){
-        colors = d3.scale.linear()
-            .domain([min,max])
-            .range([darkColor, lightColor]);
+        colors = d3.scale.linear().domain([min,max]).range([darkColor, lightColor]);
     }
     else if(TypeError == "singleSelect"){
         colors = d3.scale.category20b()
@@ -491,12 +556,6 @@ function showMap(){
         data: app.content,
 
         geographyConfig: {
-            popupTemplate: function(geo, data) {
-                return ['<div class="hoverinfo"><strong>',
-                        data.name,
-                        ': ' + data[setColorsByStat],
-                        '</strong></div>'].join('');
-            },
             highlightFillColor: highlightColor,
             highlightBorderColor: highlightBorderColor,
             highlightBorderWidth: 1,
@@ -518,122 +577,6 @@ function showMap(){
     showingMap.resolve();
 
 };
-
-function setColorsBy(stat, subset){  
-    
-        app.currentStat = stat;
-    
-        var dataForColors = {}
-        
-        var values = []
-        var minValue
-        var maxValue
-        
-        var statType = app.schema[stat].type;
-               
-//      If the data type is verbose, there's no need to calculate anything about the data
-        if(app.schema[stat]["type"] == "verbose"){
-            
-            if(subset){
-                
-                each(subset, function(index,pair){
-                    
-                    dataForColors[pair[1]] = colors(pair[0])
-                    
-                })
-                
-            }
-            else{
-    //            For each polity...
-                each(app.content, function(polityCode, polityDetails) {
-
-    //                If the relevant statistic exists...
-                    if(polityDetails[stat]){
-
-    //                    Push that polity into the dataForColors object
-                        dataForColors[polityCode] = mediumColor;
-                    };
-                });
-            }
-        }
-    
-//    Otherwise, we need to know more about the data    
-        else{
-
-//            For each polity
-            each(app.content, function(polityCode, polityDetails) {
-                
-//                If the relevant statistic exists
-                if(polityDetails[stat]){
-                    
-//                    Push into the values array for further analysis
-                    values.push(polityDetails[stat]);
-                };
-                
-            });
-            
-//            Get a minimum and maximum for the stat
-            if(app.schema[stat].min){
-                minValue = app.schema[stat]["min"]
-            }
-            else{
-                minValue = Math.min.apply(null, values)
-            };
-
-            if(app.schema[stat].max){
-                maxValue = app.schema[stat]["max"]
-            }
-            else{
-                maxValue = Math.max.apply(null, values);   
-            };
-
-//            Choose colors based on the min, max, and stat type
-            chooseColors(minValue, maxValue, statType)   
-
-            
-            if(subset){
-                
-                each(subset, function(index,pair){
-                    
-                    dataForColors[pair[1]] = colors(pair[0])
-                    
-                })
-                
-            }
-            else{            
-            
-    //            For each polity
-                each(app.content, function(polityCode, polityDetails) {
-
-    //                If the stat exists for the polity
-                    if(polityDetails[stat]){
-
-    //                    Add that color to the dataForColors object
-                        dataForColors[polityCode] = colors(polityDetails[stat]);
-                    };
-                });
-            }
-            
-        }
-    
-        mapDisplay.updateChoropleth(dataForColors, {reset: true});  
-
-    };
-
-    function clearMapColors(){
-    
-        var dataForColors = {}
-        
-        each(app.content, function(polityCode, polityInfo) {
-            dataForColors[polityCode] = defaultFillColor;
-        });
-        
-        mapDisplay.updateChoropleth(dataForColors, {reset: true});  
-
-    }
-
-
-
 
 function formatStatData(value,type){
         
@@ -683,8 +626,6 @@ function showStatsInfo(stat,limit,filter){
     app.currentStat = stat;
     
     scrollUp("#middle-right");
-    
-    setColorsBy(stat);
 
 }
 
@@ -712,23 +653,4 @@ function enableZoom(){
 
 function zoomed() {
   d3.select(".datamaps-subunits").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-}
-
-function setColorsBySubset(){
-     
-    var stat = app.currentStat;
-    var limit = app.currentLimit;
-    
-    var subset = [];
-                    
-        each(app.polities, function(index,polity){
-            
-            if(app.filterStatItem(polity)){
-                subset.push([app.content[polity][stat],polity])
-            };
-            
-        });   
-        
-        setColorsBy(stat, subset);
-        
 }

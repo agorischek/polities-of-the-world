@@ -24,7 +24,9 @@
         <div id="page">
             
         <div id="debug" v-if="showDebug">
-            <div @click="hideDebug" class="debugX">X</div> 
+            <div @click="hideDebug" class="debugX">X</div>
+            <div>currentColors: {{currentColors}}</div>
+<!--                <div>currentColors: {{currentColors}}</div>-->
 <!--            <div>currentPossibleFilters: {{currentPossibleFilters}}</div>-->
 <!--            <div>currentFilterIndex: {{currentFilterIndex}}</div>-->
 <!--            <div>currentLimit: {{currentLimit}}</div>-->
@@ -39,7 +41,10 @@
 <!--            <div>content: {{content}}</div>-->
 <!--            <div>currentPolityInfo: {{currentPolityInfo}}</div>-->
 <!--            <div>currentStatType: {{currentStatType}}</div>-->
-<!--            <div>currentStatsInfo: {{currentStatsInfo}}</div>-->
+            <div>filterApplied: {{filterApplied}}</div>
+            <div>currentStatsInfo: {{currentStatsInfo}}</div>
+            <div>currentStatsInfoFiltered: {{currentStatsInfoFiltered}}</div>
+
 <!--            <div>currentStatMin: {{currentStatMin}}</div>-->
 <!--            <div>currentStatMax: {{currentStatMax}}</div>-->
 <!--            <div>currentStatArray: {{currentStatArray}}</div>-->
