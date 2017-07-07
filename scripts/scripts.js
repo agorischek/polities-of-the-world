@@ -62,6 +62,9 @@ var app = new Vue({
         },
         statSelect: function(stat){
             this.showStatsInfo(stat);
+            this.removeFilter();
+        },
+        removeFilter: function(){
             this.currentLimit = null;
             this.currentFilter = null;
         },
