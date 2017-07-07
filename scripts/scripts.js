@@ -447,32 +447,6 @@ function processNumbers(){
     
 };
 
-function chooseColors(min, max, type){
-
-    if(type == "index" || type == "number" || type == "percent" || type == "currency"){
-        colors = d3.scale.linear().domain([min,max]).range([lightColor, darkColor]);
-    }
-    else if(type == "rank"){
-        colors = d3.scale.linear().domain([min,max]).range([darkColor, lightColor]);
-    }
-    else if(TypeError == "singleSelect"){
-        colors = d3.scale.category20b()
-    }
-    else if(type == "verbose" || type == "code"){
-        colors = function(){
-            return mediumColor;
-        };
-    }
-    else if(type == "multipleSelect"){
-        colors = function(){
-            return mediumDarkColor;
-        };
-    }
-    else{
-        colors = d3.scale.category20b();
-    } 
-}
-
 function getData(){
 
     $.ajax({
