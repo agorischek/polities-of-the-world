@@ -35,10 +35,10 @@ var app = new Vue({
             this.currentFilter = null;
         },
         polityBack: function(){
-            showPolitiesList(); 
+            this.showPolitiesList(); 
         },
         statBack: function(){
-            showStatsList();
+            this.showStatsList();
         },
         statSelectWithLimit: function(stat, limit){
             showStatsInfo(stat);
@@ -46,6 +46,14 @@ var app = new Vue({
             changeFilter();
             setColorsBySubset();
         },
+        showPolitiesList: function(){
+            this.currentPolity = null;
+            scrollUp("#middle-left");            
+        },
+        showStatsList: function(){        
+            this.currentStat = null;
+            scrollUp("#middle-right");    
+        };
         hideDebug: function(){
             this.showDebug = false;
         },
@@ -275,7 +283,7 @@ $.when(gettingData, gettingSchema).done(function(value) {
     processPercentages();
     processNumbers();
     showMap();
-    showStatsList();
+//    showStatsList();
 });
 
 var showingMap = $.Deferred().done(function(){
@@ -609,13 +617,7 @@ function setColorsBy(stat, subset){
 
     }
 
-    function showStatsList(){
-        
-        app.currentStat = null;
-        
-        scrollUp("#middle-right");
-                
-    };
+
 
 
 function formatStatData(value,type){
@@ -671,14 +673,6 @@ function showStatsInfo(stat,limit,filter){
     
     showStatsSource(stat);
 
-}
-
-function showPolitiesList(){
-     
-    app.currentPolity = null;
-    
-    scrollUp("#middle-left");
-            
 }
 
 function showDefaultPolity(){
