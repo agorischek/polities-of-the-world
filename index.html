@@ -142,7 +142,7 @@
                                     {{content[polity].name}}
                                 </span>
                             </h3>
-                            <div>
+                            <div class="actionable" @click="function(){applyFilter(currentStatsInfo[polity]);politySelect(polity);}">
                                 {{currentStatsInfoFormatted[polity]}}
                             </div>
                         </li>

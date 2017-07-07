@@ -76,6 +76,9 @@ var app = new Vue({
         },
         statSelectWithLimit: function(stat, limit){
             this.showStatsInfo(stat);
+            this.applyFilter(limit);
+        },
+        applyFilter:function(limit){
             this.currentLimit = limit;
             this.changeFilter();
         },
