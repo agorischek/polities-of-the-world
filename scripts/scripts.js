@@ -23,9 +23,40 @@ var app = new Vue({
         currentLimit: null,
         currentFilter: null,
         showDebug: false,
-        currentView: "map"
+        currentView: "map",
+        firstStatSections: ["Naming","Demographics","Economy","Infrastructure"],
+        actualStatSections: [],
+        additionalStatSections: []
     },
     methods:{
+        formatStatData: function(value,type){
+        
+            if(type == "percent"){
+                return numeral(value).format('0[.]00%');
+            }
+
+            else if(type == "currency"){
+                return numeral(value).format('$0,0[.]00');        
+            }
+
+            else if(type == "number"){  
+                return numeral(value).format('0,0[.]00') 
+            }
+
+            else if(type == "polities"){
+                if(this.content[value]){
+                    return this.content[value].name
+                }
+                else{
+                    return value
+                }
+            }
+
+            else{
+                return value
+            }
+
+        },
         politySelect: function(polity){
             this.showPolityInfo(polity);
         },
@@ -142,7 +173,7 @@ var app = new Vue({
                 if(app.schema[key]){
                     type = app.schema[key].type
                 }
-                info[key] = formatStatData(value,type)
+                info[key] = app.formatStatData(value,type)
             })
             return info;
         },
@@ -168,7 +199,7 @@ var app = new Vue({
             var info = {};
             var type = this.currentStatType
             each(this.currentStatsInfo, function(key, value){
-                info[key] = formatStatData(value,type)
+                info[key] = app.formatStatData(value,type)
             })
             return info;
         },
@@ -203,7 +234,7 @@ var app = new Vue({
                 return null;
             }
             else{
-                return formatStatData(this.currentLimit, this.currentStatType)
+                return app.formatStatData(this.currentLimit, this.currentStatType)
             }
         },
         currentStatIsNumeric: function(){
@@ -358,13 +389,6 @@ var app = new Vue({
     }
 })
 
-//    The stat sections to display first
-var firstStatSections = ["Naming","Demographics","Economy","Infrastructure"]
-//    The stat sections that actually exist in the data
-var actualStatSections = []
-//    The stat sections that exist in the data but aren't listed in the first list
-var additionalStatSections = []
-
 //Sequencing
 var gettingData = $.Deferred();
 
@@ -471,14 +495,14 @@ function getSchema(){
 
         each(parsed.data, function( key, value ) {
             app.schema[value["stat"]] = value;
-            actualStatSections.push(value["section"])
+            app.actualStatSections.push(value["section"])
         });
 
-        actualStatSections = unique(actualStatSections);
+        app.actualStatSections = unique(app.actualStatSections);
 
-        additionalStatSections = _.difference(actualStatSections, firstStatSections);
+        app.additionalStatSections = _.difference(app.actualStatSections, app.firstStatSections);
 
-        app.orderedStatSections = firstStatSections.concat(additionalStatSections);
+        app.orderedStatSections = app.firstStatSections.concat(app.additionalStatSections);
 
         gettingSchema.resolve();
 
@@ -522,34 +546,6 @@ function showMap(){
 
 };
 
-function formatStatData(value,type){
-        
-    if(type == "percent"){
-        return numeral(value).format('0[.]00%');
-    }
-    
-    else if(type == "currency"){
-        return numeral(value).format('$0,0[.]00');        
-    }
-    
-    else if(type == "number"){  
-        return numeral(value).format('0,0[.]00') 
-    }
-    
-    else if(type == "polities"){
-        if(app.content[value]){
-            return app.content[value].name
-        }
-        else{
-            return value
-        }
-    }
-    
-    else{
-        return value
-    }
-
-}
 
 function scrollUp(element){
 //    $(element).scrollTop(0);
