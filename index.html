@@ -107,7 +107,7 @@
                             <span v-if="currentStat" id="stats-back-text" class="actionable" @click="statBack">{{strings.allStats}} &#8594;</span>
                         </div>                
                         <h2 id="stats-pane-title">{{statsPaneTitle}}</h2>
-                        <div v-if="currentStat" id="stats-pane-modifier" class="modifier">
+                        <div v-if="currentStat" id="stats-pane-modifier" class="modifier actionable" @click="changeFilter">
                             <span v-if="currentStatIsNumeric && currentFilter=='greaterThanOrEqual'">&ge;</span>
                             <span v-if="currentStatIsNumeric && currentFilter=='lessThanOrEqual'">&le;</span>
                             <span v-if="!currentStatIsNumeric && currentFilter=='equal'">=</span>
