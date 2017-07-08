@@ -470,7 +470,7 @@ var app = new Vue({
             else if(type == "rank"){
                 return d3.scale.linear().domain([min,max]).range([app.settings.colors.dark, app.settings.colors.light]);
             }
-            else if(TypeError == "singleSelect"){
+            else if(type == "singleSelect"){
                 return d3.scale.category20b()
             }
             else if(type == "verbose" || type == "code"){
