@@ -13,6 +13,8 @@ var app = new Vue({
         currentStat: null,
         currentLimit: null,
         currentFilter: null,
+        currentSortDirection: "ascending",
+        currentSortField: "name",
         showDebug: false,
         currentView: "map",
         firstStatSections: ["Naming","Demographics","Economy","Infrastructure"],
@@ -20,6 +22,28 @@ var app = new Vue({
         additionalStatSections: []
     },
     methods:{
+        changeSortDirection: function(){
+            if(this.currentSortDirection=="ascending"){
+                this.setSortDirection("descending")
+            }
+            else{
+                this.setSortDirection("ascending")
+            }
+        },
+        changeSortField: function(){
+            if(this.currentSortField=="name"){
+                this.setSortField("value")
+            }
+            else{
+                this.setSortField("name")
+            }
+        },
+        setSortField: function(field){
+          this.currentSortField = field  
+        },
+        setSortDirection: function(direction){
+          this.currentSortDirection = direction  
+        },
         formatStatData: function(value,type){
         
             if(type == "percent"){
@@ -95,6 +119,14 @@ var app = new Vue({
         showDebug: function(){
             this.showDebug = true;
         },
+        sort: function(order){
+            if(order){
+                this.currentSort = order
+            }
+            else{
+                this.currentSort = "valueAscending"
+            }                
+        },
         changeFilter: function(){
             if((app.currentFilterIndex + 1) >= app.currentPossibleFilters.length){
                     app.currentFilter = app.currentPossibleFilters[0];
@@ -142,12 +174,100 @@ var app = new Vue({
         }
     },
     watch:{
-      currentColors: function(){
-          mapDisplay.updateChoropleth(this.currentColors, {reset: true});  
-
-      }  
+        currentColors: function(){
+            mapDisplay.updateChoropleth(this.currentColors, {reset: true});  
+        },
+        currentStat: function(){
+            if(!this.currentStat){
+                this.currentSortField = "name";
+                this.currentSortDirection = "ascending";
+            }
+        }
     },
     computed:{
+        currentSort: function(){
+            if(this.currentSortField=="name" && this.currentSortDirection=="ascending"){
+                return "nameAscending"
+            }
+            else if(this.currentSortField=="name" && this.currentSortDirection=="descending"){
+                return "nameDescending"
+            }
+            else if(this.currentSortField=="value" && this.currentSortDirection=="ascending"){
+                return "valueAscending"
+            }
+            else if(this.currentSortField=="value" && this.currentSortDirection=="descending"){
+                return "valueDescending"
+            }
+            else{
+                return "nameAscending";
+            }
+        },
+        sortedPolities: function(){
+            if(!this.currentSortInfo){
+                return this.polities
+            }
+            else{
+                var info = [];
+                var sortInfo = this.currentSortInfo.slice()
+                if (this.currentSort=="valueAscending"){
+                    if(this.currentStatIsNumeric){
+                        sortInfo.sort(function(a,b){
+                            return a[2] - b[2]
+                        });
+                    }
+                    else{
+                        sortInfo.sort(function(a, b){
+                            return (a[2] === b[2] ? 0 : (a[2] < b[2] ? -1 : 1));
+                        });   
+                    }
+                }
+                else if (this.currentSort=="valueDescending"){
+                    if(this.currentStatIsNumeric){
+                        sortInfo.sort(function(a,b){
+                            return b[2] - a[2]
+                        });
+                    }
+                    else{
+                        sortInfo.sort(function(a, b){
+                            return (a[2] === b[2] ? 0 : (a[2] > b[2] ? -1 : 1));
+                        });   
+                    }     
+                }
+                else if (this.currentSort=="nameAscending"){
+                    sortInfo.sort(function(a, b){
+                        return (a[1] === b[1] ? 0 : (a[1] < b[1] ? -1 : 1));
+                    });                }
+                else if (this.currentSort=="nameDescending"){
+                    sortInfo.sort(function(a, b){
+                        return (a[1] === b[1] ? 0 : (a[1] > b[1] ? -1 : 1));
+                    });
+                }
+                else{
+                    return this.polities;
+                }
+                each(sortInfo,function(index,value){
+                    info.push(value[0]);
+                })
+                return info;
+            }
+            
+        },
+        currentSortInfo: function(){
+            if(!this.currentStat || !this.content){
+                return null
+            }
+            else{
+                var info = [];  
+                each(this.polities,function(index,value){
+                    var name = app.content[value].name;
+                    var data = app.content[value][app.currentStat]
+                    if(data != ""){
+                        info.push([value,name,data]);
+                    }
+                });
+                return info;
+             }
+        },
         currentStatType: function(){
             if(this.schema[this.currentStat]){
                 return this.schema[this.currentStat].type
@@ -285,16 +405,10 @@ var app = new Vue({
                 return null;
             }
             else{
-                log(this.schema)
-                log(this.currentStat)
-                log(this.schema[this.currentStat])
-                log(this.schema[this.currentStat].min)
                 if(this.schema[this.currentStat].min != null && this.schema[this.currentStat].min != ""){
-                    log("Returned the schema min")
                     return this.schema[this.currentStat].min
                 }
                 else{
-                    log("Returned the array min")
                     return Math.min.apply(null, this.currentStatArray)
                 };
             }
