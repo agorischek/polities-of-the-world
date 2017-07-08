@@ -25,6 +25,9 @@
             
         <div id="debug" v-if="showDebug">
             <div @click="hideDebug" class="debugX">X</div>
+<!--            <div>currentSortField: {{currentSortField}}</div>-->
+<!--            <div>currentSortDirection: {{currentSortDirection}}</div>-->
+<!--            <div>currentSort: {{currentSort}}</div>-->
 <!--            <div>stats: {{stats}}</div>-->
 <!--            <div>currentColors: {{currentColors}}</div>-->
 <!--            <div>currentColors: {{currentColors}}</div>-->
@@ -50,6 +53,8 @@
 <!--            <div>currentStatArray: {{currentStatArray}}</div>-->
 <!--            <div>currentStatsInfoFormatted: {{currentStatsInfoFormatted}}</div>-->
 <!--            <div>schema: {{schema}}</div>-->
+<!--            <div>currentSortInfo: {{currentSortInfo}}</div>-->
+<!--            <div>polities: {{polities}}</div>-->
 <!--            <div>sortedPolities: {{sortedPolities}}</div>-->
 <!--            <div>polityPairs: {{polityPairs}}</div>-->
         </div>
@@ -107,13 +112,31 @@
                             <span v-if="currentStat" id="stats-back-text" class="actionable" @click="statBack">{{strings.allStats}} &#8594;</span>
                         </div>                
                         <h2 id="stats-pane-title" @click="removeFilter" v-bind:class="[{'actionable': filterApplied}]">{{statsPaneTitle}}</h2>
-                        <div v-if="currentStat" id="stats-pane-modifier" class="modifier actionable" @click="changeFilter">
-                            <span v-if="currentStatIsNumeric && currentFilter=='greaterThanOrEqual'">&ge;</span>
-                            <span v-if="currentStatIsNumeric && currentFilter=='lessThanOrEqual'">&le;</span>
-                            <span v-if="!currentStatIsNumeric && currentFilter=='equal'">=</span>
-                            <span v-if="!currentStatIsNumeric && currentFilter=='notEqual'">&ne;</span>
-                            <span> </span>
-                            <span>{{currentLimitFormatted}}</span>
+                        <div v-if="currentStat">
+                            <div v-if="currentLimit" id="stats-pane-modifier" class="modifier actionable" @click="changeFilter">
+                                <span v-if="currentStatIsNumeric && currentFilter=='greaterThanOrEqual'">&ge;</span>
+                                <span v-if="currentStatIsNumeric && currentFilter=='lessThanOrEqual'">&le;</span>
+                                <span v-if="!currentStatIsNumeric && currentFilter=='equal'">=</span>
+                                <span v-if="!currentStatIsNumeric && currentFilter=='notEqual'">&ne;</span>
+                                <span> </span>
+                                <span>{{currentLimitFormatted}}</span>
+                            </div>
+<!--                            <span>   </span>-->
+                            <div class="modifier">  
+                                <span>by</span>
+                                <span v-if="this.currentSortField=='value'" @click="changeSortField()" class="actionable">stat,</span>
+                                <span v-if="this.currentSortField=='name'" @click="changeSortField()" class="actionable">polity,</span>
+                                <span v-if="this.currentSortDirection=='ascending'" @click="changeSortDirection()" class="actionable">
+                                    <span v-if="this.currentSortField=='value'&&this.currentStatIsNumeric">increasing</span>
+                                    <span v-if="this.currentSortField=='value'&&!this.currentStatIsNumeric">A&#8594;Z</span>
+                                    <span v-if="this.currentSortField=='name'">A&#8594;Z</span>
+                                </span>
+                                <span v-if="this.currentSortDirection=='descending'" @click="changeSortDirection()" class="actionable">
+                                    <span v-if="this.currentSortField=='value'&&this.currentStatIsNumeric">decreasing</span>
+                                    <span v-if="this.currentSortField=='value'&&!this.currentStatIsNumeric">Z&#8594;A</span>
+                                    <span v-if="this.currentSortField=='name'">Z&#8594;A</span>
+                                </span>
+                            </div>
                         </div>
                         <div class="divider"></div>
                     </div>
@@ -136,7 +159,7 @@
                         </li>                    
                     </ul>
                     <ol v-if="currentStat" id="stats-info">
-                        <li :class="'stat'" v-for="polity in polities" v-if="filterStatItem(polity)">
+                        <li :class="'stat'" v-for="polity in sortedPolities" v-if="filterStatItem(polity)">
                             <h3>
                                 <span v-bind:class="['item', 'actionable', {selected: currentPolity==polity}]" @click="politySelect(polity)">
                                     {{content[polity].name}}
@@ -170,23 +193,28 @@
             
     </div>    
     </div>
-        
-    <script src="strings/en.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    
+<!--Libraries-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.4/numeral.min.js"></script>
     <script src="libs/datamaps.world.hires.js"></script>
     <script src="libs/papaparse.min.js"></script>
-    <script src="scripts/utilities.js"></script>
     <script src="libs/elementory.min.js"></script>
-    <script src="settings.min.js"></script>    
     <script src="libs/underscore.js"></script>
-    <script src="libs/underscore.string.min.js"></script>        
-    <script src="scripts/scripts.min.js"></script>
+    <script src="libs/underscore.string.min.js"></script>  
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
     <script src="libs/uikit.min.js"></script>
     <script src="libs/uikit-icons.min.js"></script>
+
+<!--Resources-->
+    <script src="strings/en.min.js"></script>
+
+<!--Scripts-->
+    <script src="scripts/utilities.min.js"></script>
+    <script src="scripts/app.min.js"></script>
+    <script src="scripts/scripts.min.js"></script>
         
     </body>
     
