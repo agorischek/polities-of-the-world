@@ -90,7 +90,7 @@ var app = new Vue({
             this.showStatsList();
         },
         statSelectWithLimit: function(stat, limit){
-            if(this.currentStat == stat){
+            if(this.currentStat == stat && this.currentLimit){
                 this.changeFilter();
             }
             this.showStatsInfo(stat);
