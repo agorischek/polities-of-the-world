@@ -72,7 +72,7 @@
                 </div>
                 <div class="middle left" id="middle-left">
                     <ol v-if="!currentPolity" id="polity-list">
-                        <li :class="'polity actionable ' + polity" v-for="polity in polities" @click="function(){politySelect(polity);removeFilter();}">
+                        <li :class="'polity actionable ' + polity" v-for="polity in polities" @click="function(){politySelect(polity);removeLimit();}">
                             {{content[polity].name}}
                         </li>
                     </ol>
@@ -111,7 +111,7 @@
                         <div id="stats-back">
                             <span v-if="currentStat" id="stats-back-text" class="actionable" @click="statBack">{{strings.allStats}} &#8594;</span>
                         </div>                
-                        <h2 id="stats-pane-title" @click="removeFilter" v-bind:class="[{'actionable': filterApplied}]">{{statsPaneTitle}}</h2>
+                        <h2 id="stats-pane-title" @click="removeLimit" v-bind:class="[{'actionable': filterApplied}]">{{statsPaneTitle}}</h2>
                         <div v-if="currentStat">
                             <div v-if="currentLimit" id="stats-pane-modifier" class="modifier actionable" @click="changeFilter">
                                 <span v-if="currentStatIsNumeric && currentFilter=='greaterThanOrEqual'">&ge;</span>
