@@ -12,7 +12,7 @@ var app = new Vue({
         currentPolity: null,
         currentStat: null,
         currentLimit: null,
-        currentFilter: "greaterThanOrEqual",
+        currentFilter: null,
         currentSortDirection: "ascending",
         currentSortField: "name",
         showDebug: false,
@@ -77,11 +77,23 @@ var app = new Vue({
         },
         statSelect: function(stat){
             this.showStatsInfo(stat);
-            this.removeFilter();
+            this.removeLimit();
+            this.resetFilter();
         },
-        removeFilter: function(){
+        removeLimit: function(){
             this.currentLimit = null;
-            this.currentFilter = "greaterThanOrEqual";
+        },
+        resetFilter: function(){
+            if(this.currentStatIsNumeric){
+                this.currentFilter = "greaterThanOrEqual"
+            }
+            else if(!this.currentStatIsNumeric){
+                this.currentFilter = "equal"
+            }
+            else{
+                this.currentFilter = null;
+            }
+
         },
         polityBack: function(){
             this.showPolitiesList(); 
@@ -90,10 +102,15 @@ var app = new Vue({
             this.showStatsList();
         },
         statSelectWithLimit: function(stat, limit){
-            if(this.currentStat == stat && this.currentLimit){
+            var previousStat = stat
+
+            this.showStatsInfo(stat);
+            if(this.currentStat == previousStat && this.currentLimit){
                 this.changeFilter();
             }
-            this.showStatsInfo(stat);
+            else{
+                this.resetFilter();
+            }
             this.applyFilter(limit);
         },
         applyFilter:function(limit){
@@ -184,6 +201,10 @@ var app = new Vue({
                 this.currentSortField = "name";
                 this.currentSortDirection = "ascending";
             }
+        },
+        currentPolity: function(){
+            $(".current-polity").remove();
+            $("." + this.currentPolity).clone().appendTo(".datamaps-subunits").addClass("current-polity")
         }
     },
     computed:{

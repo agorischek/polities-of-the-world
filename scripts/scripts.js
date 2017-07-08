@@ -165,6 +165,7 @@ function showMap(){
 
         geographyConfig: {
             popupOnHover: false,
+            highlightOnHover: false,
             highlightFillColor: app.settings.colors.highlight,
             highlightBorderColor: app.settings.colors.highlightBorder,
             highlightBorderWidth: 1,

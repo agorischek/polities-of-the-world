@@ -347,3 +347,8 @@ a:hover, .actionable:hover{
         max-height:50px;
     }
 }
+
+.current-polity{
+    stroke: rgb(219,128,225) !important;
+    stroke-width: 2.5px !important;
+}
