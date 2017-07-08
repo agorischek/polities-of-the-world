@@ -15,7 +15,7 @@ var app = new Vue({
         currentFilter: "greaterThanOrEqual",
         currentSortDirection: "ascending",
         currentSortField: "name",
-        showDebug: true,
+        showDebug: false,
         currentView: "map",
         firstStatSections: ["Naming","Demographics","Economy","Infrastructure"],
         actualStatSections: [],
