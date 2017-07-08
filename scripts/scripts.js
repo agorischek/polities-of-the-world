@@ -27,6 +27,7 @@ $.when(gettingData, gettingSchema).done(function(value) {
 
 var showingMap = $.Deferred().done(function(){
     enableZoom();
+//    enableHover();
 });
 
 //Functions
@@ -165,6 +166,7 @@ function showMap(){
 
         geographyConfig: {
             popupOnHover: false,
+            highlightOnHover: false,
             highlightFillColor: app.settings.colors.highlight,
             highlightBorderColor: app.settings.colors.highlightBorder,
             highlightBorderWidth: 1,
@@ -187,6 +189,19 @@ function showMap(){
 
 };
 
+//function enableHover(){
+//    $(".datamaps-subunits path").hover(function(e){
+//    var target = e.target
+//    var data = $(target).attr("data-info")
+//    var properties = $.parseJSON(data)
+//    var id=properties.id
+//    app.hoverPolity = id;
+//},function(e){
+//    $("." + app.hoverPolity).removeClass("hover-polity")
+//    app.hoverPolity = null;
+//        
+//    })
+//}
 
 function scrollUp(element){
 //    $(element).scrollTop(0);
