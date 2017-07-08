@@ -184,12 +184,6 @@ var app = new Vue({
                 this.currentSortField = "name";
                 this.currentSortDirection = "ascending";
             }
-        },
-        currentPolity: function(){
-            $(".datamaps-subunits path").removeClass("current-polity");
-            var class = "." + this.currentPolity.toUpperCase()
-            $(class).insertAfter($(".datamaps-subunits path:last"));
-            $(class).addClass("current-polity");
         }
     },
     computed:{
