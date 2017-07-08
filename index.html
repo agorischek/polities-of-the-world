@@ -25,16 +25,16 @@
             
         <div id="debug" v-if="showDebug">
             <div @click="hideDebug" class="debugX">X</div>
-            <div>currentSortField: {{currentSortField}}</div>
-            <div>currentSortDirection: {{currentSortDirection}}</div>
-            <div>currentSort: {{currentSort}}</div>
+<!--            <div>currentSortField: {{currentSortField}}</div>-->
+<!--            <div>currentSortDirection: {{currentSortDirection}}</div>-->
+<!--            <div>currentSort: {{currentSort}}</div>-->
 <!--            <div>stats: {{stats}}</div>-->
 <!--            <div>currentColors: {{currentColors}}</div>-->
 <!--            <div>currentColors: {{currentColors}}</div>-->
 <!--            <div>currentPossibleFilters: {{currentPossibleFilters}}</div>-->
 <!--            <div>currentFilterIndex: {{currentFilterIndex}}</div>-->
-<!--            <div>currentLimit: {{currentLimit}}</div>-->
-<!--            <div>currentFilter: {{currentFilter}}</div>-->
+            <div>currentLimit: {{currentLimit}}</div>
+            <div>currentFilter: {{currentFilter}}</div>
 <!--            <div>currentLimitFormatted: {{currentLimitFormatted}}</div>-->
 <!--            <div>currentStatIsNumeric: {{currentStatIsNumeric}}</div>-->
 <!--            <div>currentPolity: {{currentPolity}}</div>-->
@@ -53,9 +53,9 @@
 <!--            <div>currentStatArray: {{currentStatArray}}</div>-->
 <!--            <div>currentStatsInfoFormatted: {{currentStatsInfoFormatted}}</div>-->
 <!--            <div>schema: {{schema}}</div>-->
-            <div>currentSortInfo: {{currentSortInfo}}</div>
+<!--            <div>currentSortInfo: {{currentSortInfo}}</div>-->
 <!--            <div>polities: {{polities}}</div>-->
-            <div>sortedPolities: {{sortedPolities}}</div>
+<!--            <div>sortedPolities: {{sortedPolities}}</div>-->
 <!--            <div>polityPairs: {{polityPairs}}</div>-->
         </div>
             
@@ -113,7 +113,7 @@
                         </div>                
                         <h2 id="stats-pane-title" @click="removeFilter" v-bind:class="[{'actionable': filterApplied}]">{{statsPaneTitle}}</h2>
                         <div v-if="currentStat">
-                            <div id="stats-pane-modifier" class="modifier actionable" @click="changeFilter">
+                            <div v-if="currentLimit" id="stats-pane-modifier" class="modifier actionable" @click="changeFilter">
                                 <span v-if="currentStatIsNumeric && currentFilter=='greaterThanOrEqual'">&ge;</span>
                                 <span v-if="currentStatIsNumeric && currentFilter=='lessThanOrEqual'">&le;</span>
                                 <span v-if="!currentStatIsNumeric && currentFilter=='equal'">=</span>

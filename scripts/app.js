@@ -12,10 +12,10 @@ var app = new Vue({
         currentPolity: null,
         currentStat: null,
         currentLimit: null,
-        currentFilter: null,
+        currentFilter: "greaterThanOrEqual",
         currentSortDirection: "ascending",
         currentSortField: "name",
-        showDebug: false,
+        showDebug: true,
         currentView: "map",
         firstStatSections: ["Naming","Demographics","Economy","Infrastructure"],
         actualStatSections: [],
@@ -81,7 +81,7 @@ var app = new Vue({
         },
         removeFilter: function(){
             this.currentLimit = null;
-            this.currentFilter = null;
+            this.currentFilter = "greaterThanOrEqual";
         },
         polityBack: function(){
             this.showPolitiesList(); 
@@ -90,12 +90,14 @@ var app = new Vue({
             this.showStatsList();
         },
         statSelectWithLimit: function(stat, limit){
+            if(this.currentStat == stat){
+                this.changeFilter();
+            }
             this.showStatsInfo(stat);
             this.applyFilter(limit);
         },
         applyFilter:function(limit){
             this.currentLimit = limit;
-            this.changeFilter();
         },
         showPolitiesList: function(){
             this.currentPolity = null;
