@@ -25,7 +25,7 @@
 "region","Region","singleSelect","TRUE","","","Naming","","Pew Research Center via Wikipedia","https://en.wikipedia.org/wiki/Religions_by_country","true",""
 "subregion","Subregion","singleSelect","TRUE","","","Naming","","Pew Research Center via Wikipedia","https://en.wikipedia.org/wiki/Religions_by_country","true",""
 "merchantShips","Merchant Ships","number","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2108rank.html","true",""
-"gini","GINI Index","number","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2172rank.html","true",""
+"gini","Gini Index","number","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2172rank.html","true",""
 "fragileStates","State Fragility Index","number","TRUE","","","Politics","","Fund for Peace","www.fragilestatesindex.org","true",""
 "stateLegitimacy","State Legitimacy Index","rank","TRUE","0","10","Politics","","Fund for Peace","www.fragilestatesindex.org","false",""
 "externalIntervention","External Intervention Index","number","TRUE","0","10","Politics","","Fund for Peace","www.fragilestatesindex.org","true",""
