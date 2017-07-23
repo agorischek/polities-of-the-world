@@ -17,7 +17,7 @@ var app = new Vue({
         currentSortField: "name",
         debug: false,
         currentView: "map",
-        firstStatSections: ["Naming","Demographics","Economy","Infrastructure"],
+        firstStatSections: ["Naming","Politics","Demographics","Economy","Infrastructure"],
         actualStatSections: [],
         additionalStatSections: []
     },
