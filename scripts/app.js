@@ -15,7 +15,7 @@ var app = new Vue({
         currentFilter: null,
         currentSortDirection: "ascending",
         currentSortField: "name",
-        showDebug: false,
+        debug: false,
         currentView: "map",
         firstStatSections: ["Naming","Demographics","Economy","Infrastructure"],
         actualStatSections: [],
@@ -133,10 +133,10 @@ var app = new Vue({
             scrollUp("#middle-right");
         },
         hideDebug: function(){
-            this.showDebug = false;
+            this.debug = false;
         },
         showDebug: function(){
-            this.showDebug = true;
+            this.debug = true;
         },
         sort: function(order){
             if(order){
