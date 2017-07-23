@@ -13,7 +13,7 @@
 "GDPPPPPerCapita","GDP PPP per Capita","currency","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2004rank.html","true",""
 "inflationRate","Inflation Rate","percent","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2092rank.html","true",""
 "GDPPPP","GDP PPP","currency","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2001rank.html","true",""
-"roadways","Miles of Roadways","number","TRUE","","","Infrastructure","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2085rank.html","true",""
+"roadways","Roadways","number","TRUE","","","Infrastructure","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2085rank.html","true",""
 "crudeOilExports","Crude Oil Exports","number","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2242rank.html","true",""
 "educationExpendituresPercentGDP","Education Expenditures as Percent GDP","percent","TRUE","","","Economy","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2206rank.html","true",""
 "lifeExpectancyAtBirth","Life Expectancy at Birth","number","TRUE","","","Demographics","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/rankorder/2102rank.html","true",""
