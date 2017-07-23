@@ -247,12 +247,12 @@
     "COG":{
         "code":"COG",
         "name":"Congo-Brazzaville",
-        "synonyms":"COG|Congo-Brazzaville|Congo Brazzaville|Congo (Brazzaville)|Congo(Brazzaville)|Congo, Republic of the|Republic of the Congo"
+        "synonyms":"COG|Congo-Brazzaville|Congo Brazzaville|Congo (Brazzaville)|Congo(Brazzaville)|Congo, Republic of the|Republic of the Congo|Congo Republic"
     },
     "COD":{
         "code":"COD",
         "name":"Congo-Kinshasa",
-        "synonyms":"COD|Congo-Kinshasa|Zaire|Democratic Republic of the Congo|Congo (Kinshasa)|Congo(Kinshasa)|Congo, Democratic Republic of the|Congo (DRC)"
+        "synonyms":"COD|Congo-Kinshasa|Zaire|Democratic Republic of the Congo|Congo (Kinshasa)|Congo(Kinshasa)|Congo, Democratic Republic of the|Congo (DRC)|Congo Democratic Republic"
     },
     "COK":{
         "code":"COK",
@@ -542,7 +542,7 @@
     "ISR":{
         "code":"ISR",
         "name":"Israel",
-        "synonyms":"ISR|Israel"
+        "synonyms":"ISR|Israel|Israel and West Bank|Israel & West Bank"
     },
     "ITA":{
         "code":"ITA",
@@ -602,7 +602,7 @@
     "KGZ":{
         "code":"KGZ",
         "name":"Kyrgyzstan",
-        "synonyms":"KGZ|Kyrgyzstan"
+        "synonyms":"KGZ|Kyrgyzstan|Kyrgyz Republic"
     },
     "ALA":{
         "code":"ALA",
@@ -1002,7 +1002,7 @@
     "SVK":{
         "code":"SVK",
         "name":"Slovakia",
-        "synonyms":"SVK|Slovakia"
+        "synonyms":"SVK|Slovakia|Slovak Republic"
     },
     "SVN":{
         "code":"SVN",

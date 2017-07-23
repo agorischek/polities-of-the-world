@@ -15,9 +15,9 @@ var app = new Vue({
         currentFilter: null,
         currentSortDirection: "ascending",
         currentSortField: "name",
-        showDebug: false,
+        debug: false,
         currentView: "map",
-        firstStatSections: ["Naming","Demographics","Economy","Infrastructure"],
+        firstStatSections: ["Naming","Politics","Demographics","Economy","Infrastructure"],
         actualStatSections: [],
         additionalStatSections: []
     },
@@ -133,10 +133,10 @@ var app = new Vue({
             scrollUp("#middle-right");
         },
         hideDebug: function(){
-            this.showDebug = false;
+            this.debug = false;
         },
         showDebug: function(){
-            this.showDebug = true;
+            this.debug = true;
         },
         sort: function(order){
             if(order){
@@ -284,7 +284,7 @@ var app = new Vue({
                 each(this.polities,function(index,value){
                     var name = app.content[value].name;
                     var data = app.content[value][app.currentStat]
-                    if(data != ""){
+                    if(value != null && data != "" && data != null){
                         info.push([value,name,data]);
                     }
                 });
