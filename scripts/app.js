@@ -284,7 +284,7 @@ var app = new Vue({
                 each(this.polities,function(index,value){
                     var name = app.content[value].name;
                     var data = app.content[value][app.currentStat]
-                    if(data != ""){
+                    if(value != null && data != "" && data != null){
                         info.push([value,name,data]);
                     }
                 });
