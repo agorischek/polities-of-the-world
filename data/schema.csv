@@ -32,3 +32,4 @@
 "publicServices","Public Services Index","rank","TRUE","0","10","Politics","","Fund for Peace","http://www.fragilestatesindex.org","false",""
 "refugees","Refugees and IDPs Index","number","TRUE","0","10","Demographics","","Fund for Peace","http://www.fragilestatesindex.org","true",""
 "humanRights","Human Rights Index","rank","TRUE","0","10","Politics","","Fund for Peace","http://www.fragilestatesindex.org","false",""
+"officialLanguages","National Official Languages","multipleSelect","TRUE","","","Demographics","","CIA World Factbook","https://www.cia.gov/library/publications/the-world-factbook/fields/2098.html","true",""
