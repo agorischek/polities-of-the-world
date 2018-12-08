@@ -104,12 +104,12 @@ h3,
   text-align: center;
   flex: 1;
   width: 100%;
+  overflow: hidden;
 }
 
 #map {
   flex: 1;
   height: 100%;
-  width: 100%;
   text-align: center;
   overflow: none;
 }
