@@ -5,7 +5,7 @@ html,body
     margin: 0;
     padding: 0;
     overflow:hidden;
-    
+
 }
 
 body{
@@ -97,7 +97,6 @@ h3, .header{
 #map-pane{
     text-align:center;
     flex:1;
-/*    height:500px;*/
     width:100%;
 }
 
@@ -106,12 +105,10 @@ h3, .header{
     height:100%;
     width:100%;
     text-align: center;
-/*    flex:1;*/
-/*    z-index:0;*/
+    overflow:none;
 }
 
 #polity-pane,#stats-pane{
-/*    overflow:scroll;*/
     display:block;
     width:200px;
     padding: 30px 30px;
@@ -180,14 +177,14 @@ a:hover, .actionable:hover{
     font-size: 12px;
 /*    display:none;*/
 }
- 
+
 #page{
     display: flex;
     flex-direction: column;
     height:100%;
     overflow:hidden;
     justify-content: space-between;
-}        
+}
 
 #content{
     flex:1;
@@ -200,7 +197,7 @@ a:hover, .actionable:hover{
 
 .column{
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     justify-content:space-between;
     align-content:stretch;
     align-items: stretch;
@@ -216,6 +213,7 @@ a:hover, .actionable:hover{
     width:300px;
     text-align: center;
     justify-content: space-around;
+    overflow:none;
 }
 
 #right{
@@ -229,13 +227,18 @@ a:hover, .actionable:hover{
 }
 
 .upper{
-/*            height:80px;*/
+
 }
 
 .middle{
     flex:1;
-    overflow:scroll;
     height:100px;
+}
+
+#middle-left,#middle-right{
+  overflow:auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
 }
 
 .lower{
@@ -268,7 +271,7 @@ a:hover, .actionable:hover{
     display:none;
     border-top:1px solid #EAEAEA;
     background-color:#F7F8FC;
-}   
+}
 
 .nav-item{
     min-width:40px;
@@ -327,7 +330,7 @@ a:hover, .actionable:hover{
   display: none;
 }
 
-@media (max-width: 1000px) { 
+@media (max-width: 1000px) {
     .narrow-hide{
         display:none;
     }
@@ -342,6 +345,7 @@ a:hover, .actionable:hover{
     }
     .side{
         padding-bottom:0;
+        overflow:auto;
     }
     .wordmark{
         max-height:50px;
